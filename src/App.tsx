@@ -1,9 +1,12 @@
-import Button from '@mui/material/Button';
+import { Container } from '@mui/material';
+import { HomePage } from 'pages/HomePage';
 
 export const App = () => {
   return (
-    <div>
-      <Button variant="contained">Hello World</Button>
-    </div>
+    <>
+      <Container maxWidth="lg">
+        <HomePage />
+      </Container>
+    </>
   );
 };
