@@ -1,14 +1,22 @@
+import { EStoryCategory, TAppErrors } from 'types';
 import { IIconsManager } from '.';
 
 interface IStoryTellerModel {
-  tellAStory: (iconsAmount: number) => Array<string>;
+  tellAStory: (category: EStoryCategory, iconsAmount: number) => Array<string>;
 }
 
 //TODO: tests
 export class StoryTellerModel implements IStoryTellerModel {
-  constructor(private _iconsManager: IIconsManager) {}
+  static MIN_INDEX = 0;
 
-  public tellAStory(iconsAmount: number) {
-    return this._iconsManager.playersIcons;
+  constructor(private _iconsManager: IIconsManager, private _errors: TAppErrors) {}
+
+  public tellAStory(category: EStoryCategory, iconsAmount: number) {
+    const icons = this._iconsManager.getIconsSetPerCategory(category);
+    const allIconsAmount = icons.length;
+
+    if (iconsAmount >= allIconsAmount) throw this._errors.OUT_OF_RANGE;
+
+    return icons;
   }
 }

@@ -1,17 +1,30 @@
+import { EStoryCategory, TIconsSet } from 'types';
+import { IAnyArrayManager } from './AnyArrayManager';
+
 export interface IIconsManager {
-  playersIcons: Array<string>;
   iconPrefix: string;
+  getIconsSetPerCategory: (category: EStoryCategory) => Array<string>;
 }
 
 //TODO: tests
 export class IconsManager implements IIconsManager {
-  constructor(private _iconPrefix: string, private _playersIcons: Array<string>) {}
+  private _iconsCategoryMap: Map<EStoryCategory, Array<string>>;
 
-  get playersIcons() {
-    return this._playersIcons;
+  constructor(
+    private _iconPrefix: string,
+    private _arrayManager: IAnyArrayManager,
+    iconsSet: TIconsSet,
+  ) {
+    this._iconsCategoryMap = new Map([[EStoryCategory.PLAYER, iconsSet.player]]);
   }
 
   get iconPrefix() {
     return this._iconPrefix;
+  }
+
+  public getIconsSetPerCategory(category: EStoryCategory) {
+    const icons = this._iconsCategoryMap.get(category)!!;
+    const shuffledIcons = this._arrayManager.shuffle(icons);
+    return shuffledIcons;
   }
 }
