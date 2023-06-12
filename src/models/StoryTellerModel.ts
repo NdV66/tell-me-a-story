@@ -1,7 +1,7 @@
 import { EStoryCategory, TAppErrors } from 'types';
 import { IIconsManager } from '.';
 
-interface IStoryTellerModel {
+export interface IStoryTellerModel {
   tellAStory: (category: EStoryCategory, iconsAmount: number) => Array<string>;
 }
 
@@ -17,6 +17,6 @@ export class StoryTellerModel implements IStoryTellerModel {
 
     if (iconsAmount >= allIconsAmount) throw this._errors.OUT_OF_RANGE;
 
-    return icons;
+    return icons.slice(StoryTellerModel.MIN_INDEX, iconsAmount);
   }
 }

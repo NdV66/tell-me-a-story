@@ -1,12 +1,21 @@
-import { Container } from '@mui/material';
+import { CssBaseline, ThemeProvider, createTheme } from '@mui/material';
 import { HomePage } from 'pages/HomePage';
+import { AppNavbar } from 'views';
+
+const defaultTheme = createTheme();
 
 export const App = () => {
   return (
-    <>
-      <Container maxWidth="lg">
+    <ThemeProvider theme={defaultTheme}>
+      <CssBaseline />
+
+      <header>
+        <AppNavbar />
+      </header>
+
+      <main>
         <HomePage />
-      </Container>
-    </>
+      </main>
+    </ThemeProvider>
   );
 };

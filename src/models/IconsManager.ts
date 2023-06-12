@@ -6,7 +6,6 @@ export interface IIconsManager {
   getIconsSetPerCategory: (category: EStoryCategory) => Array<string>;
 }
 
-//TODO: tests
 export class IconsManager implements IIconsManager {
   private _iconsCategoryMap: Map<EStoryCategory, Array<string>>;
 
@@ -24,7 +23,6 @@ export class IconsManager implements IIconsManager {
 
   public getIconsSetPerCategory(category: EStoryCategory) {
     const icons = this._iconsCategoryMap.get(category)!!;
-    const shuffledIcons = this._arrayManager.shuffle(icons);
-    return shuffledIcons;
+    return this._arrayManager.shuffle(icons);
   }
 }
