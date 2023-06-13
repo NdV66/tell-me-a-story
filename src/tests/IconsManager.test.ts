@@ -1,15 +1,6 @@
-import { IAnyArrayManager, IIconsManager, IconsManager } from 'models';
-import { EStoryCategory, TIconsSet } from 'types';
-
-const prefixIconMock = 'mock-';
-const playersIconsMock = ['mock-icon'];
-const iconsSetMock: TIconsSet = {
-  [EStoryCategory.PLAYER]: playersIconsMock,
-};
-
-const anyArrayManagerMock: IAnyArrayManager = {
-  shuffle: jest.fn(),
-};
+import { IIconsManager, IconsManager } from 'models';
+import { EStoryCategory } from 'types';
+import { anyArrayManagerMock, prefixIconMock, iconsSetMock, playersIconsMock } from './mocks';
 
 describe('IconsManager', () => {
   let manager: IIconsManager;

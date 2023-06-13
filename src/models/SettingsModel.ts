@@ -1,33 +1,25 @@
-import { EAppLangs, TTranslations } from 'types';
+import { EAppLangs, EAppTheme, TAppTheme, TTranslations } from 'types';
 
 export interface ISettingsModel {
   translations: TTranslations;
+  theme: TAppTheme;
   lang: EAppLangs;
+  appTheme: EAppTheme;
 }
 
 export class SettingsModel implements ISettingsModel {
-  private _translations: Map<EAppLangs, TTranslations>;
-
   constructor(
-    private _lang: EAppLangs,
-    enTranslations: TTranslations,
-    plTranslations: TTranslations,
-  ) {
-    this._translations = new Map([
-      [EAppLangs.EN, enTranslations],
-      [EAppLangs.PL, plTranslations],
-    ]);
-  }
-
-  set lang(data: EAppLangs) {
-    this._lang = data;
-  }
-
-  get lang() {
-    return this._lang;
-  }
+    public lang: EAppLangs,
+    public appTheme: EAppTheme,
+    private _translations: Map<EAppLangs, TTranslations>,
+    private _themes: Map<EAppTheme, TAppTheme>,
+  ) {}
 
   get translations() {
     return this._translations.get(this.lang)!!;
+  }
+
+  get theme() {
+    return this._themes.get(this.appTheme)!!;
   }
 }

@@ -1,4 +1,4 @@
-import { createContext } from 'react';
+import { createContext, PropsWithChildren } from 'react';
 import { useStateObservable } from 'tools';
 import { ISettingsViewModel } from 'viewModels/SettingsViewModel';
 
@@ -10,8 +10,12 @@ type Props = {
   settingsViewModel: ISettingsViewModel;
 };
 
-export const SettingContextWrapper = ({ settingsViewModel }: Props) => {
+export const SettingContextWrapper = ({
+  settingsViewModel,
+  children,
+}: PropsWithChildren<Props>) => {
+  const theme = useStateObservable(settingsViewModel.translations$);
   const translations = useStateObservable(settingsViewModel.translations$);
 
-  return <></>;
+  return <>{children}</>;
 };

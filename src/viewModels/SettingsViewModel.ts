@@ -9,6 +9,7 @@ export interface ISettingsViewModel {
   changeLang: (lang: EAppLangs) => void;
 }
 
+//TODO: tests
 export class SettingsViewModel implements ISettingsViewModel {
   private _lang$: BehaviorSubject<EAppLangs>;
   private _translations$: BehaviorSubject<TTranslations>;
