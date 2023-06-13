@@ -1,10 +1,22 @@
 import { AppBar, Toolbar, Typography, Switch } from '@mui/material';
 import { useSettingsContext } from '../SettingContext';
 
-const label = { inputProps: { 'aria-label': 'Switch demo' } };
+const useAppNavbar = () => {
+  const { changeAppTheme, ...settingContext } = useSettingsContext();
+
+  const handleThemeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const checked = event.target.checked;
+    changeAppTheme(checked);
+  };
+
+  return {
+    ...settingContext,
+    handleThemeChange,
+  };
+};
 
 export const AppNavbar = () => {
-  const { changeAppTheme, theme } = useSettingsContext();
+  const { theme, isDefaultAppTheme, handleThemeChange } = useAppNavbar();
 
   console.log(theme);
 
@@ -15,7 +27,11 @@ export const AppNavbar = () => {
           News
         </Typography>
 
-        <Switch {...label} defaultChecked />
+        <Switch
+          checked={isDefaultAppTheme}
+          onChange={handleThemeChange}
+          inputProps={{ 'aria-label': 'controlled' }}
+        />
       </Toolbar>
     </AppBar>
   );

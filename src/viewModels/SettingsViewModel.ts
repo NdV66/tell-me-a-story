@@ -6,6 +6,9 @@ export interface ISettingsViewModel {
   translations$: Observable<TTranslations>;
   theme$: Observable<TAppTheme>;
 
+  appTheme$: Observable<EAppTheme>; //TODO tests
+  appLang$: Observable<EAppLangs>; //TODO: tests
+
   changeLang: (lang: EAppLangs) => void;
   changeAppTheme: (theme: EAppTheme) => void;
 }
@@ -14,11 +17,11 @@ export interface ISettingsViewModel {
 export class SettingsViewModel implements ISettingsViewModel {
   private _appTheme$: BehaviorSubject<EAppTheme>;
   private _theme$: BehaviorSubject<TAppTheme>;
-  private _lang$: BehaviorSubject<EAppLangs>;
+  private _appLang$: BehaviorSubject<EAppLangs>;
   private _translations$: BehaviorSubject<TTranslations>;
 
   constructor(private _settingModel: ISettingsModel) {
-    this._lang$ = new BehaviorSubject(this._settingModel.lang);
+    this._appLang$ = new BehaviorSubject(this._settingModel.lang);
     this._translations$ = new BehaviorSubject(this._settingModel.translations);
     this._appTheme$ = new BehaviorSubject(this._settingModel.appTheme);
     this._theme$ = new BehaviorSubject(this._settingModel.theme);
@@ -28,7 +31,7 @@ export class SettingsViewModel implements ISettingsViewModel {
   }
 
   private _subscribeToLang$() {
-    this._lang$.subscribe((lang) => {
+    this._appLang$.subscribe((lang) => {
       this._settingModel.lang = lang;
       this._translations$.next(this._settingModel.translations);
     });
@@ -49,8 +52,16 @@ export class SettingsViewModel implements ISettingsViewModel {
     return this._theme$.asObservable();
   }
 
+  get appLang$() {
+    return this._appLang$.asObservable();
+  }
+
+  get appTheme$() {
+    return this._appTheme$.asObservable();
+  }
+
   public changeLang(lang: EAppLangs) {
-    this._lang$.next(lang);
+    this._appLang$.next(lang);
   }
 
   public changeAppTheme(theme: EAppTheme) {
