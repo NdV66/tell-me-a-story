@@ -1,2 +1,2 @@
-export * from './AppNavbar/AppNavbar';
+export * from './AppNavbar';
 export * from './SettingContext';

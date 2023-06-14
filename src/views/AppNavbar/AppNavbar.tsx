@@ -1,5 +1,6 @@
-import { AppBar, Toolbar, Typography, Switch } from '@mui/material';
+import { AppBar, Toolbar, Typography } from '@mui/material';
 import { useSettingsContext } from '../SettingContext';
+import { ThemeSwitch } from './ThemeSwitch';
 
 const useAppNavbar = () => {
   const { changeAppTheme, ...settingContext } = useSettingsContext();
@@ -16,7 +17,7 @@ const useAppNavbar = () => {
 };
 
 export const AppNavbar = () => {
-  const { theme, isDefaultAppTheme, handleThemeChange } = useAppNavbar();
+  const { theme, isDefaultAppTheme, handleThemeChange, translations } = useAppNavbar();
 
   console.log(theme);
 
@@ -24,13 +25,13 @@ export const AppNavbar = () => {
     <AppBar position="static">
       <Toolbar>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          News
+          {translations.appName}
         </Typography>
 
-        <Switch
+        <ThemeSwitch
           checked={isDefaultAppTheme}
           onChange={handleThemeChange}
-          inputProps={{ 'aria-label': 'controlled' }}
+          label={translations.themeChange}
         />
       </Toolbar>
     </AppBar>

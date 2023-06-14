@@ -4,7 +4,7 @@ import { HomePage } from 'pages/HomePage';
 import { EAppTheme } from 'types';
 import { AppNavbar, SettingContextWrapper } from 'views';
 
-const defaultTheme = createTheme();
+const defaultTheme = createTheme(); //TODO change theme
 
 export const App = () => {
   return (
