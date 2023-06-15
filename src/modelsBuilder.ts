@@ -34,6 +34,7 @@ const settingModel = new SettingsModel(
   ENV.theme,
   ENV.mappedTranslations,
   ENV.mappedThemes,
+  cookiesManager,
 );
 
 export const settingViewModel = new SettingsViewModel(settingModel);

@@ -2,27 +2,27 @@ import Cookies from 'js-cookie';
 import { EAppLangs, EAppTheme, ECookieKeys } from 'types';
 
 export interface ICookiesManager {
-  theme?: EAppTheme;
-  lang?: EAppLangs;
+  appTheme?: EAppTheme;
+  appLang?: EAppLangs;
 
-  setThemeCookie: (theme: EAppTheme) => void;
-  setLangCookie: (lang: EAppLangs) => void;
+  setAppThemeCookie: (theme: EAppTheme) => void;
+  setAppLangCookie: (lang: EAppLangs) => void;
 }
 
 export class CookiesManager implements ICookiesManager {
-  public setThemeCookie(theme: EAppTheme) {
+  public setAppThemeCookie(theme: EAppTheme) {
     Cookies.set(ECookieKeys.THEME, theme);
   }
 
-  public setLangCookie(lang: EAppLangs) {
+  public setAppLangCookie(lang: EAppLangs) {
     Cookies.set(ECookieKeys.LANG, lang);
   }
 
-  get theme() {
+  get appTheme() {
     return Cookies.get(ECookieKeys.THEME) as EAppTheme;
   }
 
-  get lang() {
+  get appLang() {
     return Cookies.get(ECookieKeys.LANG) as EAppLangs;
   }
 }

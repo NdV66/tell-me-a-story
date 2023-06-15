@@ -1,4 +1,4 @@
-import { createContext, PropsWithChildren, useContext } from 'react';
+import { createContext, PropsWithChildren, useContext, useEffect } from 'react';
 import { useStateObservable } from 'tools';
 import { EAppLangs, EAppTheme, TAppTheme, TTranslations } from 'types';
 import { ISettingsViewModel } from 'viewModels/SettingsViewModel';
@@ -32,6 +32,10 @@ export const SettingContextWrapper = ({
   const translations = useStateObservable(settingsViewModel.translations$);
   const appLang = useStateObservable(settingsViewModel.appLang$);
   const appTheme = useStateObservable(settingsViewModel.appTheme$);
+
+  useEffect(() => {
+    settingsViewModel.setupFromCookies();
+  }, [settingsViewModel]);
 
   if (!theme || !translations) return <div>LOADING...</div>;
 

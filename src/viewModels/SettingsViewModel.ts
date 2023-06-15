@@ -11,6 +11,8 @@ export interface ISettingsViewModel {
 
   changeLang: (lang: EAppLangs) => void;
   changeAppTheme: (theme: EAppTheme) => void;
+
+  setupFromCookies: () => void;
 }
 
 //TODO: tests
@@ -20,7 +22,7 @@ export class SettingsViewModel implements ISettingsViewModel {
   private _appLang$: BehaviorSubject<EAppLangs>;
   private _translations$: BehaviorSubject<TTranslations>;
 
-  constructor(private _settingModel: ISettingsModel, private _cookiesManager: ICookiesManager) {
+  constructor(private _settingModel: ISettingsModel) {
     this._appLang$ = new BehaviorSubject(this._settingModel.lang);
     this._translations$ = new BehaviorSubject(this._settingModel.translations);
     this._appTheme$ = new BehaviorSubject(this._settingModel.appTheme);
@@ -28,6 +30,11 @@ export class SettingsViewModel implements ISettingsViewModel {
 
     this._subscribeToLang$();
     this._subscribeToAppTheme$();
+  }
+
+  private _syncWithModel() {
+    this._appLang$.next(this._settingModel.lang);
+    this._appTheme$.next(this._settingModel.appTheme);
   }
 
   private _subscribeToLang$() {
@@ -66,5 +73,9 @@ export class SettingsViewModel implements ISettingsViewModel {
 
   public changeAppTheme(theme: EAppTheme) {
     this._appTheme$.next(theme);
+  }
+
+  public setupFromCookies() {
+    this._syncWithModel();
   }
 }

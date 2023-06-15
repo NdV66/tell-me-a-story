@@ -1,5 +1,5 @@
 import { TRANSLATIONS_EN, TRANSLATIONS_PL } from 'data';
-import { SettingsModel } from 'models';
+import { ICookiesManager, SettingsModel } from 'models';
 import { EAppLangs, EAppTheme, TAppTheme } from 'types';
 
 const defaultLang = EAppLangs.EN;
@@ -18,11 +18,19 @@ const mappedThemesMock = new Map([
   [EAppTheme.DARK, darkMock],
 ]);
 
+const cookiesManagerMock: ICookiesManager = {} as any; //TODO
+
 describe('SettingsModel', () => {
   let model: SettingsModel;
 
   beforeEach(() => {
-    model = new SettingsModel(defaultLang, defaultTheme, mappedTranslationsMock, mappedThemesMock);
+    model = new SettingsModel(
+      defaultLang,
+      defaultTheme,
+      mappedTranslationsMock,
+      mappedThemesMock,
+      cookiesManagerMock,
+    );
   });
 
   test('Should set default lang', () => {
