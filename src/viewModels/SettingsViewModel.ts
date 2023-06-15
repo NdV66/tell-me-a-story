@@ -1,4 +1,4 @@
-import { ISettingsModel } from 'models';
+import { ICookiesManager, ISettingsModel } from 'models';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { EAppLangs, EAppTheme, TAppTheme, TTranslations } from 'types';
 
@@ -20,7 +20,7 @@ export class SettingsViewModel implements ISettingsViewModel {
   private _appLang$: BehaviorSubject<EAppLangs>;
   private _translations$: BehaviorSubject<TTranslations>;
 
-  constructor(private _settingModel: ISettingsModel) {
+  constructor(private _settingModel: ISettingsModel, private _cookiesManager: ICookiesManager) {
     this._appLang$ = new BehaviorSubject(this._settingModel.lang);
     this._translations$ = new BehaviorSubject(this._settingModel.translations);
     this._appTheme$ = new BehaviorSubject(this._settingModel.appTheme);

@@ -1,5 +1,11 @@
 import { APP_ERRORS, ICONS_SET, PREFIX_ICON, TRANSLATIONS_EN, TRANSLATIONS_PL } from 'data';
-import { AnyArrayManager, IconsManager, SettingsModel, StoryTellerModel } from 'models';
+import {
+  AnyArrayManager,
+  CookiesManager,
+  IconsManager,
+  SettingsModel,
+  StoryTellerModel,
+} from 'models';
 import { EAppLangs, EAppTheme, TAppTheme } from 'types';
 import { SettingsViewModel } from 'viewModels';
 
@@ -20,6 +26,7 @@ const ENV = {
   ]),
 };
 
+const cookiesManager = new CookiesManager();
 const anyArrayManager = new AnyArrayManager();
 const iconsManager = new IconsManager(PREFIX_ICON, anyArrayManager, ICONS_SET);
 const settingModel = new SettingsModel(

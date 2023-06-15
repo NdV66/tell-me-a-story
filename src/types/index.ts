@@ -5,3 +5,4 @@ export * from './TTranslations';
 export * from './EAppLangs';
 export * from './EAppTheme';
 export * from './TAppTheme';
+export * from './ECookieKeys';
