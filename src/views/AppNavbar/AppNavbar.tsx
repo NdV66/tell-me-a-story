@@ -20,7 +20,7 @@ export const AppNavbar = () => {
   const { theme, isDefaultAppTheme, handleThemeChange, translations } = useAppNavbar();
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" color="primary">
       <Toolbar>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           {translations.appName}
