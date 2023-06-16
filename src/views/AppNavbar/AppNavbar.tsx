@@ -19,8 +19,6 @@ const useAppNavbar = () => {
 export const AppNavbar = () => {
   const { theme, isDefaultAppTheme, handleThemeChange, translations } = useAppNavbar();
 
-  console.log(theme);
-
   return (
     <AppBar position="static">
       <Toolbar>
