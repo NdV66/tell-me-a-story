@@ -1,4 +1,12 @@
-import { APP_ERRORS, ICONS_SET, PREFIX_ICON, TRANSLATIONS_EN, TRANSLATIONS_PL } from 'data';
+import {
+  APP_ERRORS,
+  DARK_THEME,
+  ICONS_SET,
+  LIGHT_THEME,
+  PREFIX_ICON,
+  TRANSLATIONS_EN,
+  TRANSLATIONS_PL,
+} from 'data';
 import {
   AnyArrayManager,
   CookiesManager,
@@ -6,11 +14,8 @@ import {
   SettingsModel,
   StoryTellerModel,
 } from 'models';
-import { EAppLangs, EAppTheme, TAppTheme } from 'types';
+import { EAppLangs, EAppTheme } from 'types';
 import { SettingsViewModel } from 'viewModels';
-
-const LIGHT: TAppTheme = { name: 'light' };
-const DARK: TAppTheme = { name: 'dark' };
 
 const ENV = {
   lang: EAppLangs.EN,
@@ -21,8 +26,8 @@ const ENV = {
     [EAppLangs.PL, TRANSLATIONS_PL],
   ]),
   mappedThemes: new Map([
-    [EAppTheme.DARK, DARK],
-    [EAppTheme.LIGHT, LIGHT],
+    [EAppTheme.DARK, DARK_THEME],
+    [EAppTheme.LIGHT, LIGHT_THEME],
   ]),
 };
 

@@ -1,8 +1,12 @@
 import { styled } from '@mui/material/styles';
 import Switch, { SwitchProps } from '@mui/material/Switch';
+import { TAppTheme } from 'types';
 
-//TODO based on theme mode COLORS
-const ThemeStyledSwitch = styled(Switch)(({ theme }) => ({
+type ThemeStyledSwitchProps = {
+  appTheme: TAppTheme;
+};
+
+const ThemeStyledSwitch = styled(Switch)<ThemeStyledSwitchProps>(({ appTheme }) => ({
   width: 62,
   height: 34,
   padding: 7,
@@ -20,12 +24,12 @@ const ThemeStyledSwitch = styled(Switch)(({ theme }) => ({
       },
       '& + .MuiSwitch-track': {
         opacity: 1,
-        backgroundColor: 'red',
+        backgroundColor: appTheme.secondary,
       },
     },
   },
   '& .MuiSwitch-thumb': {
-    backgroundColor: theme.palette.mode === 'dark' ? '#003892' : '#001e3c',
+    backgroundColor: appTheme.secondary,
     width: 32,
     height: 32,
     '&:before': {
@@ -44,15 +48,21 @@ const ThemeStyledSwitch = styled(Switch)(({ theme }) => ({
   },
   '& .MuiSwitch-track': {
     opacity: 1,
-    backgroundColor: theme.palette.mode === 'dark' ? '#8796A5' : '#aab4be',
+    backgroundColor: appTheme.secondary,
     borderRadius: 20 / 2,
   },
 }));
 
 type Props = SwitchProps & {
   label: string;
+  theme: TAppTheme;
 };
 
-export const ThemeSwitch = (props: Props) => (
-  <ThemeStyledSwitch sx={{ m: 1 }} inputProps={{ 'aria-label': 'controlled' }} {...props} />
+export const ThemeSwitch = ({ theme, ...props }: Props) => (
+  <ThemeStyledSwitch
+    sx={{ m: 1 }}
+    inputProps={{ 'aria-label': 'controlled' }}
+    appTheme={theme}
+    {...props}
+  />
 );

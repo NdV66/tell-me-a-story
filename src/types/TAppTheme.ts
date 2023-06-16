@@ -1,3 +1,9 @@
+import { PaletteOptions } from '@mui/material';
+
 export type TAppTheme = {
-  name: string;
+  name: PaletteOptions['mode'];
+  primary: string;
+  secondary: string;
+  success: string;
+  accent: string;
 };

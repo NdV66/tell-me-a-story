@@ -32,6 +32,7 @@ export const AppNavbar = () => {
           checked={isDefaultAppTheme}
           onChange={handleThemeChange}
           label={translations.themeChange}
+          theme={theme}
         />
       </Toolbar>
     </AppBar>
