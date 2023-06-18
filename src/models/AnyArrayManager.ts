@@ -2,7 +2,6 @@ export interface IAnyArrayManager {
   shuffle: <T>(array: Array<T>) => Array<T>;
 }
 
-//TODO: tests
 export class AnyArrayManager implements IAnyArrayManager {
   private _randomInteger(min: number, max: number) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -14,7 +13,6 @@ export class AnyArrayManager implements IAnyArrayManager {
 
     for (let i = max; i >= 0; i--) {
       const randomIndex = this._randomInteger(min, max);
-      console.log('>>>', randomIndex);
       [array[i], array[randomIndex]] = [array[randomIndex], array[i]];
     }
 
