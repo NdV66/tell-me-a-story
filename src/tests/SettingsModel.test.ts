@@ -18,7 +18,12 @@ const mappedThemesMock = new Map([
   [EAppTheme.DARK, darkMock],
 ]);
 
-const cookiesManagerMock: ICookiesManager = {} as any; //TODO
+const cookiesManagerMock: ICookiesManager = {
+  setAppLangCookie: jest.fn(),
+  setAppThemeCookie: jest.fn(),
+  appLang: EAppLangs.EN,
+  appTheme: EAppTheme.DARK,
+};
 
 describe('SettingsModel', () => {
   let model: SettingsModel;
@@ -33,24 +38,43 @@ describe('SettingsModel', () => {
     );
   });
 
-  test('Should set default lang', () => {
-    expect(model.lang).toBe(defaultLang);
+  test('Should get default lang, when data from cookies are empty', () => {
+    const lang = model.lang;
+    cookiesManagerMock.appLang = undefined;
+
+    expect(lang).toBe(defaultLang);
+  });
+
+  test('Should set default appTheme', () => {
+    const appTheme = model.appTheme;
+    cookiesManagerMock.appTheme = undefined;
+
+    expect(appTheme).toBe(defaultTheme);
   });
 
   test('Should change lang', () => {
     const newLang = EAppLangs.PL;
     model.lang = newLang;
 
-    expect(model.lang).toBe(newLang);
+    expect(cookiesManagerMock.setAppLangCookie).toBeCalledTimes(1);
+    expect(cookiesManagerMock.setAppLangCookie).toBeCalledWith(newLang);
+  });
+
+  test('Should change appTheme', () => {
+    const newTheme = EAppTheme.LIGHT;
+    model.appTheme = newTheme;
+
+    expect(cookiesManagerMock.setAppThemeCookie).toBeCalledTimes(1);
+    expect(cookiesManagerMock.setAppThemeCookie).toBeCalledWith(newTheme);
   });
 
   test('Should get translations based on a current lang', () => {
-    model.lang = EAppLangs.PL;
+    cookiesManagerMock.appLang = EAppLangs.PL;
     expect(model.translations).toEqual(TRANSLATIONS_PL);
   });
 
   test('Should get theme based on a current theme', () => {
-    model.appTheme = EAppTheme.LIGHT;
+    cookiesManagerMock.appTheme = EAppTheme.LIGHT;
     expect(model.theme).toBe(lightMock);
   });
 });

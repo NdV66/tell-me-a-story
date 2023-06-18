@@ -5,7 +5,7 @@ export interface IAnyArrayManager {
 //TODO: tests
 export class AnyArrayManager implements IAnyArrayManager {
   public shuffle<T>(array: Array<T>) {
-    let currentIndex = array.length;
+    const currentIndex = array.length;
     let randomIndex = 0;
 
     while (currentIndex) {
