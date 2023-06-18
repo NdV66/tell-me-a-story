@@ -4,13 +4,18 @@ export interface IAnyArrayManager {
 
 //TODO: tests
 export class AnyArrayManager implements IAnyArrayManager {
-  public shuffle<T>(array: Array<T>) {
-    const currentIndex = array.length;
-    let randomIndex = 0;
+  private _randomInteger(min: number, max: number) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
 
-    while (currentIndex) {
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+  public shuffle<T>(array: Array<T>) {
+    const min = 0;
+    const max = array.length - 1;
+
+    for (let i = max; i >= 0; i--) {
+      const randomIndex = this._randomInteger(min, max);
+      console.log('>>>', randomIndex);
+      [array[i], array[randomIndex]] = [array[randomIndex], array[i]];
     }
 
     return array;

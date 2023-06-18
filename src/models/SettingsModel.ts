@@ -8,7 +8,6 @@ export interface ISettingsModel {
   appTheme: EAppTheme;
 }
 
-//TODO tests
 export class SettingsModel implements ISettingsModel {
   constructor(
     private _defaultLang: EAppLangs,
