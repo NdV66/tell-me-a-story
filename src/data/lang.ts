@@ -1,15 +1,13 @@
 import { TTranslations } from 'types';
 
 export const TRANSLATIONS_EN: TTranslations = {
-  lang: 'en',
+  lang: 'English',
   appName: 'Tell me a story!',
   themeChange: 'theme',
-  changeLang: 'lang',
 };
 
 export const TRANSLATIONS_PL: TTranslations = {
-  lang: 'pl',
+  lang: 'polski',
   appName: 'Opowiedz mi!',
   themeChange: 'tryb',
-  changeLang: 'jezyk',
 };

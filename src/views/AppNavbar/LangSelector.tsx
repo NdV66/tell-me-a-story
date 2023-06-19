@@ -17,22 +17,18 @@ export const LangSelector = ({ onChange, value, values, translations }: Props) =
   };
 
   return (
-    <FormControl>
-      <InputLabel id="lang-selector-label">{translations.changeLang}</InputLabel>
-      <Select
-        labelId="lang-selector-label"
-        id="lang-selector"
-        value={value}
-        label={translations.changeLang}
-        onChange={handleChange}
-        defaultValue={value}
-      >
-        {values.map(({ key, value }) => (
-          <MenuItem key={key} value={key}>
-            {value}
-          </MenuItem>
-        ))}
-      </Select>
-    </FormControl>
+    <Select
+      id="lang-selector"
+      variant="outlined"
+      value={value}
+      onChange={handleChange}
+      defaultValue={value}
+    >
+      {values.map(({ key, value }) => (
+        <MenuItem key={key} value={key}>
+          {value}
+        </MenuItem>
+      ))}
+    </Select>
   );
 };

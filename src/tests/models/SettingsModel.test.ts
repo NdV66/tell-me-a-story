@@ -56,7 +56,7 @@ describe('SettingsModel', () => {
     const newLang = EAppLangs.PL;
     model.lang = newLang;
 
-    expect(cookiesManagerMock.setAppLangCookie).toBeCalledTimes(1);
+    expect(cookiesManagerMock.setAppLangCookie).toBeCalledTimes(2);
     expect(cookiesManagerMock.setAppLangCookie).toBeCalledWith(newLang);
   });
 
@@ -64,7 +64,7 @@ describe('SettingsModel', () => {
     const newTheme = EAppTheme.LIGHT;
     model.appTheme = newTheme;
 
-    expect(cookiesManagerMock.setAppThemeCookie).toBeCalledTimes(1);
+    expect(cookiesManagerMock.setAppThemeCookie).toBeCalledTimes(2);
     expect(cookiesManagerMock.setAppThemeCookie).toBeCalledWith(newTheme);
   });
 

@@ -45,8 +45,8 @@ export class SettingsModel implements ISettingsModel {
     return this._themes.get(this.appTheme)!!;
   }
 
+  //TODO: tests
   public getTranslationsByLang(lang: EAppLangs) {
-    //TODO: tests
     return this._mappedTranslations.get(lang)!!;
   }
 }
