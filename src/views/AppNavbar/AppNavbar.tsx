@@ -3,14 +3,6 @@ import { useSettingsContext } from '../SettingContext';
 import { ThemeSwitch } from './ThemeSwitch';
 import { LangSelector } from './LangSelector';
 
-const useAppNavbar = () => {
-  const settingContext = useSettingsContext();
-
-  return {
-    ...settingContext,
-  };
-};
-
 export const AppNavbar = () => {
   const {
     theme,
@@ -20,7 +12,7 @@ export const AppNavbar = () => {
     changeLang,
     appLang,
     availableTranslations,
-  } = useAppNavbar();
+  } = useSettingsContext();
 
   return (
     <AppBar position="static" color="primary">
