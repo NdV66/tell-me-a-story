@@ -30,12 +30,7 @@ export const AppNavbar = () => {
         </Typography>
 
         <ThemeSwitch checked={isDefaultAppTheme} onChange={changeAppTheme} theme={theme} />
-        <LangSelector
-          onChange={changeLang}
-          value={appLang}
-          values={availableTranslations}
-          translations={translations}
-        />
+        <LangSelector onChange={changeLang} value={appLang} values={availableTranslations} />
       </Toolbar>
     </AppBar>
   );
