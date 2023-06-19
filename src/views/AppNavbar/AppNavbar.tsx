@@ -1,23 +1,26 @@
 import { AppBar, Toolbar, Typography } from '@mui/material';
 import { useSettingsContext } from '../SettingContext';
 import { ThemeSwitch } from './ThemeSwitch';
+import { LangSelector } from './LangSelector';
 
 const useAppNavbar = () => {
-  const { changeAppTheme, ...settingContext } = useSettingsContext();
-
-  const handleThemeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const checked = event.target.checked;
-    changeAppTheme(checked);
-  };
+  const settingContext = useSettingsContext();
 
   return {
     ...settingContext,
-    handleThemeChange,
   };
 };
 
 export const AppNavbar = () => {
-  const { theme, isDefaultAppTheme, handleThemeChange, translations } = useAppNavbar();
+  const {
+    theme,
+    isDefaultAppTheme,
+    changeAppTheme,
+    translations,
+    changeLang,
+    appLang,
+    availableTranslations,
+  } = useAppNavbar();
 
   return (
     <AppBar position="static" color="primary">
@@ -26,11 +29,12 @@ export const AppNavbar = () => {
           {translations.appName}
         </Typography>
 
-        <ThemeSwitch
-          checked={isDefaultAppTheme}
-          onChange={handleThemeChange}
-          label={translations.themeChange}
-          theme={theme}
+        <ThemeSwitch checked={isDefaultAppTheme} onChange={changeAppTheme} theme={theme} />
+        <LangSelector
+          onChange={changeLang}
+          value={appLang}
+          values={availableTranslations}
+          translations={translations}
         />
       </Toolbar>
     </AppBar>

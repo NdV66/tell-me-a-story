@@ -1,6 +1,6 @@
 import { createContext, PropsWithChildren, useContext, useEffect } from 'react';
 import { useStateObservable } from 'tools';
-import { EAppLangs, EAppTheme, TAppTheme, TTranslations } from 'types';
+import { EAppLangs, EAppTheme, TAppTheme, TAvailableTranslation, TTranslations } from 'types';
 import { ISettingsViewModel } from 'viewModels/SettingsViewModel';
 
 export type ISettingContext = {
@@ -9,6 +9,7 @@ export type ISettingContext = {
   appLang: EAppLangs;
   appTheme: EAppTheme;
   isDefaultAppTheme: boolean;
+  availableTranslations: TAvailableTranslation[];
 
   changeLang: (lang: EAppLangs) => void;
   changeAppTheme: (value: boolean) => void;
@@ -52,6 +53,7 @@ export const SettingContextWrapper = ({
     translations: translations!!,
     changeAppTheme,
     changeLang: settingsViewModel.changeLang,
+    availableTranslations: settingsViewModel.availableTranslations,
   };
 
   return <SettingContext.Provider value={value}>{children}</SettingContext.Provider>;

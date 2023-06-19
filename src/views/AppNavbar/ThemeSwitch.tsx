@@ -1,6 +1,6 @@
 import { styled } from '@mui/material/styles';
 import Switch, { SwitchProps } from '@mui/material/Switch';
-import { TAppTheme } from 'types';
+import { EAppTheme, TAppTheme } from 'types';
 
 type ThemeStyledSwitchProps = {
   appTheme: TAppTheme;
@@ -53,16 +53,25 @@ const ThemeStyledSwitch = styled(Switch)<ThemeStyledSwitchProps>(({ appTheme }) 
   },
 }));
 
-type Props = SwitchProps & {
-  label: string;
+type Props = {
   theme: TAppTheme;
+  onChange: (isSelected: boolean) => void;
+  checked: boolean;
 };
 
-export const ThemeSwitch = ({ theme, ...props }: Props) => (
-  <ThemeStyledSwitch
-    sx={{ m: 1 }}
-    inputProps={{ 'aria-label': 'controlled' }}
-    appTheme={theme}
-    {...props}
-  />
-);
+export const ThemeSwitch = ({ theme, onChange, checked }: Props) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const checked = event.target.checked;
+    onChange(checked);
+  };
+
+  return (
+    <ThemeStyledSwitch
+      sx={{ m: 1 }}
+      inputProps={{ 'aria-label': 'controlled' }}
+      appTheme={theme}
+      onChange={handleChange}
+      checked={checked}
+    />
+  );
+};

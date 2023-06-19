@@ -6,16 +6,20 @@ export interface ISettingsModel {
   theme: TAppTheme;
   lang: EAppLangs;
   appTheme: EAppTheme;
+  getTranslationsByLang: (lang: EAppLangs) => TTranslations;
 }
 
 export class SettingsModel implements ISettingsModel {
   constructor(
     private _defaultLang: EAppLangs,
     private _defaultAppTheme: EAppTheme,
-    private _translations: Map<EAppLangs, TTranslations>,
+    private _mappedTranslations: Map<EAppLangs, TTranslations>,
     private _themes: Map<EAppTheme, TAppTheme>,
     private _cookiesManager: ICookiesManager,
-  ) {}
+  ) {
+    !this._cookiesManager.appLang && this._cookiesManager.setAppLangCookie(this._defaultLang); //TODO tests
+    !this._cookiesManager.appTheme && this._cookiesManager.setAppThemeCookie(this._defaultAppTheme); //TODO tests
+  }
 
   set lang(data: EAppLangs) {
     this._cookiesManager.setAppLangCookie(data);
@@ -34,10 +38,15 @@ export class SettingsModel implements ISettingsModel {
   }
 
   get translations() {
-    return this._translations.get(this.lang)!!;
+    return this._mappedTranslations.get(this.lang)!!;
   }
 
   get theme() {
     return this._themes.get(this.appTheme)!!;
+  }
+
+  public getTranslationsByLang(lang: EAppLangs) {
+    //TODO: tests
+    return this._mappedTranslations.get(lang)!!;
   }
 }

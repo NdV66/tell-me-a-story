@@ -1,6 +1,6 @@
-import { ICookiesManager, ISettingsModel } from 'models';
+import { ISettingsModel } from 'models';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { EAppLangs, EAppTheme, TAppTheme, TTranslations } from 'types';
+import { EAppLangs, EAppTheme, TAppTheme, TAvailableTranslation, TTranslations } from 'types';
 
 export interface ISettingsViewModel {
   translations$: Observable<TTranslations>;
@@ -13,6 +13,7 @@ export interface ISettingsViewModel {
   changeAppTheme: (theme: EAppTheme) => void;
 
   setupFromCookies: () => void;
+  availableTranslations: TAvailableTranslation[];
 }
 
 //TODO: tests
@@ -67,15 +68,25 @@ export class SettingsViewModel implements ISettingsViewModel {
     return this._appTheme$.asObservable();
   }
 
-  public changeLang(lang: EAppLangs) {
+  public changeLang = (lang: EAppLangs) => {
     this._appLang$.next(lang);
-  }
+  };
 
-  public changeAppTheme(theme: EAppTheme) {
+  public changeAppTheme = (theme: EAppTheme) => {
     this._appTheme$.next(theme);
-  }
+  };
 
   public setupFromCookies() {
     this._syncWithModel();
+  }
+
+  //TODO tests
+  get availableTranslations() {
+    const keys = Object.keys(EAppLangs);
+
+    return keys.map((key) => ({
+      key: (EAppLangs as any)[key],
+      value: this._settingModel.getTranslationsByLang((EAppLangs as any)[key])!!.lang,
+    }));
   }
 }
