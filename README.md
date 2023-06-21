@@ -19,6 +19,15 @@ Features:
 # How to deploy?
 
 # Architecture
+- `/public`
+- `/src`
+-- `/data`
+-- `/models`
+-- `/pages`
+-- `/tests`
+-- `/tools`
+-- `/types`
+-- `/views`
 
 # Thanks!
 https://nagoshiashumari.github.io/Rpg-Awesome/
