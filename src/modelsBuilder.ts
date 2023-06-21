@@ -15,7 +15,7 @@ import {
   StoryTellerModel,
 } from 'models';
 import { EAppLangs, EAppTheme } from 'types';
-import { SettingsViewModel } from 'viewModels';
+import { HomePageViewModel, SettingsViewModel } from 'viewModels';
 
 const ENV = {
   lang: EAppLangs.EN,
@@ -42,6 +42,7 @@ const settingModel = new SettingsModel(
   cookiesManager,
 );
 
-export const settingViewModel = new SettingsViewModel(settingModel);
+const storyTellerModel = new StoryTellerModel(iconsManager, APP_ERRORS);
 
-export const storyTellerModel = new StoryTellerModel(iconsManager, APP_ERRORS);
+export const settingViewModel = new SettingsViewModel(settingModel);
+export const homePageViewModel = new HomePageViewModel(storyTellerModel);

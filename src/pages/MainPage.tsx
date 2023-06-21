@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import { CssBaseline, ThemeProvider, createTheme, PaletteOptions } from '@mui/material';
 import { HomePage } from 'pages/HomePage';
 import { AppNavbar, useSettingsContext } from 'views';
+import { homePageViewModel } from 'modelsBuilder';
 
 const useMainPage = () => {
   const { theme } = useSettingsContext();
@@ -42,7 +43,7 @@ export const MainPage = () => {
       </header>
 
       <main>
-        <HomePage />
+        <HomePage viewModel={homePageViewModel} />
       </main>
     </ThemeProvider>
   );
