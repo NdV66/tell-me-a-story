@@ -7,9 +7,13 @@ export const anyArrayManagerMock: IAnyArrayManager = {
 };
 
 export const prefixIconMock = 'mock-';
-export const playersIconsMock = ['mock-icon', 'other-mock-icon', 'other-other-mock-icon'];
+export const iconsMock = ['mock-icon', 'other-mock-icon', 'other-other-mock-icon'];
+
+export const playersIconsMock = [...iconsMock];
+
 export const iconsSetMock: TIconsSet = {
   [EStoryCategory.PLAYER]: playersIconsMock,
+  [EStoryCategory.BOTTLES]: [...iconsMock],
 };
 
 export const iconsManagerMock: IIconsManager = {
