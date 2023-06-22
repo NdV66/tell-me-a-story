@@ -3,6 +3,7 @@ import { CssBaseline, ThemeProvider, createTheme, PaletteOptions, Container } fr
 import { HomePage } from 'pages/HomePage';
 import { AppNavbar, useSettingsContext } from 'views';
 import { homePageViewModel } from 'modelsBuilder';
+import { FooterPage } from './FooterPage';
 
 const useMainPage = () => {
   const { theme } = useSettingsContext();
@@ -13,11 +14,19 @@ const useMainPage = () => {
       secondary: { main: theme.secondary },
       success: { main: theme.success },
       info: { main: theme.accent },
+      background: { default: theme.background },
     };
 
     return createTheme({
       palette,
       components: {
+        MuiPaper: {
+          styleOverrides: {
+            root: {
+              background: theme.background,
+            },
+          },
+        },
         MuiSelect: {
           styleOverrides: {
             outlined: {
@@ -55,6 +64,10 @@ export const MainPage = () => {
           <HomePage viewModel={homePageViewModel} />
         </Container>
       </main>
+
+      <footer>
+        <FooterPage />
+      </footer>
     </ThemeProvider>
   );
 };

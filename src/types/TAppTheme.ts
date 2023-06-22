@@ -6,5 +6,5 @@ export type TAppTheme = {
   secondary: string;
   success: string;
   accent: string;
-  //   background: string;
+  background: string;
 };
