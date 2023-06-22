@@ -1,3 +1,4 @@
+import { styled } from '@mui/material';
 import Button from '@mui/material/Button';
 import { TTranslations } from 'types';
 
@@ -6,8 +7,12 @@ type Props = {
   translations: TTranslations;
 };
 
+const StyledTellButton = styled(Button)(({ theme }) => ({
+  marginTop: '32px',
+}));
+
 export const TellButton = ({ onClick, translations }: Props) => (
-  <Button variant="contained" onClick={onClick}>
+  <StyledTellButton variant="contained" onClick={onClick}>
     {translations.roll}
-  </Button>
+  </StyledTellButton>
 );

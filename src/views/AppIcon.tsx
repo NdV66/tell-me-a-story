@@ -5,11 +5,13 @@ type Props = {
   icon: string;
 };
 
-const StyledAppIcon = styled('div')(({ theme }) => ({
+const StyledAppIcon = styled('i')(({ theme }) => ({
+  display: 'flex',
+  justifyContent: 'center',
+  width: '100%',
   fontSize: '96px',
-  paddingTop: '32px',
-  color:
-    theme.palette.mode === EAppTheme.LIGHT ? theme.palette.primary.main : theme.palette.info.main,
+  paddingTop: '64px',
+  color: theme.palette.primary.main,
 }));
 
 export const AppIcon = ({ icon }: Props) => {

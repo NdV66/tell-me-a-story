@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { CssBaseline, ThemeProvider, createTheme, PaletteOptions, Container } from '@mui/material';
+import { CssBaseline, ThemeProvider, createTheme, PaletteOptions } from '@mui/material';
 import { HomePage } from 'pages/HomePage';
 import { AppNavbar, useSettingsContext } from 'views';
 import { homePageViewModel } from 'modelsBuilder';
@@ -60,9 +60,7 @@ export const MainPage = () => {
       </header>
 
       <main>
-        <Container maxWidth="lg">
-          <HomePage viewModel={homePageViewModel} />
-        </Container>
+        <HomePage viewModel={homePageViewModel} />
       </main>
 
       <footer>

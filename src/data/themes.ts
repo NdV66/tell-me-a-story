@@ -11,7 +11,7 @@ export const LIGHT_THEME: TAppTheme = {
 
 export const DARK_THEME: TAppTheme = {
   name: 'dark',
-  primary: '#3c4272',
+  primary: '#545983',
   secondary: '#1D267D',
   success: '#5C469C',
   accent: '#D4ADFC',

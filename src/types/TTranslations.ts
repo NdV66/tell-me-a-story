@@ -3,4 +3,5 @@ export type TTranslations = {
   appName: string;
   themeChange: string;
   roll: string;
+  noRoll: string;
 };

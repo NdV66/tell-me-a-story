@@ -1,14 +1,14 @@
 import { IStoryTellerModel } from 'models';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { EStoryCategory } from 'types';
 
 export interface IHomePageViewModel {
-  currentDice$: Observable<string[]>;
+  currentDice$: Observable<string[] | undefined>;
   tellAStory: (category: EStoryCategory, amount: number) => void;
 }
 
 export class HomePageViewModel implements IHomePageViewModel {
-  private _currentDice$: BehaviorSubject<string[]> = new BehaviorSubject(['']);
+  private _currentDice$: Subject<string[]> = new Subject();
 
   constructor(private _storyTeller: IStoryTellerModel) {}
 
