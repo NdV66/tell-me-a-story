@@ -1,5 +1,4 @@
-import Button from '@mui/material/Button';
-import { DiceArea, useSettingsContext } from 'views';
+import { DiceArea, TellButton, useSettingsContext } from 'views';
 import { IHomePageViewModel } from 'viewModels';
 import { useStateObservable } from 'tools';
 import { EStoryCategory } from 'types';
@@ -24,9 +23,10 @@ export const HomePage = ({ viewModel }: Props) => {
 
   return (
     <>
-      <Button variant="contained" onClick={() => tellAStory(EStoryCategory.PLAYER, 4)}>
-        {translations.roll}
-      </Button>
+      <TellButton
+        onClick={() => tellAStory(EStoryCategory.PLAYER, 4)}
+        translations={translations}
+      />
 
       <DiceArea dice={dice || []} />
     </>
