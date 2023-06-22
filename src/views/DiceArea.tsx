@@ -1,7 +1,7 @@
 import { TTranslations } from 'types';
 import { AppIcon } from './AppIcon';
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
-import { Typography } from '@mui/material';
+import { Typography, styled } from '@mui/material';
 
 type Props = {
   dice: Array<string>;
@@ -10,6 +10,10 @@ type Props = {
 type EmptyProps = {
   translations: TTranslations;
 };
+
+const StyledDiceAreaEmptyTypography = styled(Typography)(({ theme }) => ({
+  color: theme.palette.primary.main,
+}));
 
 export const DiceArea = ({ dice }: Props) => (
   <Grid2 container justifyContent="center">
@@ -22,9 +26,9 @@ export const DiceArea = ({ dice }: Props) => (
 );
 
 const DiceAreaEmpty = ({ translations }: EmptyProps) => (
-  <Typography component="p" variant="h4">
+  <StyledDiceAreaEmptyTypography variant="h4" align="center">
     {translations.noRoll}
-  </Typography>
+  </StyledDiceAreaEmptyTypography>
 );
 
 DiceArea.Empty = DiceAreaEmpty;

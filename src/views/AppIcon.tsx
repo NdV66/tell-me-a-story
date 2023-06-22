@@ -1,5 +1,4 @@
 import { styled } from '@mui/material/styles';
-import { EAppTheme } from 'types';
 
 type Props = {
   icon: string;

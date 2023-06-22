@@ -7,12 +7,21 @@ type Props = {
   translations: TTranslations;
 };
 
-const StyledTellButton = styled(Button)(({ theme }) => ({
-  marginTop: '32px',
+const StyledTellButton = styled(Button)(() => ({
+  padding: '8px 32px',
+}));
+
+const StyledWrapper = styled('div')(() => ({
+  width: '100%',
+  display: 'flex',
+  justifyContent: 'center',
+  marginTop: '64px',
 }));
 
 export const TellButton = ({ onClick, translations }: Props) => (
-  <StyledTellButton variant="contained" onClick={onClick}>
-    {translations.roll}
-  </StyledTellButton>
+  <StyledWrapper>
+    <StyledTellButton variant="contained" onClick={onClick}>
+      {translations.roll}
+    </StyledTellButton>
+  </StyledWrapper>
 );
