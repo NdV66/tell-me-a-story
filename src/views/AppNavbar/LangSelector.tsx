@@ -1,3 +1,4 @@
+import { styled } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { EAppLangs } from 'types';
@@ -8,13 +9,18 @@ type Props = {
   values: Array<{ key: EAppLangs; value: string }>;
 };
 
+const StyledLandSelector = styled(Select)(({ theme }) => ({
+  backgroundColor: theme.palette.secondary.main,
+  width: '100px',
+}));
+
 export const LangSelector = ({ onChange, value, values }: Props) => {
-  const handleChange = (event: SelectChangeEvent) => {
+  const handleChange = (event: SelectChangeEvent<any>) => {
     onChange(event.target.value as EAppLangs);
   };
 
   return (
-    <Select
+    <StyledLandSelector
       id="lang-selector"
       variant="outlined"
       value={value}
@@ -26,6 +32,6 @@ export const LangSelector = ({ onChange, value, values }: Props) => {
           {value}
         </MenuItem>
       ))}
-    </Select>
+    </StyledLandSelector>
   );
 };
