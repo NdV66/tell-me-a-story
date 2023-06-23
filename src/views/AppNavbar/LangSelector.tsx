@@ -9,9 +9,14 @@ type Props = {
   values: Array<{ key: EAppLangs; value: string }>;
 };
 
-const StyledLandSelector = styled(Select)(({ theme }) => ({
+const StyledLangSelector = styled(Select)(({ theme }) => ({
   backgroundColor: theme.palette.secondary.main,
-  width: '100px',
+  width: '90px',
+  fontSize: theme.typography.fontSize * 0.9,
+}));
+
+const StyledMenuItem = styled(MenuItem)(({ theme }) => ({
+  fontSize: theme.typography.fontSize * 0.9,
 }));
 
 export const LangSelector = ({ onChange, value, values }: Props) => {
@@ -20,7 +25,7 @@ export const LangSelector = ({ onChange, value, values }: Props) => {
   };
 
   return (
-    <StyledLandSelector
+    <StyledLangSelector
       id="lang-selector"
       variant="outlined"
       value={value}
@@ -28,10 +33,10 @@ export const LangSelector = ({ onChange, value, values }: Props) => {
       defaultValue={value}
     >
       {values.map(({ key, value }) => (
-        <MenuItem key={key} value={key}>
+        <StyledMenuItem key={key} value={key}>
           {value}
-        </MenuItem>
+        </StyledMenuItem>
       ))}
-    </StyledLandSelector>
+    </StyledLangSelector>
   );
 };
