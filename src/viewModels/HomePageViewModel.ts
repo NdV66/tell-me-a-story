@@ -32,10 +32,17 @@ export class HomePageViewModel implements IHomePageViewModel {
       this._prepareMaxAmount(this.diceSettings.defaultCategoriesKeys),
     );
 
+    this._subscribeToCategories();
+    this._subscribeToDiceSettings();
+  }
+
+  private _subscribeToCategories() {
     this.currentCategories$.subscribe((el) =>
       this._maxDiceAmount$.next(this._prepareMaxAmount(el)),
     );
+  }
 
+  private _subscribeToDiceSettings() {
     combineLatest([this._currentDiceAmount$, this._currentCategories$]).subscribe(
       ([diceAmount, categories]) => {
         this.tellAStory(categories, diceAmount);
