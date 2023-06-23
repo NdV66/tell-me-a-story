@@ -7,7 +7,6 @@ export interface IIconsManager {
   getCategoriesAmount: (categories: EStoryCategory[]) => number;
 }
 
-//TODO tests
 export class IconsManager implements IIconsManager {
   constructor(
     private _iconPrefix: string,
