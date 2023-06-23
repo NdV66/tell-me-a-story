@@ -5,7 +5,6 @@ export interface IStoryTellerModel {
   tellAStory: (categories: EStoryCategory[], iconsAmount: number) => Array<string>;
 }
 
-//TODO tests
 export class StoryTellerModel implements IStoryTellerModel {
   static MIN_INDEX = 0;
   static MIN_AMOUNT = 1;

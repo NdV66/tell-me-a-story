@@ -13,7 +13,7 @@ export const playersIconsMock = [...iconsMock];
 
 export const iconsSetMock: TIconsSet = {
   [EStoryCategory.PLAYER]: playersIconsMock,
-  [EStoryCategory.BOTTLES]: [...iconsMock],
+  [EStoryCategory.BOTTLES]: ['mock-icon2', 'other-mock-icon2', 'other-other-mock-icon2'],
 };
 
 export const iconsManagerMock: IIconsManager = {
