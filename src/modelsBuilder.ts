@@ -1,12 +1,5 @@
-import {
-  APP_ERRORS,
-  DARK_THEME,
-  ICONS_SET,
-  LIGHT_THEME,
-  PREFIX_ICON,
-  TRANSLATIONS_EN,
-  TRANSLATIONS_PL,
-} from 'data';
+import { ENV } from 'appEnv';
+import { APP_ERRORS, ICONS_SET, PREFIX_ICON } from 'data';
 import {
   AnyArrayManager,
   CookiesManager,
@@ -14,23 +7,8 @@ import {
   SettingsModel,
   StoryTellerModel,
 } from 'models';
-import { EAppLangs, EAppTheme } from 'types';
+
 import { HomePageViewModel, SettingsViewModel } from 'viewModels';
-
-const ENV = {
-  lang: EAppLangs.EN,
-  theme: EAppTheme.DARK,
-  defaultDiceAmount: 9,
-
-  mappedTranslations: new Map([
-    [EAppLangs.EN, TRANSLATIONS_EN],
-    [EAppLangs.PL, TRANSLATIONS_PL],
-  ]),
-  mappedThemes: new Map([
-    [EAppTheme.DARK, DARK_THEME],
-    [EAppTheme.LIGHT, LIGHT_THEME],
-  ]),
-};
 
 const cookiesManager = new CookiesManager();
 const anyArrayManager = new AnyArrayManager();
@@ -46,4 +24,4 @@ const settingModel = new SettingsModel(
 const storyTellerModel = new StoryTellerModel(iconsManager, APP_ERRORS);
 
 export const settingViewModel = new SettingsViewModel(settingModel);
-export const homePageViewModel = new HomePageViewModel(storyTellerModel, ENV.defaultDiceAmount);
+export const homePageViewModel = new HomePageViewModel(storyTellerModel, ENV.diceSettings);

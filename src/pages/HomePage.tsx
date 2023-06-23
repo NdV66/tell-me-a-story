@@ -16,7 +16,8 @@ const useHomePage = (viewModel: IHomePageViewModel) => {
   return {
     dice,
     translations,
-    diceAmount: diceAmount,
+    diceAmount,
+    diceSettings: viewModel.diceSettings,
     tellAStory: viewModel.tellAStory,
     changeDiceAmount: viewModel.changeDiceAmount,
   };
@@ -27,15 +28,16 @@ const StyledContainer = styled(Container)(() => ({
 }));
 
 export const HomePage = ({ viewModel }: Props) => {
-  const { dice, tellAStory, translations, diceAmount, changeDiceAmount } = useHomePage(viewModel);
+  const { dice, tellAStory, translations, diceAmount, changeDiceAmount, diceSettings } =
+    useHomePage(viewModel);
 
   return diceAmount ? (
     <StyledContainer maxWidth="md" sx={{ height: 'calc(100vh - 24px - 24px - 24px - 64px)' }}>
       <SettingsArea
         translations={translations}
-        min={3}
-        max={12}
-        step={3}
+        min={diceSettings.minDice}
+        max={diceSettings.maxDice}
+        step={diceSettings.stepDice}
         value={diceAmount}
         onChange={changeDiceAmount}
       />

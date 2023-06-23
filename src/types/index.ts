@@ -7,3 +7,4 @@ export * from './EAppTheme';
 export * from './TAppTheme';
 export * from './ECookieKeys';
 export * from './TAvailableTranslation';
+export * from './TDiceSettings';
