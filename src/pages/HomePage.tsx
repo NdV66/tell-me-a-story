@@ -1,38 +1,29 @@
 import { Box, Container } from '@mui/material';
-import { useSettingsContext } from 'views';
-import { IDiceAreaViewComponent, IHomePageViewModel } from 'viewModels';
-import { useStateObservable } from 'tools';
+import {
+  IDiceAreaViewComponent,
+  IHomePageViewModel,
+  IDiceAmountViewComponent,
+  IDiceCategoriesViewComponent,
+} from 'viewModels';
+
 import { DiceAreaComponent } from './DiceAreaComponent';
 import { IconsAmountSlider } from './IconsAmountSlider';
-import { IDiceAmountViewComponent } from 'viewModels/DiceAmountViewComponent';
-import { StoryCategorySelector } from 'views/StoryCategorySelector';
+
+import { StoryCategorySelector } from 'pages/StoryCategorySelector';
 
 type Props = {
   viewModel: IHomePageViewModel;
   diceAreaViewComponent: IDiceAreaViewComponent;
   diceAmountViewComponent: IDiceAmountViewComponent;
+  diceCategoriesViewComponent: IDiceCategoriesViewComponent;
 };
 
-const useHomePage = (viewModel: IHomePageViewModel) => {
-  const { translations } = useSettingsContext();
-  const currentCategories = useStateObservable(viewModel.currentCategories$);
-
-  return {
-    translations,
-    currentCategories,
-    diceSettings: viewModel.diceSettings,
-    changeCategories: viewModel.changeCategories,
-  };
-};
-
-export const HomePage = ({ viewModel, diceAreaViewComponent, diceAmountViewComponent }: Props) => {
-  const { translations, changeCategories, currentCategories, diceSettings } =
-    useHomePage(viewModel);
-
-  const isLoading = !currentCategories;
-
-  //TODO loader
-  return !isLoading ? (
+export const HomePage = ({
+  diceAreaViewComponent,
+  diceAmountViewComponent,
+  diceCategoriesViewComponent,
+}: Props) => {
+  return (
     <Container
       maxWidth="md"
       sx={{ height: 'calc(100vh - 24px - 24px - 24px - 64px)', paddingTop: '32px' }}
@@ -40,12 +31,7 @@ export const HomePage = ({ viewModel, diceAreaViewComponent, diceAmountViewCompo
       <IconsAmountSlider viewComponent={diceAmountViewComponent} />
 
       <Box sx={{ marginTop: '32px' }}>
-        <StoryCategorySelector
-          translations={translations}
-          categories={diceSettings.categoriesKeys}
-          onChange={changeCategories}
-          values={currentCategories}
-        />
+        <StoryCategorySelector viewComponent={diceCategoriesViewComponent} />
       </Box>
 
       <Box
@@ -56,5 +42,5 @@ export const HomePage = ({ viewModel, diceAreaViewComponent, diceAmountViewCompo
         <DiceAreaComponent viewComponent={diceAreaViewComponent} />
       </Box>
     </Container>
-  ) : null;
+  );
 };

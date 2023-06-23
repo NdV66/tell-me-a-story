@@ -10,6 +10,7 @@ import {
 
 import { DiceAreaViewComponent, HomePageViewModel, SettingsViewModel } from 'viewModels';
 import { DiceAmountViewComponent } from 'viewModels/DiceAmountViewComponent';
+import { DiceCategoriesViewComponent } from 'viewModels/DiceCategoriesViewComponent';
 
 const cookiesManager = new CookiesManager();
 const anyArrayManager = new AnyArrayManager();
@@ -26,10 +27,13 @@ const storyTellerModel = new StoryTellerModel(iconsManager, APP_ERRORS);
 
 export const diceAreaViewComponent = new DiceAreaViewComponent(storyTellerModel);
 export const diceAmountViewComponent = new DiceAmountViewComponent(iconsManager, ENV.diceSettings);
+export const diceCategoriesViewComponent = new DiceCategoriesViewComponent(ENV.diceSettings);
 
 export const settingViewModel = new SettingsViewModel(settingModel);
+
+//TODO it's not used, but it keep everything together- maybe use it in the context?
 export const homePageViewModel = new HomePageViewModel(
   diceAreaViewComponent,
   diceAmountViewComponent,
-  ENV.diceSettings,
+  diceCategoriesViewComponent,
 );

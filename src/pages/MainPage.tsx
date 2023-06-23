@@ -2,7 +2,12 @@ import { useMemo } from 'react';
 import { CssBaseline, ThemeProvider, createTheme, PaletteOptions } from '@mui/material';
 import { HomePage } from 'pages/HomePage';
 import { AppNavbar, useSettingsContext } from 'views';
-import { diceAmountViewComponent, diceAreaViewComponent, homePageViewModel } from 'modelsBuilder';
+import {
+  diceAmountViewComponent,
+  diceAreaViewComponent,
+  diceCategoriesViewComponent,
+  homePageViewModel,
+} from 'modelsBuilder';
 import { FooterPage } from './FooterPage';
 
 const useMainPage = () => {
@@ -64,6 +69,7 @@ export const MainPage = () => {
           viewModel={homePageViewModel}
           diceAreaViewComponent={diceAreaViewComponent}
           diceAmountViewComponent={diceAmountViewComponent}
+          diceCategoriesViewComponent={diceCategoriesViewComponent}
         />
       </main>
 
