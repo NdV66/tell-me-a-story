@@ -12,9 +12,9 @@ type EmptyProps = {
 };
 
 export const DiceArea = ({ dice }: Props) => (
-  <Grid2 container justifyContent="center">
+  <Grid2 container justifyContent="flex-start">
     {dice.map((icon) => (
-      <Grid2 key={icon} xs={4} justifyContent="center">
+      <Grid2 key={icon} xs={4}>
         <AppIcon icon={icon} />
       </Grid2>
     ))}

@@ -1,13 +1,43 @@
-import { Box, Slider, Typography } from '@mui/material';
+import { Box, Slider, Typography, styled } from '@mui/material';
 import { TTranslations } from 'types';
 
 type Props = {
   translations: TTranslations;
+  min: number;
+  max: number;
+  step: number;
+  value: number;
+  onChange: (value: number) => void;
 };
 
-export const IconsAmountSlider = ({ translations }: Props) => {
-  const valuetext = (value: number) => {
-    return `${value}°C`;
+const marks = [
+  {
+    value: 3,
+    label: '3',
+  },
+  {
+    value: 6,
+    label: '6',
+  },
+  {
+    value: 9,
+    label: '9',
+  },
+  {
+    value: 12,
+    label: '12',
+  },
+];
+
+const StyledSlider = styled(Slider)(({ theme }) => ({
+  '& .MuiSlider-markLabel': {
+    color: theme.palette.primary.main,
+  },
+}));
+
+export const IconsAmountSlider = ({ translations, min, max, step, value, onChange }: Props) => {
+  const handleOnChange = (_: React.SyntheticEvent | Event, value: number | Array<number>) => {
+    onChange(value as number);
   };
 
   return (
@@ -16,15 +46,14 @@ export const IconsAmountSlider = ({ translations }: Props) => {
         {translations.settingsDice}
       </Typography>
 
-      <Slider
-        aria-label="XXXX"
-        defaultValue={9}
-        getAriaValueText={valuetext}
-        valueLabelDisplay="auto"
-        step={1}
-        marks
-        min={1}
-        max={12}
+      <StyledSlider
+        valueLabelDisplay="off"
+        step={step}
+        marks={marks}
+        min={min}
+        max={max}
+        value={value}
+        onChange={handleOnChange}
       />
     </Box>
   );

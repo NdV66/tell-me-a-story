@@ -4,12 +4,17 @@ import { Box } from '@mui/material';
 
 type Props = {
   translations: TTranslations;
+  min: number;
+  max: number;
+  step: number;
+  value: number;
+  onChange: (value: number) => void;
 };
 
-export const SettingsArea = ({ translations }: Props) => {
+export const SettingsArea = (props: Props) => {
   return (
     <Box>
-      <IconsAmountSlider translations={translations} />
+      <IconsAmountSlider {...props} />
     </Box>
   );
 };

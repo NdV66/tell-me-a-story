@@ -36,15 +36,19 @@ https://nagoshiashumari.github.io/Rpg-Awesome/
 - basic structure OK
 - basic styles OK
 - roll dices OK
-- footer
+- footer OK
 - change lang OK
 - change theme OK
 - move dices ?
-- re-roll dice?
+- re-roll dice ?
+- dice area export
 - add categories
-- add dices amount input
+- add dices amount input OK
 - info box
-- add more dices
+- add more dice icons
+- title
+- deploy + readme
+- architecture update in readme
 
 - model tests
 - view models tests

@@ -20,6 +20,7 @@ import { HomePageViewModel, SettingsViewModel } from 'viewModels';
 const ENV = {
   lang: EAppLangs.EN,
   theme: EAppTheme.DARK,
+  defaultDiceAmount: 9,
 
   mappedTranslations: new Map([
     [EAppLangs.EN, TRANSLATIONS_EN],
@@ -45,4 +46,4 @@ const settingModel = new SettingsModel(
 const storyTellerModel = new StoryTellerModel(iconsManager, APP_ERRORS);
 
 export const settingViewModel = new SettingsViewModel(settingModel);
-export const homePageViewModel = new HomePageViewModel(storyTellerModel);
+export const homePageViewModel = new HomePageViewModel(storyTellerModel, ENV.defaultDiceAmount);
