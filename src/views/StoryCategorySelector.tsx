@@ -5,20 +5,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Chip from '@mui/material/Chip';
 import { Typography } from '@mui/material';
-import { TTranslations } from 'types';
-
-const names = [
-  'Oliver Hansen',
-  'Van Henry',
-  'April Tucker',
-  'Ralph Hubbard',
-  'Omar Alexander',
-  'Carlos Abbott',
-  'Miriam Wagner1',
-  'Omar Alexander2',
-  'Carlos Abbott3',
-  'Miriam Wagner4',
-];
+import { EStoryCategory, TTranslations } from 'types';
 
 const getStyles = (name: string, personName: readonly string[], theme: Theme) => ({
   fontWeight:
@@ -37,9 +24,10 @@ const renderValue = (selected: string[]) => (
 
 type Props = {
   translations: TTranslations;
+  categories: Array<string>;
 };
 
-export const StoryCategorySelector = ({ translations }: Props) => {
+export const StoryCategorySelector = ({ translations, categories }: Props) => {
   const theme = useTheme();
   const [personName, setPersonName] = React.useState<string[]>([]);
 
@@ -60,9 +48,9 @@ export const StoryCategorySelector = ({ translations }: Props) => {
         renderValue={renderValue}
         sx={{ width: '100%' }}
       >
-        {names.map((name) => (
-          <MenuItem key={name} value={name} style={getStyles(name, personName, theme)}>
-            {name}
+        {categories.map((key) => (
+          <MenuItem key={key} value={key} style={getStyles(key, personName, theme)}>
+            {translations.categoriesByKeys[(EStoryCategory as any)[key]]}
           </MenuItem>
         ))}
       </Select>

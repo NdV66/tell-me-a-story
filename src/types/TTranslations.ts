@@ -1,3 +1,5 @@
+import { EStoryCategory } from './EStoryCategory';
+
 export type TTranslations = {
   lang: string;
   appName: string;
@@ -14,4 +16,8 @@ export type TTranslations = {
   githubLink: string;
   author: string;
   lnLink: string;
+
+  categoriesByKeys: {
+    [key: string]: string;
+  };
 };

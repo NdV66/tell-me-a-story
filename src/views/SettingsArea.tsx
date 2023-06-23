@@ -10,6 +10,7 @@ type Props = {
   step: number;
   value: number;
   onChange: (value: number) => void;
+  categories: Array<string>;
 };
 
 export const SettingsArea = (props: Props) => (
@@ -18,8 +19,8 @@ export const SettingsArea = (props: Props) => (
       <IconsAmountSlider {...props} />
     </Box>
 
-    <Box>
-      <StoryCategorySelector translations={props.translations} />
+    <Box sx={{ marginTop: '32px' }}>
+      <StoryCategorySelector translations={props.translations} categories={props.categories} />
     </Box>
   </Box>
 );

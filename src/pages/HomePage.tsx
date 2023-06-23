@@ -39,6 +39,7 @@ export const HomePage = ({ viewModel }: Props) => {
   return diceAmount ? (
     <StyledContainer maxWidth="md" sx={{ height: 'calc(100vh - 24px - 24px - 24px - 64px)' }}>
       <SettingsArea
+        categories={diceSettings.categoriesKeys}
         translations={translations}
         min={diceSettings.minDice}
         max={diceSettings.maxDice}
