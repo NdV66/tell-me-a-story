@@ -12,7 +12,9 @@ export const IconsAmountSlider = ({ translations }: Props) => {
 
   return (
     <Box>
-      <Typography gutterBottom>{translations.settingsDice}</Typography>
+      <Typography gutterBottom color="primary">
+        {translations.settingsDice}
+      </Typography>
 
       <Slider
         aria-label="XXXX"

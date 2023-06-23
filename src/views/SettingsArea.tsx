@@ -1,5 +1,6 @@
 import { TTranslations } from 'types';
 import { IconsAmountSlider } from './IconsAmountSlider';
+import { Box } from '@mui/material';
 
 type Props = {
   translations: TTranslations;
@@ -7,8 +8,8 @@ type Props = {
 
 export const SettingsArea = ({ translations }: Props) => {
   return (
-    <div>
+    <Box>
       <IconsAmountSlider translations={translations} />
-    </div>
+    </Box>
   );
 };
