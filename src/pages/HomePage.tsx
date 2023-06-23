@@ -1,44 +1,35 @@
 import { Box, Container } from '@mui/material';
-import { SettingsArea, useSettingsContext } from 'views';
+import { useSettingsContext } from 'views';
 import { IDiceAreaViewComponent, IHomePageViewModel } from 'viewModels';
 import { useStateObservable } from 'tools';
 import { DiceAreaComponent } from './DiceAreaComponent';
+import { IconsAmountSlider } from './IconsAmountSlider';
+import { IDiceAmountViewComponent } from 'viewModels/DiceAmountViewComponent';
+import { StoryCategorySelector } from 'views/StoryCategorySelector';
 
 type Props = {
   viewModel: IHomePageViewModel;
   diceAreaViewComponent: IDiceAreaViewComponent;
+  diceAmountViewComponent: IDiceAmountViewComponent;
 };
 
 const useHomePage = (viewModel: IHomePageViewModel) => {
   const { translations } = useSettingsContext();
-  const diceAmount = useStateObservable(viewModel.currentDiceAmount$);
   const currentCategories = useStateObservable(viewModel.currentCategories$);
-  const maxDiceAmount = useStateObservable(viewModel.maxDiceAmount$);
 
   return {
     translations,
-    diceAmount,
     currentCategories,
-    maxDiceAmount,
-
     diceSettings: viewModel.diceSettings,
-    changeDiceAmount: viewModel.changeDiceAmount,
     changeCategories: viewModel.changeCategories,
   };
 };
 
-export const HomePage = ({ viewModel, diceAreaViewComponent }: Props) => {
-  const {
-    translations,
-    diceAmount,
-    changeDiceAmount,
-    diceSettings,
-    changeCategories,
-    currentCategories,
-    maxDiceAmount,
-  } = useHomePage(viewModel);
+export const HomePage = ({ viewModel, diceAreaViewComponent, diceAmountViewComponent }: Props) => {
+  const { translations, changeCategories, currentCategories, diceSettings } =
+    useHomePage(viewModel);
 
-  const isLoading = !diceAmount || !currentCategories || !maxDiceAmount;
+  const isLoading = !currentCategories;
 
   //TODO loader
   return !isLoading ? (
@@ -46,17 +37,16 @@ export const HomePage = ({ viewModel, diceAreaViewComponent }: Props) => {
       maxWidth="md"
       sx={{ height: 'calc(100vh - 24px - 24px - 24px - 64px)', paddingTop: '32px' }}
     >
-      <SettingsArea
-        categories={diceSettings.categoriesKeys}
-        translations={translations}
-        min={diceSettings.minDice}
-        max={maxDiceAmount}
-        step={diceSettings.stepDice}
-        value={diceAmount}
-        onChange={changeDiceAmount}
-        onChangeCategories={changeCategories}
-        currentCategories={currentCategories}
-      />
+      <IconsAmountSlider viewComponent={diceAmountViewComponent} />
+
+      <Box sx={{ marginTop: '32px' }}>
+        <StoryCategorySelector
+          translations={translations}
+          categories={diceSettings.categoriesKeys}
+          onChange={changeCategories}
+          values={currentCategories}
+        />
+      </Box>
 
       <Box
         sx={{

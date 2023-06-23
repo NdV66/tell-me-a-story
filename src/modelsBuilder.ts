@@ -9,6 +9,7 @@ import {
 } from 'models';
 
 import { DiceAreaViewComponent, HomePageViewModel, SettingsViewModel } from 'viewModels';
+import { DiceAmountViewComponent } from 'viewModels/DiceAmountViewComponent';
 
 const cookiesManager = new CookiesManager();
 const anyArrayManager = new AnyArrayManager();
@@ -24,9 +25,11 @@ const settingModel = new SettingsModel(
 const storyTellerModel = new StoryTellerModel(iconsManager, APP_ERRORS);
 
 export const diceAreaViewComponent = new DiceAreaViewComponent(storyTellerModel);
+export const diceAmountViewComponent = new DiceAmountViewComponent(iconsManager, ENV.diceSettings);
+
 export const settingViewModel = new SettingsViewModel(settingModel);
 export const homePageViewModel = new HomePageViewModel(
-  iconsManager,
   diceAreaViewComponent,
+  diceAmountViewComponent,
   ENV.diceSettings,
 );
