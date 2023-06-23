@@ -2,7 +2,7 @@ import { DiceArea, TellButton, useSettingsContext } from 'views';
 import { IHomePageViewModel } from 'viewModels';
 import { useStateObservable } from 'tools';
 import { EStoryCategory } from 'types';
-import { Container, styled } from '@mui/material';
+import { Box, Container, styled } from '@mui/material';
 
 type Props = {
   viewModel: IHomePageViewModel;
@@ -27,13 +27,22 @@ export const HomePage = ({ viewModel }: Props) => {
   const { dice, tellAStory, translations } = useHomePage(viewModel);
 
   return (
-    <StyledContainer maxWidth="lg">
-      {dice ? <DiceArea dice={dice} /> : <DiceArea.Empty translations={translations} />}
+    <StyledContainer maxWidth="lg" sx={{ height: 'calc(100vh - 24px - 24px - 24px - 64px)' }}>
+      <Box
+        sx={{
+          width: '100%',
+          display: 'flex',
+          justifyContent: 'center',
+          marginBottom: '64px',
+        }}
+      >
+        <TellButton
+          onClick={() => tellAStory(EStoryCategory.PLAYER, 4)}
+          translations={translations}
+        />
+      </Box>
 
-      <TellButton
-        onClick={() => tellAStory(EStoryCategory.PLAYER, 4)}
-        translations={translations}
-      />
+      {dice ? <DiceArea dice={dice} /> : <DiceArea.Empty translations={translations} />}
     </StyledContainer>
   );
 };

@@ -4,4 +4,11 @@ export type TTranslations = {
   themeChange: string;
   roll: string;
   noRoll: string;
+
+  repo: string;
+  repoLink: string;
+  github: string;
+  githubLink: string;
+  author: string;
+  lnLink: string;
 };

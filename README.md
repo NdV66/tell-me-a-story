@@ -31,3 +31,20 @@ Features:
 
 # Thanks!
 https://nagoshiashumari.github.io/Rpg-Awesome/
+
+# Todo
+- basic structure OK
+- basic styles OK
+- roll dices OK
+- footer
+- change lang OK
+- change theme OK
+- move dices ?
+- re-roll dice?
+- add categories
+- add dices amount input
+
+- model tests
+- view models tests
+- view tests
+- pages tests
