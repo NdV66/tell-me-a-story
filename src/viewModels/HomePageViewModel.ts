@@ -1,5 +1,5 @@
 import { IStoryTellerModel } from 'models';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, combineLatest } from 'rxjs';
 import { EStoryCategory, TDiceSettings } from 'types';
 
 export interface IHomePageViewModel {
@@ -25,6 +25,10 @@ export class HomePageViewModel implements IHomePageViewModel {
   ) {
     this._currentDiceAmount$ = new BehaviorSubject(this.diceSettings.defaultDiceAmount);
     this._currentCategories$ = new BehaviorSubject(this.diceSettings.defaultCategoriesKeys);
+
+    combineLatest([this._currentDiceAmount$]).subscribe(([diceAmount]) => {
+      this.tellAStory(EStoryCategory.PLAYER, diceAmount);
+    });
   }
 
   get currentDice$() {
@@ -48,6 +52,7 @@ export class HomePageViewModel implements IHomePageViewModel {
   };
 
   public tellAStory = (category: EStoryCategory, amount: number) => {
+    console.log(category, amount);
     const dice = this._storyTeller.tellAStory(category, amount);
     this._currentDice$.next(dice);
   };

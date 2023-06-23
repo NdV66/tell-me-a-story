@@ -1,9 +1,9 @@
-import { DiceArea, SettingsArea, TellButton, useSettingsContext } from 'views';
+import { DiceArea, SettingsArea, useSettingsContext } from 'views';
 import { IHomePageViewModel } from 'viewModels';
 import { useStateObservable } from 'tools';
-import { EStoryCategory } from 'types';
 import { Box, Container, styled } from '@mui/material';
 import { useEffect } from 'react';
+import { EStoryCategory } from 'types';
 
 type Props = {
   viewModel: IHomePageViewModel;
@@ -11,22 +11,24 @@ type Props = {
 
 const useHomePage = (viewModel: IHomePageViewModel) => {
   const { translations } = useSettingsContext();
-  const dice = useStateObservable(viewModel.currentDice$);
+  const currentDice = useStateObservable(viewModel.currentDice$);
   const diceAmount = useStateObservable(viewModel.currentDiceAmount$);
   const currentCategories = useStateObservable(viewModel.currentCategories$);
 
   useEffect(() => {
-    viewModel.tellAStory(EStoryCategory.PLAYER, viewModel.diceSettings.defaultDiceAmount);
+    viewModel.tellAStory(
+      (EStoryCategory as any)[viewModel.diceSettings.defaultCategoriesKeys[0]],
+      viewModel.diceSettings.defaultDiceAmount,
+    );
   }, [viewModel]);
 
   return {
-    dice,
+    currentDice,
     translations,
     diceAmount,
     currentCategories,
 
     diceSettings: viewModel.diceSettings,
-    tellAStory: viewModel.tellAStory,
     changeDiceAmount: viewModel.changeDiceAmount,
     changeCategories: viewModel.changeCategories,
   };
@@ -38,8 +40,7 @@ const StyledContainer = styled(Container)(() => ({
 
 export const HomePage = ({ viewModel }: Props) => {
   const {
-    dice,
-    tellAStory,
+    currentDice,
     translations,
     diceAmount,
     changeDiceAmount,
@@ -66,19 +67,12 @@ export const HomePage = ({ viewModel }: Props) => {
 
       <Box
         sx={{
-          width: '100%',
-          display: 'flex',
-          justifyContent: 'center',
           marginBottom: '64px',
           marginTop: '64px',
         }}
       >
-        <TellButton
-          onClick={() => tellAStory(EStoryCategory.PLAYER, diceAmount)}
-          translations={translations}
-        />
+        {currentDice && <DiceArea dice={currentDice} />}
       </Box>
-      {dice && <DiceArea dice={dice} />}
     </StyledContainer>
   ) : null; //TODO loader
 };
