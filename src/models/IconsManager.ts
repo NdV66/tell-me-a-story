@@ -3,26 +3,29 @@ import { IAnyArrayManager } from './AnyArrayManager';
 
 export interface IIconsManager {
   iconPrefix: string;
-  getIconsSetPerCategory: (category: EStoryCategory) => Array<string>;
+  getIconsSetPerCategory: (category: EStoryCategory) => string[];
+  getCategoriesAmount: (categories: EStoryCategory[]) => number;
 }
 
+//TODO tests
 export class IconsManager implements IIconsManager {
-  private _iconsCategoryMap: Map<EStoryCategory, Array<string>>;
-
   constructor(
     private _iconPrefix: string,
     private _arrayManager: IAnyArrayManager,
-    iconsSet: TIconsSet,
-  ) {
-    this._iconsCategoryMap = new Map([[EStoryCategory.PLAYER, iconsSet.player]]);
-  }
+    private _iconsSet: TIconsSet,
+  ) {}
 
   get iconPrefix() {
     return this._iconPrefix;
   }
 
+  public getCategoriesAmount(categories: EStoryCategory[]) {
+    const start = 0;
+    return categories.reduce((prev, curr) => prev + this._iconsSet[curr]!!.length, start);
+  }
+
   public getIconsSetPerCategory(category: EStoryCategory) {
-    const icons = this._iconsCategoryMap.get(category)!!;
+    const icons = this._iconsSet[category]!!;
     return this._arrayManager.shuffle(icons);
   }
 }

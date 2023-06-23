@@ -4,8 +4,8 @@ import { EAppLangs, EAppTheme, EStoryCategory, TDiceSettings } from 'types';
 const diceSettings: TDiceSettings = {
   defaultDiceAmount: 9,
   minDice: 3,
-  maxDice: 12,
   stepDice: 3,
+  maxThresholds: 5,
   categoriesKeys: Object.values(EStoryCategory),
   defaultCategoriesKeys: [EStoryCategory.PLAYER],
 };

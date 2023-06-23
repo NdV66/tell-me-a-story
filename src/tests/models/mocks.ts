@@ -19,6 +19,7 @@ export const iconsSetMock: TIconsSet = {
 export const iconsManagerMock: IIconsManager = {
   getIconsSetPerCategory: jest.fn(),
   iconPrefix: PREFIX_ICON,
+  getCategoriesAmount: jest.fn(),
 };
 
 export const errorsMock: TAppErrors = {

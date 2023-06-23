@@ -10,24 +10,18 @@ type Props = {
   onChange: (value: number) => void;
 };
 
-const marks = [
-  {
-    value: 3,
-    label: '3',
-  },
-  {
-    value: 6,
-    label: '6',
-  },
-  {
-    value: 9,
-    label: '9',
-  },
-  {
-    value: 12,
-    label: '12',
-  },
-];
+const prepareMarks = (min: number, max: number, step: number) => {
+  const result = [];
+
+  for (let i = min; i <= max; i += step) {
+    result.push({
+      value: i,
+      label: i,
+    });
+  }
+
+  return result;
+};
 
 const StyledSlider = styled(Slider)(({ theme }) => ({
   '& .MuiSlider-markLabel': {
@@ -49,7 +43,7 @@ export const IconsAmountSlider = ({ translations, min, max, step, value, onChang
       <StyledSlider
         valueLabelDisplay="off"
         step={step}
-        marks={marks}
+        marks={prepareMarks(min, max, step)}
         min={min}
         max={max}
         value={value}

@@ -24,4 +24,8 @@ const settingModel = new SettingsModel(
 const storyTellerModel = new StoryTellerModel(iconsManager, APP_ERRORS);
 
 export const settingViewModel = new SettingsViewModel(settingModel);
-export const homePageViewModel = new HomePageViewModel(storyTellerModel, ENV.diceSettings);
+export const homePageViewModel = new HomePageViewModel(
+  storyTellerModel,
+  iconsManager,
+  ENV.diceSettings,
+);

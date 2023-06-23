@@ -1,4 +1,4 @@
-import { IStoryTellerModel } from 'models';
+import { IIconsManager, IStoryTellerModel } from 'models';
 import { BehaviorSubject, Observable, Subject, combineLatest } from 'rxjs';
 import { EStoryCategory, TDiceSettings } from 'types';
 
@@ -6,6 +6,7 @@ export interface IHomePageViewModel {
   currentDice$: Observable<string[] | undefined>;
   currentDiceAmount$: Observable<number | undefined>;
   currentCategories$: Observable<EStoryCategory[] | undefined>;
+  maxDiceAmount$: Observable<number>;
 
   diceSettings: TDiceSettings;
 
@@ -18,19 +19,32 @@ export class HomePageViewModel implements IHomePageViewModel {
   private _currentDice$: Subject<string[]> = new Subject();
   private _currentDiceAmount$: BehaviorSubject<number>;
   private _currentCategories$: BehaviorSubject<EStoryCategory[]>;
+  private _maxDiceAmount$: BehaviorSubject<number>;
 
   constructor(
     private _storyTeller: IStoryTellerModel,
+    private _iconManager: IIconsManager,
     public readonly diceSettings: TDiceSettings,
   ) {
     this._currentDiceAmount$ = new BehaviorSubject(this.diceSettings.defaultDiceAmount);
     this._currentCategories$ = new BehaviorSubject(this.diceSettings.defaultCategoriesKeys);
+    this._maxDiceAmount$ = new BehaviorSubject(
+      this._prepareMaxAmount(this.diceSettings.defaultCategoriesKeys),
+    );
+
+    this.currentCategories$.subscribe((el) =>
+      this._maxDiceAmount$.next(this._prepareMaxAmount(el)),
+    );
 
     combineLatest([this._currentDiceAmount$, this._currentCategories$]).subscribe(
       ([diceAmount, categories]) => {
-        this.tellAStory([EStoryCategory.PLAYER], diceAmount);
+        this.tellAStory(categories, diceAmount);
       },
     );
+  }
+
+  get maxDiceAmount$() {
+    return this._maxDiceAmount$.asObservable();
   }
 
   get currentDice$() {
@@ -54,8 +68,15 @@ export class HomePageViewModel implements IHomePageViewModel {
   };
 
   public tellAStory = (category: EStoryCategory[], amount: number) => {
-    console.log(category, amount);
     const dice = this._storyTeller.tellAStory(category, amount);
     this._currentDice$.next(dice);
   };
+
+  private _prepareMaxAmount(categories: EStoryCategory[]) {
+    const { stepDice } = this.diceSettings;
+    const iconsAmount = this._iconManager.getCategoriesAmount(categories);
+    const amount = iconsAmount - (iconsAmount % stepDice);
+    const realMax = stepDice * this.diceSettings.maxThresholds;
+    return amount > realMax ? realMax : amount;
+  }
 }

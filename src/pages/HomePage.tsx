@@ -13,6 +13,7 @@ const useHomePage = (viewModel: IHomePageViewModel) => {
   const currentDice = useStateObservable(viewModel.currentDice$);
   const diceAmount = useStateObservable(viewModel.currentDiceAmount$);
   const currentCategories = useStateObservable(viewModel.currentCategories$);
+  const maxDiceAmount = useStateObservable(viewModel.maxDiceAmount$);
 
   useEffect(() => {
     viewModel.tellAStory(
@@ -26,6 +27,7 @@ const useHomePage = (viewModel: IHomePageViewModel) => {
     translations,
     diceAmount,
     currentCategories,
+    maxDiceAmount,
 
     diceSettings: viewModel.diceSettings,
     changeDiceAmount: viewModel.changeDiceAmount,
@@ -46,9 +48,10 @@ export const HomePage = ({ viewModel }: Props) => {
     diceSettings,
     changeCategories,
     currentCategories,
+    maxDiceAmount,
   } = useHomePage(viewModel);
 
-  const isLoading = !diceAmount || !currentCategories;
+  const isLoading = !diceAmount || !currentCategories || !maxDiceAmount;
 
   return !isLoading ? (
     <StyledContainer maxWidth="md" sx={{ height: 'calc(100vh - 24px - 24px - 24px - 64px)' }}>
@@ -56,7 +59,7 @@ export const HomePage = ({ viewModel }: Props) => {
         categories={diceSettings.categoriesKeys}
         translations={translations}
         min={diceSettings.minDice}
-        max={diceSettings.maxDice}
+        max={maxDiceAmount}
         step={diceSettings.stepDice}
         value={diceAmount}
         onChange={changeDiceAmount}
