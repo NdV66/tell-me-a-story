@@ -1,29 +1,29 @@
-import { DiceArea, SettingsArea, useSettingsContext } from 'views';
-import { IHomePageViewModel } from 'viewModels';
+import { SettingsArea, useSettingsContext } from 'views';
+import { IDiceAreaViewComponent, IHomePageViewModel } from 'viewModels';
 import { useStateObservable } from 'tools';
-import { Box, Container, styled } from '@mui/material';
+import { Box, Container } from '@mui/material';
 import { useEffect } from 'react';
+import { DiceAreaComponent } from './DiceAreaComponent';
 
 type Props = {
   viewModel: IHomePageViewModel;
+  diceAreaViewComponent: IDiceAreaViewComponent;
 };
 
 const useHomePage = (viewModel: IHomePageViewModel) => {
   const { translations } = useSettingsContext();
-  const currentDice = useStateObservable(viewModel.currentDice$);
   const diceAmount = useStateObservable(viewModel.currentDiceAmount$);
   const currentCategories = useStateObservable(viewModel.currentCategories$);
   const maxDiceAmount = useStateObservable(viewModel.maxDiceAmount$);
 
-  useEffect(() => {
-    viewModel.tellAStory(
-      viewModel.diceSettings.defaultCategoriesKeys,
-      viewModel.diceSettings.defaultDiceAmount,
-    );
-  }, [viewModel]);
+  //   useEffect(() => {
+  //     viewModel.tellAStory(
+  //       viewModel.diceSettings.defaultCategoriesKeys,
+  //       viewModel.diceSettings.defaultDiceAmount,
+  //     );
+  //   }, [viewModel]);
 
   return {
-    currentDice,
     translations,
     diceAmount,
     currentCategories,
@@ -35,13 +35,8 @@ const useHomePage = (viewModel: IHomePageViewModel) => {
   };
 };
 
-const StyledContainer = styled(Container)(() => ({
-  paddingTop: '32px',
-}));
-
-export const HomePage = ({ viewModel }: Props) => {
+export const HomePage = ({ viewModel, diceAreaViewComponent }: Props) => {
   const {
-    currentDice,
     translations,
     diceAmount,
     changeDiceAmount,
@@ -53,8 +48,12 @@ export const HomePage = ({ viewModel }: Props) => {
 
   const isLoading = !diceAmount || !currentCategories || !maxDiceAmount;
 
+  //TODO loader
   return !isLoading ? (
-    <StyledContainer maxWidth="md" sx={{ height: 'calc(100vh - 24px - 24px - 24px - 64px)' }}>
+    <Container
+      maxWidth="md"
+      sx={{ height: 'calc(100vh - 24px - 24px - 24px - 64px)', paddingTop: '32px' }}
+    >
       <SettingsArea
         categories={diceSettings.categoriesKeys}
         translations={translations}
@@ -72,8 +71,8 @@ export const HomePage = ({ viewModel }: Props) => {
           margin: '32px 0',
         }}
       >
-        {currentDice && <DiceArea dice={currentDice} />}
+        <DiceAreaComponent viewComponent={diceAreaViewComponent} />
       </Box>
-    </StyledContainer>
-  ) : null; //TODO loader
+    </Container>
+  ) : null;
 };

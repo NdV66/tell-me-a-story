@@ -1,29 +1,25 @@
-import { IIconsManager, IStoryTellerModel } from 'models';
-import { BehaviorSubject, Observable, Subject, combineLatest, firstValueFrom } from 'rxjs';
+import { IIconsManager } from 'models';
+import { BehaviorSubject, Observable, combineLatest, firstValueFrom } from 'rxjs';
 import { EStoryCategory, TDiceSettings } from 'types';
+import { IDiceAreaViewComponent } from './DiceAreaViewComponent';
 
 export interface IHomePageViewModel {
-  currentDice$: Observable<string[] | undefined>;
   currentDiceAmount$: Observable<number | undefined>;
   currentCategories$: Observable<EStoryCategory[] | undefined>;
   maxDiceAmount$: Observable<number>;
-
   diceSettings: TDiceSettings;
-
-  tellAStory: (categories: EStoryCategory[], amount: number) => void;
   changeDiceAmount: (amount: number) => void;
   changeCategories: (categories: EStoryCategory[]) => void;
 }
 
 export class HomePageViewModel implements IHomePageViewModel {
-  private _currentDice$: Subject<string[]> = new Subject();
   private _currentDiceAmount$: BehaviorSubject<number>;
   private _currentCategories$: BehaviorSubject<EStoryCategory[]>;
   private _maxDiceAmount$: BehaviorSubject<number>;
 
   constructor(
-    private _storyTeller: IStoryTellerModel,
     private _iconManager: IIconsManager,
+    private _diceAreaViewComponent: IDiceAreaViewComponent,
     public readonly diceSettings: TDiceSettings,
   ) {
     this._currentDiceAmount$ = new BehaviorSubject(this.diceSettings.defaultDiceAmount);
@@ -45,17 +41,13 @@ export class HomePageViewModel implements IHomePageViewModel {
   private _subscribeToDiceSettings() {
     combineLatest([this._currentDiceAmount$, this._currentCategories$]).subscribe(
       ([diceAmount, categories]) => {
-        this.tellAStory(categories, diceAmount);
+        this._diceAreaViewComponent.tellAStory(categories, diceAmount);
       },
     );
   }
 
   get maxDiceAmount$() {
     return this._maxDiceAmount$.asObservable();
-  }
-
-  get currentDice$() {
-    return this._currentDice$.asObservable();
   }
 
   get currentDiceAmount$() {
@@ -73,11 +65,6 @@ export class HomePageViewModel implements IHomePageViewModel {
   public changeCategories = async (categories: EStoryCategory[]) => {
     const areTheSame = await this.areCategoriesTheSame(categories);
     !areTheSame && categories.length && this._currentCategories$.next(categories);
-  };
-
-  public tellAStory = (category: EStoryCategory[], amount: number) => {
-    const dice = this._storyTeller.tellAStory(category, amount);
-    this._currentDice$.next(dice);
   };
 
   private async areCategoriesTheSame(selectedValues: EStoryCategory[]) {
