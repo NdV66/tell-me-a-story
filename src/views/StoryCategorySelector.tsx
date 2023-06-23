@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { Theme, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MenuItem from '@mui/material/MenuItem';
@@ -7,9 +6,9 @@ import Chip from '@mui/material/Chip';
 import { Typography } from '@mui/material';
 import { EStoryCategory, TTranslations } from 'types';
 
-const getStyles = (name: string, personName: readonly string[], theme: Theme) => ({
+const getStyles = (name: string, values: string[], theme: Theme) => ({
   fontWeight:
-    personName.indexOf(name) === -1
+    values.indexOf(name) === -1
       ? theme.typography.fontWeightRegular
       : theme.typography.fontWeightMedium,
 });
@@ -25,14 +24,15 @@ const renderValue = (selected: string[]) => (
 type Props = {
   translations: TTranslations;
   categories: Array<string>;
+  values: Array<string>;
+  onChange: (values: Array<string>) => void;
 };
 
-export const StoryCategorySelector = ({ translations, categories }: Props) => {
+export const StoryCategorySelector = ({ translations, categories, onChange, values }: Props) => {
   const theme = useTheme();
-  const [personName, setPersonName] = React.useState<string[]>([]);
 
-  const handleChange = ({ target: { value } }: SelectChangeEvent<typeof personName>) => {
-    setPersonName(typeof value === 'string' ? value.split(',') : value);
+  const handleChange = ({ target: { value } }: SelectChangeEvent<Array<string>>) => {
+    onChange(typeof value === 'string' ? value.split(',') : value);
   };
 
   return (
@@ -43,14 +43,14 @@ export const StoryCategorySelector = ({ translations, categories }: Props) => {
 
       <Select
         multiple
-        value={personName}
+        value={values}
         onChange={handleChange}
         renderValue={renderValue}
         sx={{ width: '100%' }}
       >
         {categories.map((key) => (
-          <MenuItem key={key} value={key} style={getStyles(key, personName, theme)}>
-            {translations.categoriesByKeys[(EStoryCategory as any)[key]]}
+          <MenuItem key={key} value={key} style={getStyles(key, values, theme)}>
+            {key}
           </MenuItem>
         ))}
       </Select>

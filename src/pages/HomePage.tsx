@@ -13,6 +13,7 @@ const useHomePage = (viewModel: IHomePageViewModel) => {
   const { translations } = useSettingsContext();
   const dice = useStateObservable(viewModel.currentDice$);
   const diceAmount = useStateObservable(viewModel.currentDiceAmount$);
+  const currentCategories = useStateObservable(viewModel.currentCategories$);
 
   useEffect(() => {
     viewModel.tellAStory(EStoryCategory.PLAYER, viewModel.diceSettings.defaultDiceAmount);
@@ -22,9 +23,12 @@ const useHomePage = (viewModel: IHomePageViewModel) => {
     dice,
     translations,
     diceAmount,
+    currentCategories,
+
     diceSettings: viewModel.diceSettings,
     tellAStory: viewModel.tellAStory,
     changeDiceAmount: viewModel.changeDiceAmount,
+    changeCategories: viewModel.changeCategories,
   };
 };
 
@@ -33,10 +37,20 @@ const StyledContainer = styled(Container)(() => ({
 }));
 
 export const HomePage = ({ viewModel }: Props) => {
-  const { dice, tellAStory, translations, diceAmount, changeDiceAmount, diceSettings } =
-    useHomePage(viewModel);
+  const {
+    dice,
+    tellAStory,
+    translations,
+    diceAmount,
+    changeDiceAmount,
+    diceSettings,
+    changeCategories,
+    currentCategories,
+  } = useHomePage(viewModel);
 
-  return diceAmount ? (
+  const isLoading = !diceAmount || !currentCategories;
+
+  return !isLoading ? (
     <StyledContainer maxWidth="md" sx={{ height: 'calc(100vh - 24px - 24px - 24px - 64px)' }}>
       <SettingsArea
         categories={diceSettings.categoriesKeys}
@@ -46,6 +60,8 @@ export const HomePage = ({ viewModel }: Props) => {
         step={diceSettings.stepDice}
         value={diceAmount}
         onChange={changeDiceAmount}
+        onChangeCategories={changeCategories}
+        currentCategories={currentCategories}
       />
 
       <Box

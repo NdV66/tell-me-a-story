@@ -5,19 +5,26 @@ import { EStoryCategory, TDiceSettings } from 'types';
 export interface IHomePageViewModel {
   currentDice$: Observable<string[] | undefined>;
   currentDiceAmount$: Observable<number | undefined>;
+  currentCategories$: Observable<string[] | undefined>;
 
   diceSettings: TDiceSettings;
 
   tellAStory: (category: EStoryCategory, amount: number) => void;
   changeDiceAmount: (amount: number) => void;
+  changeCategories: (categories: string[]) => void;
 }
 
 export class HomePageViewModel implements IHomePageViewModel {
   private _currentDice$: Subject<string[]> = new Subject();
   private _currentDiceAmount$: BehaviorSubject<number>;
+  private _currentCategories$: BehaviorSubject<string[]>;
 
-  constructor(private _storyTeller: IStoryTellerModel, private _diceSettings: TDiceSettings) {
-    this._currentDiceAmount$ = new BehaviorSubject(this._diceSettings.defaultDiceAmount);
+  constructor(
+    private _storyTeller: IStoryTellerModel,
+    public readonly diceSettings: TDiceSettings,
+  ) {
+    this._currentDiceAmount$ = new BehaviorSubject(this.diceSettings.defaultDiceAmount);
+    this._currentCategories$ = new BehaviorSubject(this.diceSettings.defaultCategoriesKeys);
   }
 
   get currentDice$() {
@@ -28,12 +35,16 @@ export class HomePageViewModel implements IHomePageViewModel {
     return this._currentDiceAmount$.asObservable();
   }
 
-  get diceSettings() {
-    return this._diceSettings;
+  get currentCategories$() {
+    return this._currentCategories$.asObservable();
   }
 
   public changeDiceAmount = (amount: number) => {
     this._currentDiceAmount$.next(amount);
+  };
+
+  public changeCategories = (categories: string[]) => {
+    this._currentCategories$.next(categories);
   };
 
   public tellAStory = (category: EStoryCategory, amount: number) => {

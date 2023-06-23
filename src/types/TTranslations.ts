@@ -1,5 +1,3 @@
-import { EStoryCategory } from './EStoryCategory';
-
 export type TTranslations = {
   lang: string;
   appName: string;

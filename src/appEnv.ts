@@ -7,6 +7,7 @@ const diceSettings: TDiceSettings = {
   maxDice: 12,
   stepDice: 3,
   categoriesKeys: Object.keys(EStoryCategory),
+  defaultCategoriesKeys: ['PLAYER'], //todo better
 };
 
 export const ENV = {

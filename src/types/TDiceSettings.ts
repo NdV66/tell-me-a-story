@@ -3,5 +3,7 @@ export type TDiceSettings = {
   minDice: number;
   maxDice: number;
   stepDice: number;
+
   categoriesKeys: Array<string>;
+  defaultCategoriesKeys: Array<string>;
 };
