@@ -1,4 +1,4 @@
-import { DiceArea, SettingContext, SettingsArea, TellButton, useSettingsContext } from 'views';
+import { DiceArea, SettingsArea, TellButton, useSettingsContext } from 'views';
 import { IHomePageViewModel } from 'viewModels';
 import { useStateObservable } from 'tools';
 import { EStoryCategory } from 'types';
