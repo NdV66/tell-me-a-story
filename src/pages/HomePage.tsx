@@ -3,7 +3,6 @@ import { IHomePageViewModel } from 'viewModels';
 import { useStateObservable } from 'tools';
 import { Box, Container, styled } from '@mui/material';
 import { useEffect } from 'react';
-import { EStoryCategory } from 'types';
 
 type Props = {
   viewModel: IHomePageViewModel;
@@ -17,7 +16,7 @@ const useHomePage = (viewModel: IHomePageViewModel) => {
 
   useEffect(() => {
     viewModel.tellAStory(
-      (EStoryCategory as any)[viewModel.diceSettings.defaultCategoriesKeys[0]],
+      viewModel.diceSettings.defaultCategoriesKeys,
       viewModel.diceSettings.defaultDiceAmount,
     );
   }, [viewModel]);

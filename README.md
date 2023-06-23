@@ -49,6 +49,7 @@ https://nagoshiashumari.github.io/Rpg-Awesome/
 - title
 - deploy + readme
 - architecture update in readme
+- behavior when there is less dice than expected
 
 - model tests
 - view models tests

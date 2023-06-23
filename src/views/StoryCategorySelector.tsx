@@ -23,16 +23,16 @@ const renderValue = (selected: string[]) => (
 
 type Props = {
   translations: TTranslations;
-  categories: Array<string>;
-  values: Array<string>;
-  onChange: (values: Array<string>) => void;
+  categories: string[];
+  values: string[];
+  onChange: (values: EStoryCategory[]) => void;
 };
 
 export const StoryCategorySelector = ({ translations, categories, onChange, values }: Props) => {
   const theme = useTheme();
 
   const handleChange = ({ target: { value } }: SelectChangeEvent<Array<string>>) => {
-    onChange(typeof value === 'string' ? value.split(',') : value);
+    onChange(value as any as EStoryCategory[]);
   };
 
   return (
@@ -47,6 +47,7 @@ export const StoryCategorySelector = ({ translations, categories, onChange, valu
         onChange={handleChange}
         renderValue={renderValue}
         sx={{ width: '100%' }}
+        error={!values.length}
       >
         {categories.map((key) => (
           <MenuItem key={key} value={key} style={getStyles(key, values, theme)}>

@@ -1,4 +1,4 @@
-import { TTranslations } from 'types';
+import { EStoryCategory, TTranslations } from 'types';
 import { IconsAmountSlider } from './IconsAmountSlider';
 import { Box } from '@mui/material';
 import { StoryCategorySelector } from './StoryCategorySelector';
@@ -12,7 +12,7 @@ type Props = {
   onChange: (value: number) => void;
   categories: Array<string>;
   currentCategories: Array<string>;
-  onChangeCategories: (values: Array<string>) => void;
+  onChangeCategories: (values: Array<EStoryCategory>) => void;
 };
 
 export const SettingsArea = (props: Props) => (

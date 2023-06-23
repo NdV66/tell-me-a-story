@@ -1,3 +1,5 @@
+import { EStoryCategory } from './EStoryCategory';
+
 export type TDiceSettings = {
   defaultDiceAmount: number;
   minDice: number;
@@ -5,5 +7,5 @@ export type TDiceSettings = {
   stepDice: number;
 
   categoriesKeys: Array<string>;
-  defaultCategoriesKeys: Array<string>;
+  defaultCategoriesKeys: Array<EStoryCategory>;
 };
