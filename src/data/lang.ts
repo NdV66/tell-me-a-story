@@ -24,7 +24,7 @@ export const TRANSLATIONS_PL: TTranslations = {
   lang: 'polski',
   appName: 'Opowiedz mi!',
   themeChange: 'tryb',
-  roll: 'Opowiedz mi!',
+  roll: 'Opowiedz mi coś!',
   noRoll: 'Dawno, dawno temu...',
   settingsDice: 'Ile kostek mam wylosować?',
 
