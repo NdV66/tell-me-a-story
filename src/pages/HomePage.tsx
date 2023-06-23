@@ -1,8 +1,7 @@
+import { Box, Container } from '@mui/material';
 import { SettingsArea, useSettingsContext } from 'views';
 import { IDiceAreaViewComponent, IHomePageViewModel } from 'viewModels';
 import { useStateObservable } from 'tools';
-import { Box, Container } from '@mui/material';
-import { useEffect } from 'react';
 import { DiceAreaComponent } from './DiceAreaComponent';
 
 type Props = {
@@ -15,13 +14,6 @@ const useHomePage = (viewModel: IHomePageViewModel) => {
   const diceAmount = useStateObservable(viewModel.currentDiceAmount$);
   const currentCategories = useStateObservable(viewModel.currentCategories$);
   const maxDiceAmount = useStateObservable(viewModel.maxDiceAmount$);
-
-  //   useEffect(() => {
-  //     viewModel.tellAStory(
-  //       viewModel.diceSettings.defaultCategoriesKeys,
-  //       viewModel.diceSettings.defaultDiceAmount,
-  //     );
-  //   }, [viewModel]);
 
   return {
     translations,
