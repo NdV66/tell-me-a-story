@@ -3,6 +3,7 @@ import { IHomePageViewModel } from 'viewModels';
 import { useStateObservable } from 'tools';
 import { EStoryCategory } from 'types';
 import { Box, Container, styled } from '@mui/material';
+import { useEffect } from 'react';
 
 type Props = {
   viewModel: IHomePageViewModel;
@@ -12,6 +13,10 @@ const useHomePage = (viewModel: IHomePageViewModel) => {
   const { translations } = useSettingsContext();
   const dice = useStateObservable(viewModel.currentDice$);
   const diceAmount = useStateObservable(viewModel.currentDiceAmount$);
+
+  useEffect(() => {
+    viewModel.tellAStory(EStoryCategory.PLAYER, viewModel.diceSettings.defaultDiceAmount);
+  }, [viewModel]);
 
   return {
     dice,
@@ -56,7 +61,7 @@ export const HomePage = ({ viewModel }: Props) => {
           translations={translations}
         />
       </Box>
-      {dice ? <DiceArea dice={dice} /> : <DiceArea.Empty translations={translations} />}
+      {dice && <DiceArea dice={dice} />}
     </StyledContainer>
   ) : null; //TODO loader
 };

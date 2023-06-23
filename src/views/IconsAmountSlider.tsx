@@ -41,7 +41,7 @@ export const IconsAmountSlider = ({ translations, min, max, step, value, onChang
   };
 
   return (
-    <Box>
+    <>
       <Typography gutterBottom color="primary">
         {translations.settingsDice}
       </Typography>
@@ -55,6 +55,6 @@ export const IconsAmountSlider = ({ translations, min, max, step, value, onChang
         value={value}
         onChange={handleOnChange}
       />
-    </Box>
+    </>
   );
 };

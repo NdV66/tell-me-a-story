@@ -13,7 +13,9 @@ export const TRANSLATIONS_EN: TTranslations = {
   themeChange: 'theme',
   roll: 'Tell me a story!',
   noRoll: 'A long, long time ago...',
+
   settingsDice: 'How many dice do you want?',
+  settingCategories: 'Which categories do you want to have?',
 
   repo: 'See this repo',
   github: 'See my Github',
@@ -26,7 +28,9 @@ export const TRANSLATIONS_PL: TTranslations = {
   themeChange: 'tryb',
   roll: 'Opowiedz mi coś!',
   noRoll: 'Dawno, dawno temu...',
+
   settingsDice: 'Ile kostek mam wylosować?',
+  settingCategories: 'Z jakich chcesz skorzystać kategorii?',
 
   repo: 'Zobacz to repo',
   github: 'Zerknij na mój Github',

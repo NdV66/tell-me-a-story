@@ -6,6 +6,7 @@ export type TTranslations = {
   noRoll: string;
 
   settingsDice: string;
+  settingCategories: string;
 
   repo: string;
   repoLink: string;

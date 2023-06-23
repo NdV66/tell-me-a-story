@@ -11,7 +11,7 @@ type Props = {
 
 const StyledLangSelector = styled(Select)(({ theme }) => ({
   backgroundColor: theme.palette.secondary.main,
-  width: '90px',
+  width: '88px',
   fontSize: theme.typography.fontSize * 0.9,
 }));
 
