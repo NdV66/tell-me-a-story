@@ -43,6 +43,8 @@ https://nagoshiashumari.github.io/Rpg-Awesome/
 - re-roll dice?
 - add categories
 - add dices amount input
+- info box
+- add more dices
 
 - model tests
 - view models tests

@@ -1,4 +1,4 @@
-import { DiceArea, TellButton, useSettingsContext } from 'views';
+import { DiceArea, SettingContext, SettingsArea, TellButton, useSettingsContext } from 'views';
 import { IHomePageViewModel } from 'viewModels';
 import { useStateObservable } from 'tools';
 import { EStoryCategory } from 'types';
@@ -27,13 +27,16 @@ export const HomePage = ({ viewModel }: Props) => {
   const { dice, tellAStory, translations } = useHomePage(viewModel);
 
   return (
-    <StyledContainer maxWidth="lg" sx={{ height: 'calc(100vh - 24px - 24px - 24px - 64px)' }}>
+    <StyledContainer maxWidth="md" sx={{ height: 'calc(100vh - 24px - 24px - 24px - 64px)' }}>
+      <SettingsArea translations={translations} />
+
       <Box
         sx={{
           width: '100%',
           display: 'flex',
           justifyContent: 'center',
           marginBottom: '64px',
+          marginTop: '64px',
         }}
       >
         <TellButton

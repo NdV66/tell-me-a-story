@@ -5,6 +5,8 @@ export type TTranslations = {
   roll: string;
   noRoll: string;
 
+  settingsDice: string;
+
   repo: string;
   repoLink: string;
   github: string;
