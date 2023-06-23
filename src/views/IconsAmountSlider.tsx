@@ -1,4 +1,4 @@
-import { Box, Slider, Typography, styled } from '@mui/material';
+import { Slider, Typography, styled } from '@mui/material';
 import { TTranslations } from 'types';
 
 type Props = {

@@ -69,8 +69,7 @@ export const HomePage = ({ viewModel }: Props) => {
 
       <Box
         sx={{
-          marginBottom: '64px',
-          marginTop: '64px',
+          margin: '32px 0',
         }}
       >
         {currentDice && <DiceArea dice={currentDice} />}

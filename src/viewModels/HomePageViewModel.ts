@@ -1,5 +1,5 @@
 import { IIconsManager, IStoryTellerModel } from 'models';
-import { BehaviorSubject, Observable, Subject, combineLatest } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, combineLatest, firstValueFrom } from 'rxjs';
 import { EStoryCategory, TDiceSettings } from 'types';
 
 export interface IHomePageViewModel {
@@ -63,8 +63,9 @@ export class HomePageViewModel implements IHomePageViewModel {
     this._currentDiceAmount$.next(amount);
   };
 
-  public changeCategories = (categories: EStoryCategory[]) => {
-    this._currentCategories$.next(categories);
+  public changeCategories = async (categories: EStoryCategory[]) => {
+    const areTheSame = await this.areCategoriesTheSame(categories);
+    !areTheSame && categories.length && this._currentCategories$.next(categories);
   };
 
   public tellAStory = (category: EStoryCategory[], amount: number) => {
@@ -72,11 +73,19 @@ export class HomePageViewModel implements IHomePageViewModel {
     this._currentDice$.next(dice);
   };
 
+  private async areCategoriesTheSame(selectedValues: EStoryCategory[]) {
+    const currentCategories = await firstValueFrom(this.currentCategories$);
+
+    if (currentCategories.length !== selectedValues.length) return false;
+    return currentCategories.every((el) => selectedValues.includes(el));
+  }
+
   private _prepareMaxAmount(categories: EStoryCategory[]) {
     const { stepDice } = this.diceSettings;
     const iconsAmount = this._iconManager.getCategoriesAmount(categories);
     const amount = iconsAmount - (iconsAmount % stepDice);
     const realMax = stepDice * this.diceSettings.maxThresholds;
+
     return amount > realMax ? realMax : amount;
   }
 }

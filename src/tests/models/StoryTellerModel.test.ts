@@ -1,5 +1,5 @@
 import { StoryTellerModel } from 'models';
-import { errorsMock, iconsManagerMock, playersIconsMock } from './mocks';
+import { errorsMock, iconsManagerMock, playersIconsMock } from '../mocks';
 import { EStoryCategory } from 'types';
 
 describe('StoryTellerModel', () => {

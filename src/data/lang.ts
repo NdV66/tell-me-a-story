@@ -36,7 +36,7 @@ export const TRANSLATIONS_PL: TTranslations = {
   noRoll: 'Dawno, dawno temu...',
 
   settingsDice: 'Ile kostek mam wylosować?',
-  settingCategories: 'Z jakich chcesz skorzystać kategorii?',
+  settingCategories: 'O czym mam opowiedzieć?',
 
   categoriesByKeys: {
     [EStoryCategory.PLAYER]: 'gracze',

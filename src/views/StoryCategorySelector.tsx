@@ -6,21 +6,6 @@ import Chip from '@mui/material/Chip';
 import { Typography } from '@mui/material';
 import { EStoryCategory, TTranslations } from 'types';
 
-const getStyles = (name: string, values: string[], theme: Theme) => ({
-  fontWeight:
-    values.indexOf(name) === -1
-      ? theme.typography.fontWeightRegular
-      : theme.typography.fontWeightMedium,
-});
-
-const renderValue = (selected: string[]) => (
-  <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-    {selected.map((value) => (
-      <Chip key={value} label={value} />
-    ))}
-  </Box>
-);
-
 type Props = {
   translations: TTranslations;
   categories: string[];
@@ -28,12 +13,34 @@ type Props = {
   onChange: (values: EStoryCategory[]) => void;
 };
 
+const useStoryCategorySelector = () => {
+  const renderValue = (selected: string[]) => (
+    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+      {selected.map((value) => (
+        <Chip key={value} label={value} />
+      ))}
+    </Box>
+  );
+
+  const getItemStyles = (value: string, values: string[], theme: Theme) => ({
+    fontWeight:
+      values.indexOf(value) === -1
+        ? theme.typography.fontWeightRegular
+        : theme.typography.fontWeightMedium,
+  });
+
+  return {
+    renderValue,
+    getItemStyles,
+  };
+};
+
 export const StoryCategorySelector = ({ translations, categories, onChange, values }: Props) => {
   const theme = useTheme();
+  const { getItemStyles, renderValue } = useStoryCategorySelector();
 
-  const handleChange = ({ target: { value } }: SelectChangeEvent<Array<string>>) => {
+  const handleChange = ({ target: { value } }: SelectChangeEvent<string[]>) =>
     onChange(value as any as EStoryCategory[]);
-  };
 
   return (
     <>
@@ -44,13 +51,13 @@ export const StoryCategorySelector = ({ translations, categories, onChange, valu
       <Select
         multiple
         value={values}
-        onChange={handleChange}
+        onChange={(e) => handleChange(e)}
         renderValue={renderValue}
         sx={{ width: '100%' }}
         error={!values.length}
       >
         {categories.map((key) => (
-          <MenuItem key={key} value={key} style={getStyles(key, values, theme)}>
+          <MenuItem key={key} value={key} style={getItemStyles(key, values, theme)}>
             {key}
           </MenuItem>
         ))}

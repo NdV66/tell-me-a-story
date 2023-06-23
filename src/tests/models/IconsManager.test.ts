@@ -1,6 +1,6 @@
 import { IIconsManager, IconsManager } from 'models';
 import { EStoryCategory } from 'types';
-import { anyArrayManagerMock, prefixIconMock, iconsSetMock, playersIconsMock } from './mocks';
+import { anyArrayManagerMock, prefixIconMock, iconsSetMock, playersIconsMock } from '../mocks';
 
 describe('IconsManager', () => {
   let manager: IIconsManager;
