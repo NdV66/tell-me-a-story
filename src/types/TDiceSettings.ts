@@ -7,4 +7,5 @@ export type TDiceSettings = {
   maxThresholds: number;
   categoriesKeys: Array<string>;
   defaultCategoriesKeys: Array<EStoryCategory>;
+  defaultCategoriesLength: number;
 };

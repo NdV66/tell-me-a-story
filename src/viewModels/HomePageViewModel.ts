@@ -2,7 +2,6 @@ import { combineLatest, filter } from 'rxjs';
 import { IDiceAreaViewComponent } from './DiceAreaViewComponent';
 import { IDiceAmountViewComponent } from './DiceAmountViewComponent';
 import { IDiceCategoriesViewComponent } from './DiceCategoriesViewComponent';
-import { IIconsManager } from 'models';
 
 export interface IHomePageViewModel {}
 
@@ -11,22 +10,19 @@ export class HomePageViewModel implements IHomePageViewModel {
     private _diceAreaViewComponent: IDiceAreaViewComponent,
     private _diceAmountViewComponent: IDiceAmountViewComponent,
     private _diceCategoriesViewComponent: IDiceCategoriesViewComponent,
-    private _iconsManager: IIconsManager,
   ) {
-    this._diceCategoriesViewComponent.currentCategories$.subscribe((categories) => {
-      this._diceAmountViewComponent.changeMaxDiceAmount(categories);
+    this._diceCategoriesViewComponent.currentCategoriesLength$.subscribe((rawCategoriesLength) => {
+      this._diceAmountViewComponent.changeMaxDiceAmount(rawCategoriesLength);
     });
 
     combineLatest([
       this._diceCategoriesViewComponent.currentCategories$,
       this._diceAmountViewComponent.currentDiceAmount$,
-      this._diceAmountViewComponent.maxDiceAmount$,
+      this._diceCategoriesViewComponent.currentCategoriesLength$,
     ])
       .pipe(
-        filter(([categories, diceAmount, max]) => {
-          console.log('>>> skip skip', categories, diceAmount, max, diceAmount > max);
-          const x = this._iconsManager.getCategoriesAmount(categories);
-          return diceAmount <= x;
+        filter(([_, diceAmount, categoriesLength]) => {
+          return diceAmount <= categoriesLength;
         }),
       )
       .subscribe(async ([categories, diceAmount]) => {

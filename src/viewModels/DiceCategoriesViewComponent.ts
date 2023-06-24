@@ -1,21 +1,38 @@
+import { IIconsManager } from 'models';
 import { BehaviorSubject, Observable, firstValueFrom } from 'rxjs';
 import { EStoryCategory, TDiceSettings } from 'types';
 
 export interface IDiceCategoriesViewComponent {
   currentCategories$: Observable<EStoryCategory[]>;
+  currentCategoriesLength$: Observable<number>;
+
   diceSettings: TDiceSettings;
   changeCategories: (categories: EStoryCategory[]) => void;
 }
 
 export class DiceCategoriesViewComponent implements IDiceCategoriesViewComponent {
   private _currentCategories$: BehaviorSubject<EStoryCategory[]>;
+  private _currentCategoriesLength$: BehaviorSubject<number>;
 
-  constructor(public readonly diceSettings: TDiceSettings) {
+  constructor(private _iconsManager: IIconsManager, public readonly diceSettings: TDiceSettings) {
+    const defaultCategoriesLength = this._iconsManager.getCategoriesAmount(
+      this.diceSettings.defaultCategoriesKeys,
+    );
+    this._currentCategoriesLength$ = new BehaviorSubject(defaultCategoriesLength);
     this._currentCategories$ = new BehaviorSubject(this.diceSettings.defaultCategoriesKeys);
+
+    this.currentCategories$.subscribe((categories) => {
+      const categoriesLength = this._iconsManager.getCategoriesAmount(categories);
+      this._currentCategoriesLength$.next(categoriesLength);
+    });
   }
 
   get currentCategories$() {
     return this._currentCategories$.asObservable();
+  }
+
+  get currentCategoriesLength$() {
+    return this._currentCategoriesLength$.asObservable();
   }
 
   public changeCategories = async (categories: EStoryCategory[]) => {

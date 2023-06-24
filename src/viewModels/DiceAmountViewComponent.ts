@@ -1,6 +1,5 @@
-import { IIconsManager } from 'models';
 import { BehaviorSubject, Observable, firstValueFrom } from 'rxjs';
-import { EStoryCategory, TDiceSettings } from 'types';
+import { TDiceSettings } from 'types';
 
 export interface IDiceAmountViewComponent {
   currentDiceAmount$: Observable<number>;
@@ -8,15 +7,15 @@ export interface IDiceAmountViewComponent {
   diceSettings: TDiceSettings;
 
   changeDiceAmount: (amount: number) => void;
-  changeMaxDiceAmount: (categories: EStoryCategory[]) => void;
+  changeMaxDiceAmount: (rawCategoriesLength: number) => void;
 }
 
 export class DiceAmountViewComponent implements IDiceAmountViewComponent {
   private _currentDiceAmount$: BehaviorSubject<number>;
   private _maxDiceAmount$: BehaviorSubject<number>;
 
-  constructor(private _iconManager: IIconsManager, public readonly diceSettings: TDiceSettings) {
-    const max = this._prepareMaxAmount(this.diceSettings.defaultCategoriesKeys);
+  constructor(public readonly diceSettings: TDiceSettings) {
+    const max = this._prepareMaxAmount(this.diceSettings.defaultCategoriesLength);
     const current = max - this.diceSettings.stepDice;
 
     this._currentDiceAmount$ = new BehaviorSubject(current);
@@ -35,21 +34,17 @@ export class DiceAmountViewComponent implements IDiceAmountViewComponent {
     this._currentDiceAmount$.next(amount);
   };
 
-  public async changeMaxDiceAmount(categories: EStoryCategory[]) {
-    const max = this._prepareMaxAmount(categories);
+  public async changeMaxDiceAmount(rawCategoriesLength: number) {
+    const max = this._prepareMaxAmount(rawCategoriesLength);
     const current = await firstValueFrom(this._currentDiceAmount$);
 
-    if (current > max) {
-      //   console.log('_____ ZMIENIAM NA____', max);
-      this._currentDiceAmount$.next(max);
-    }
+    if (current > max) this._currentDiceAmount$.next(max);
     this._maxDiceAmount$.next(max);
   }
 
-  private _prepareMaxAmount(categories: EStoryCategory[]) {
+  private _prepareMaxAmount(rawCategoriesLength: number) {
     const { stepDice } = this.diceSettings;
-    const iconsAmount = this._iconManager.getCategoriesAmount(categories);
-    const amount = iconsAmount - (iconsAmount % stepDice);
+    const amount = rawCategoriesLength - (rawCategoriesLength % stepDice);
     const realMax = stepDice * this.diceSettings.maxThresholds;
 
     return amount > realMax ? realMax : amount;

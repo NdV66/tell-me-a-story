@@ -28,6 +28,7 @@ export const diceSettingsMock: TDiceSettings = {
   maxThresholds: 5,
   categoriesKeys: Object.values(EStoryCategory),
   defaultCategoriesKeys: [EStoryCategory.PLAYER],
+  defaultCategoriesLength: playersIconsMock.length,
 };
 
 export const storyTellerMock: IStoryTellerModel = {

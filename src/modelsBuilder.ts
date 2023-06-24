@@ -26,8 +26,11 @@ const settingModel = new SettingsModel(
 const storyTellerModel = new StoryTellerModel(iconsManager, APP_ERRORS);
 
 export const diceAreaViewComponent = new DiceAreaViewComponent(storyTellerModel);
-export const diceAmountViewComponent = new DiceAmountViewComponent(iconsManager, ENV.diceSettings);
-export const diceCategoriesViewComponent = new DiceCategoriesViewComponent(ENV.diceSettings);
+export const diceAmountViewComponent = new DiceAmountViewComponent(ENV.diceSettings);
+export const diceCategoriesViewComponent = new DiceCategoriesViewComponent(
+  iconsManager,
+  ENV.diceSettings,
+);
 
 export const settingViewModel = new SettingsViewModel(settingModel);
 
@@ -36,5 +39,4 @@ export const homePageViewModel = new HomePageViewModel(
   diceAreaViewComponent,
   diceAmountViewComponent,
   diceCategoriesViewComponent,
-  iconsManager,
 );
