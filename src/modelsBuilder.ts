@@ -23,7 +23,7 @@ const settingModel = new SettingsModel(
   cookiesManager,
 );
 
-const storyTellerModel = new StoryTellerModel(iconsManager, APP_ERRORS);
+const storyTellerModel = new StoryTellerModel(iconsManager, APP_ERRORS, anyArrayManager);
 
 export const diceAreaViewComponent = new DiceAreaViewComponent(storyTellerModel);
 export const diceAmountViewComponent = new DiceAmountViewComponent(ENV.diceSettings);

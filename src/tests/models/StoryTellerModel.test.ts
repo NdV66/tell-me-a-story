@@ -6,7 +6,8 @@ describe('StoryTellerModel', () => {
   let model: StoryTellerModel;
 
   beforeEach(() => {
-    model = new StoryTellerModel(iconsManagerMock, errorsMock);
+    //TODO: test with any arraymodel!!!
+    model = new StoryTellerModel(iconsManagerMock, errorsMock, {} as any);
   });
 
   describe('getIconsPerCategories()', () => {
