@@ -1,5 +1,5 @@
 import { IIconsManager } from 'models';
-import { BehaviorSubject, Observable, Subject, firstValueFrom } from 'rxjs';
+import { BehaviorSubject, Observable, firstValueFrom } from 'rxjs';
 import { EStoryCategory, TDiceSettings } from 'types';
 
 export interface IDiceAmountViewComponent {
@@ -39,7 +39,10 @@ export class DiceAmountViewComponent implements IDiceAmountViewComponent {
     const max = this._prepareMaxAmount(categories);
     const current = await firstValueFrom(this._currentDiceAmount$);
 
-    if (current > max) this._currentDiceAmount$.next(max);
+    if (current > max) {
+      //   console.log('_____ ZMIENIAM NA____', max);
+      this._currentDiceAmount$.next(max);
+    }
     this._maxDiceAmount$.next(max);
   }
 

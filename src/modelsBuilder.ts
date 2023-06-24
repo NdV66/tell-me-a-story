@@ -36,4 +36,5 @@ export const homePageViewModel = new HomePageViewModel(
   diceAreaViewComponent,
   diceAmountViewComponent,
   diceCategoriesViewComponent,
+  iconsManager,
 );

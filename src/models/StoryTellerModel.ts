@@ -20,6 +20,15 @@ export class StoryTellerModel implements IStoryTellerModel {
     const icons = this.getIconsPerCategories(categories);
     const allIconsAmount = icons.length;
 
+    // console.log(
+    //   '>>> tellAStory()',
+    //   categories,
+    //   'dice: ',
+    //   iconsAmount,
+    //   'allIconsAmount: ',
+    //   allIconsAmount,
+    // );
+
     if (iconsAmount > allIconsAmount || iconsAmount < StoryTellerModel.MIN_AMOUNT) {
       throw this._errors.OUT_OF_RANGE;
     }
