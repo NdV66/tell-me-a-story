@@ -14,7 +14,6 @@ export interface IDiceAmountViewComponent {
 export class DiceAmountViewComponent implements IDiceAmountViewComponent {
   private _currentDiceAmount$: BehaviorSubject<number>;
   private _maxDiceAmount$: BehaviorSubject<number>;
-  private subject$ = new Subject<void>();
 
   constructor(private _iconManager: IIconsManager, public readonly diceSettings: TDiceSettings) {
     const max = this._prepareMaxAmount(this.diceSettings.defaultCategoriesKeys);
@@ -40,11 +39,7 @@ export class DiceAmountViewComponent implements IDiceAmountViewComponent {
     const max = this._prepareMaxAmount(categories);
     const current = await firstValueFrom(this._currentDiceAmount$);
 
-    if (current > max) {
-      console.log('______ ZMIANA _____');
-      this._currentDiceAmount$.next(max);
-    }
-
+    if (current > max) this._currentDiceAmount$.next(max);
     this._maxDiceAmount$.next(max);
   }
 

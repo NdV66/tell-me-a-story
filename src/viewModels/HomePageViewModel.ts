@@ -1,4 +1,4 @@
-import { combineLatest, of, switchMap } from 'rxjs';
+import { combineLatest } from 'rxjs';
 import { IDiceAreaViewComponent } from './DiceAreaViewComponent';
 import { IDiceAmountViewComponent } from './DiceAmountViewComponent';
 import { IDiceCategoriesViewComponent } from './DiceCategoriesViewComponent';
@@ -18,13 +18,12 @@ export class HomePageViewModel implements IHomePageViewModel {
     combineLatest([
       this._diceCategoriesViewComponent.currentCategories$,
       this._diceAmountViewComponent.currentDiceAmount$,
-      this._diceAmountViewComponent.maxDiceAmount$,
-    ]).subscribe(([categories, diceAmount, max]) => {
+    ]).subscribe(async ([categories, diceAmount]) => {
       //   console.log('>>>', categories, diceAmount, max);
       try {
         this._diceAreaViewComponent.tellAStory(categories, diceAmount);
       } catch (e) {
-        console.log('NIE WIEM JAK TO POPRAWIC');
+        console.log('I dont know how to fix it'); //TODO maybe somehow better? how?
       }
     });
   }
