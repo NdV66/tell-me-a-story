@@ -1,4 +1,4 @@
-import { combineLatest } from 'rxjs';
+import { combineLatest, of, switchMap } from 'rxjs';
 import { IDiceAreaViewComponent } from './DiceAreaViewComponent';
 import { IDiceAmountViewComponent } from './DiceAmountViewComponent';
 import { IDiceCategoriesViewComponent } from './DiceCategoriesViewComponent';
@@ -11,22 +11,21 @@ export class HomePageViewModel implements IHomePageViewModel {
     private _diceAmountViewComponent: IDiceAmountViewComponent,
     private _diceCategoriesViewComponent: IDiceCategoriesViewComponent,
   ) {
-    this._subscribeToCategories();
-    this._subscribeToDiceSettings();
-  }
+    this._diceCategoriesViewComponent.currentCategories$.subscribe((categories) => {
+      this._diceAmountViewComponent.changeMaxDiceAmount(categories);
+    });
 
-  private _subscribeToCategories() {
-    this._diceCategoriesViewComponent.currentCategories$.subscribe((categories) =>
-      this._diceAmountViewComponent.changeMaxDiceAmount(categories),
-    );
-  }
-
-  private _subscribeToDiceSettings() {
     combineLatest([
       this._diceCategoriesViewComponent.currentCategories$,
       this._diceAmountViewComponent.currentDiceAmount$,
-    ]).subscribe(([categories, diceAmount]) => {
-      this._diceAreaViewComponent.tellAStory(categories, diceAmount);
+      this._diceAmountViewComponent.maxDiceAmount$,
+    ]).subscribe(([categories, diceAmount, max]) => {
+      //   console.log('>>>', categories, diceAmount, max);
+      try {
+        this._diceAreaViewComponent.tellAStory(categories, diceAmount);
+      } catch (e) {
+        console.log('NIE WIEM JAK TO POPRAWIC');
+      }
     });
   }
 }

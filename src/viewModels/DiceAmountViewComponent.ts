@@ -1,5 +1,5 @@
 import { IIconsManager } from 'models';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, firstValueFrom } from 'rxjs';
 import { EStoryCategory, TDiceSettings } from 'types';
 
 export interface IDiceAmountViewComponent {
@@ -14,12 +14,14 @@ export interface IDiceAmountViewComponent {
 export class DiceAmountViewComponent implements IDiceAmountViewComponent {
   private _currentDiceAmount$: BehaviorSubject<number>;
   private _maxDiceAmount$: BehaviorSubject<number>;
+  private subject$ = new Subject<void>();
 
   constructor(private _iconManager: IIconsManager, public readonly diceSettings: TDiceSettings) {
-    this._currentDiceAmount$ = new BehaviorSubject(this.diceSettings.defaultDiceAmount);
-    this._maxDiceAmount$ = new BehaviorSubject(
-      this._prepareMaxAmount(this.diceSettings.defaultCategoriesKeys),
-    );
+    const max = this._prepareMaxAmount(this.diceSettings.defaultCategoriesKeys);
+    const current = max - this.diceSettings.stepDice;
+
+    this._currentDiceAmount$ = new BehaviorSubject(current);
+    this._maxDiceAmount$ = new BehaviorSubject(max);
   }
 
   get maxDiceAmount$() {
@@ -34,9 +36,16 @@ export class DiceAmountViewComponent implements IDiceAmountViewComponent {
     this._currentDiceAmount$.next(amount);
   };
 
-  public changeMaxDiceAmount(categories: EStoryCategory[]) {
-    const newValue = this._prepareMaxAmount(categories);
-    this._maxDiceAmount$.next(newValue);
+  public async changeMaxDiceAmount(categories: EStoryCategory[]) {
+    const max = this._prepareMaxAmount(categories);
+    const current = await firstValueFrom(this._currentDiceAmount$);
+
+    if (current > max) {
+      console.log('______ ZMIANA _____');
+      this._currentDiceAmount$.next(max);
+    }
+
+    this._maxDiceAmount$.next(max);
   }
 
   private _prepareMaxAmount(categories: EStoryCategory[]) {

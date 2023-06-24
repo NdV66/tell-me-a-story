@@ -2,7 +2,6 @@ import { DARK_THEME, LIGHT_THEME, TRANSLATIONS_EN, TRANSLATIONS_PL } from 'data'
 import { EAppLangs, EAppTheme, EStoryCategory, TDiceSettings } from 'types';
 
 const diceSettings: TDiceSettings = {
-  defaultDiceAmount: 9,
   minDice: 3,
   stepDice: 3,
   maxThresholds: 5,

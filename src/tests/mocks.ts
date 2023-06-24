@@ -23,7 +23,6 @@ export const iconsManagerMock: IIconsManager = {
 };
 
 export const diceSettingsMock: TDiceSettings = {
-  defaultDiceAmount: 9,
   minDice: 3,
   stepDice: 3,
   maxThresholds: 5,
