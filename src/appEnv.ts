@@ -4,7 +4,7 @@ import { EAppLangs, EAppTheme, EStoryCategory, TDiceSettings } from 'types';
 const diceSettings: TDiceSettings = {
   minDice: 3,
   stepDice: 3,
-  maxThresholds: 5,
+  maxThresholds: 6,
   categoriesKeys: Object.values(EStoryCategory),
   defaultCategoriesKeys: [EStoryCategory.PLAYER],
   defaultCategoriesLength: ICONS_SET.player.length,
@@ -13,7 +13,6 @@ const diceSettings: TDiceSettings = {
 export const ENV = {
   lang: EAppLangs.EN,
   theme: EAppTheme.DARK,
-
   diceSettings,
 
   mappedTranslations: new Map([

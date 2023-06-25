@@ -1,11 +1,5 @@
 import { StoryTellerModel } from 'models';
-import {
-  anyArrayManagerMock,
-  errorsMock,
-  iconsManagerMock,
-  iconsSetMock,
-  playersIconsMock,
-} from '../mocks';
+import { anyArrayManagerMock, errorsMock, iconsManagerMock, iconsSetMock } from '../mocks';
 import { EStoryCategory } from 'types';
 
 describe('StoryTellerModel', () => {
@@ -35,8 +29,8 @@ describe('StoryTellerModel', () => {
 
   describe('tellAStory()', () => {
     test('Should throw error, when icons amount is bigger than available icons', () => {
-      const diceAmount = playersIconsMock.length + 2;
-      iconsManagerMock.getIconsSetPerCategory = jest.fn().mockReturnValue(playersIconsMock);
+      const diceAmount = iconsSetMock.player.length + 2;
+      iconsManagerMock.getIconsSetPerCategory = jest.fn().mockReturnValue(iconsSetMock.player);
       const callback = () => model.tellAStory([EStoryCategory.PLAYER], diceAmount);
 
       expect(callback).toThrow(errorsMock.OUT_OF_RANGE);
@@ -44,23 +38,23 @@ describe('StoryTellerModel', () => {
 
     test('Should throw error, when icons amount is less than minimum', () => {
       const diceAmount = StoryTellerModel.MIN_AMOUNT - 1;
-      iconsManagerMock.getIconsSetPerCategory = jest.fn().mockReturnValue(playersIconsMock);
+      iconsManagerMock.getIconsSetPerCategory = jest.fn().mockReturnValue(iconsSetMock.player);
       const callback = () => model.tellAStory([EStoryCategory.PLAYER], diceAmount);
 
       expect(callback).toThrow(errorsMock.OUT_OF_RANGE);
     });
 
     test('Should work correctly', () => {
-      const diceAmount = playersIconsMock.length - 1;
-      iconsManagerMock.getIconsSetPerCategory = jest.fn().mockReturnValue(playersIconsMock);
+      const diceAmount = iconsSetMock.player.length - 1;
+      iconsManagerMock.getIconsSetPerCategory = jest.fn().mockReturnValue(iconsSetMock.player);
       const result = model.tellAStory([EStoryCategory.PLAYER], diceAmount);
 
       expect(result.length).toBe(diceAmount);
     });
 
     test('Should work correctly, when icons amount is equals available icons', () => {
-      const diceAmount = playersIconsMock.length - 1;
-      iconsManagerMock.getIconsSetPerCategory = jest.fn().mockReturnValue(playersIconsMock);
+      const diceAmount = iconsSetMock.player.length - 1;
+      iconsManagerMock.getIconsSetPerCategory = jest.fn().mockReturnValue(iconsSetMock.player);
       const result = model.tellAStory([EStoryCategory.PLAYER], diceAmount);
 
       expect(result.length).toBe(diceAmount);

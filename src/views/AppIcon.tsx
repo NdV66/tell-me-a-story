@@ -8,8 +8,8 @@ const StyledAppIcon = styled('i')(({ theme }) => ({
   display: 'flex',
   justifyContent: 'center',
   width: '100%',
-  fontSize: theme.typography.fontSize * 7,
-  paddingTop: '64px',
+  fontSize: theme.typography.fontSize * 6,
+  paddingTop: '48px',
   color: theme.palette.primary.main,
 }));
 

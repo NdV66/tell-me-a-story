@@ -1,4 +1,4 @@
-import { PREFIX_ICON } from 'data';
+import { ICONS_SET, PREFIX_ICON } from 'data';
 import { IAnyArrayManager, IIconsManager, IStoryTellerModel } from 'models';
 import { EStoryCategory, TAppErrors, TDiceSettings, TIconsSet } from 'types';
 
@@ -9,12 +9,7 @@ export const anyArrayManagerMock: IAnyArrayManager = {
 export const prefixIconMock = 'mock-';
 export const iconsMock = ['mock-icon', 'other-mock-icon', 'other-other-mock-icon'];
 
-export const playersIconsMock = [...iconsMock];
-
-export const iconsSetMock: TIconsSet = {
-  [EStoryCategory.PLAYER]: playersIconsMock,
-  [EStoryCategory.BOTTLES]: ['mock-icon2', 'other-mock-icon2', 'other-other-mock-icon2'],
-};
+export const iconsSetMock: TIconsSet = ICONS_SET;
 
 export const iconsManagerMock: IIconsManager = {
   getIconsSetPerCategory: jest.fn(),
@@ -28,7 +23,7 @@ export const diceSettingsMock: TDiceSettings = {
   maxThresholds: 5,
   categoriesKeys: Object.values(EStoryCategory),
   defaultCategoriesKeys: [EStoryCategory.PLAYER],
-  defaultCategoriesLength: playersIconsMock.length,
+  defaultCategoriesLength: iconsSetMock.player.length,
 };
 
 export const storyTellerMock: IStoryTellerModel = {
