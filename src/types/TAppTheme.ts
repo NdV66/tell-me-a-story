@@ -7,4 +7,5 @@ export type TAppTheme = {
   success: string;
   accent: string;
   background: string;
+  fontSize: number;
 };

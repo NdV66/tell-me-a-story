@@ -12,6 +12,7 @@ import { FooterPage } from './FooterPage';
 
 const useMainPage = () => {
   const { theme } = useSettingsContext();
+
   const muiTheme = useMemo(() => {
     const palette: PaletteOptions = {
       mode: theme.name,
@@ -23,12 +24,22 @@ const useMainPage = () => {
     };
 
     return createTheme({
+      typography: {
+        fontSize: theme.fontSize,
+      },
       palette,
       components: {
         MuiPaper: {
           styleOverrides: {
             root: {
-              background: theme.background,
+              background: theme.primary,
+            },
+          },
+        },
+        MuiMenuItem: {
+          styleOverrides: {
+            root: {
+              fontSize: theme.fontSize * 0.9,
             },
           },
         },
@@ -36,6 +47,8 @@ const useMainPage = () => {
           styleOverrides: {
             outlined: {
               padding: '10px',
+              fontSize: theme.fontSize * 0.9,
+              backgroundColor: theme.background,
             },
           },
         },
