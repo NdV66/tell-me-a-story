@@ -17,10 +17,13 @@ const useStoryCategoriesSelector = (viewComponent: IStoryCategoriesViewComponent
   const { translations } = useSettingsContext();
   const currentCategories = useStateObservable(viewComponent.currentCategories$);
 
+  const translateCategoryByKey = (category: EStoryCategory) =>
+    translations.categoriesByKeys[category];
+
   const renderValue = (selected: string[]) => (
     <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
       {selected.map((value) => (
-        <Chip key={value} label={value} />
+        <Chip key={value} label={translateCategoryByKey(value as EStoryCategory)} />
       ))}
     </Box>
   );
@@ -32,7 +35,7 @@ const useStoryCategoriesSelector = (viewComponent: IStoryCategoriesViewComponent
   });
 
   const handleChange = ({ target: { value } }: SelectChangeEvent<string[]>) => {
-    viewComponent.changeCategories(value as any as EStoryCategory[]);
+    viewComponent.changeCategories(value as EStoryCategory[]);
   };
 
   return {
@@ -41,6 +44,7 @@ const useStoryCategoriesSelector = (viewComponent: IStoryCategoriesViewComponent
     translations,
     currentCategories,
     handleChange,
+    translateCategoryByKey,
     diceSettings: viewComponent.diceSettings,
   };
 };
@@ -54,6 +58,7 @@ export const StoryCategoriesSelector = ({ viewComponent }: Props) => {
     translations,
     diceSettings,
     handleChange,
+    translateCategoryByKey,
   } = useStoryCategoriesSelector(viewComponent);
 
   return (
@@ -73,7 +78,7 @@ export const StoryCategoriesSelector = ({ viewComponent }: Props) => {
         >
           {diceSettings.categoriesKeys.map((key) => (
             <MenuItem key={key} value={key} style={getItemStyles(key, currentCategories, theme)}>
-              {key}
+              {translateCategoryByKey(key as EStoryCategory)}
             </MenuItem>
           ))}
         </Select>

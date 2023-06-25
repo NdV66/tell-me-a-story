@@ -1,3 +1,5 @@
+import { EStoryCategory } from './EStoryCategory';
+
 export type TTranslations = {
   lang: string;
   appName: string;
@@ -16,6 +18,6 @@ export type TTranslations = {
   lnLink: string;
 
   categoriesByKeys: {
-    [key: string]: string;
+    [key in EStoryCategory]: string;
   };
 };
