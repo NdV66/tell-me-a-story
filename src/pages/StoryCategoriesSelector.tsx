@@ -26,10 +26,9 @@ const useStoryCategoriesSelector = (viewComponent: IStoryCategoriesViewComponent
   );
 
   const getItemStyles = (value: string, values: string[], theme: Theme) => ({
-    fontWeight:
-      values.indexOf(value) === -1
-        ? theme.typography.fontWeightRegular
-        : theme.typography.fontWeightMedium,
+    fontWeight: values.includes(value)
+      ? theme.typography.fontWeightBold
+      : theme.typography.fontWeightRegular,
   });
 
   const handleChange = ({ target: { value } }: SelectChangeEvent<string[]>) => {
@@ -73,11 +72,7 @@ export const StoryCategoriesSelector = ({ viewComponent }: Props) => {
           error={!currentCategories.length}
         >
           {diceSettings.categoriesKeys.map((key) => (
-            <MenuItem
-              key={key}
-              value={key}
-              style={getItemStyles(key, diceSettings.categoriesKeys, theme)}
-            >
+            <MenuItem key={key} value={key} style={getItemStyles(key, currentCategories, theme)}>
               {key}
             </MenuItem>
           ))}
