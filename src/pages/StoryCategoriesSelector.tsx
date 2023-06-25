@@ -1,8 +1,6 @@
 import { Theme, useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
 import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import Chip from '@mui/material/Chip';
 import { Typography } from '@mui/material';
 import { EStoryCategory } from 'types';
 import { IStoryCategoriesViewComponent } from 'viewModels';

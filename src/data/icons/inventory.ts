@@ -38,7 +38,6 @@ export const INVENTORY_ICONS = [
   'slash-ring',
   'snorkel',
   'soccer-ball',
-  'spray',
   'stopwatch',
   'syringe',
   'three-keys',
