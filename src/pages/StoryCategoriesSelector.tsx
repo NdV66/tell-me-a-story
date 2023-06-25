@@ -8,6 +8,7 @@ import { EStoryCategory } from 'types';
 import { IStoryCategoriesViewComponent } from 'viewModels';
 import { useSettingsContext } from 'views';
 import { useStateObservable } from 'tools';
+import { StoryCategoryChip } from './StoryCategoryChip';
 
 type Props = {
   viewComponent: IStoryCategoriesViewComponent;
@@ -21,11 +22,10 @@ const useStoryCategoriesSelector = (viewComponent: IStoryCategoriesViewComponent
     translations.categoriesByKeys[category];
 
   const renderValue = (selected: string[]) => (
-    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-      {selected.map((value) => (
-        <Chip key={value} label={translateCategoryByKey(value as EStoryCategory)} />
-      ))}
-    </Box>
+    <StoryCategoryChip
+      selected={selected as EStoryCategory[]}
+      translateCategoryByKey={translateCategoryByKey}
+    />
   );
 
   const getItemStyles = (value: string, values: string[], theme: Theme) => ({
