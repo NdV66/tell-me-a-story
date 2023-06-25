@@ -1,4 +1,4 @@
-import { combineLatest, filter } from 'rxjs';
+import { combineLatest, filter, firstValueFrom, map } from 'rxjs';
 import { IDiceAreaViewComponent } from './DiceAreaViewComponent';
 import { IDiceAmountViewComponent } from './DiceAmountViewComponent';
 import { IDiceCategoriesViewComponent } from './DiceCategoriesViewComponent';
@@ -16,16 +16,17 @@ export class HomePageViewModel implements IHomePageViewModel {
     });
 
     combineLatest([
-      this._diceCategoriesViewComponent.currentCategories$,
       this._diceAmountViewComponent.currentDiceAmount$,
       this._diceCategoriesViewComponent.currentCategoriesLength$,
     ])
       .pipe(
-        filter(([_, diceAmount, categoriesLength]) => {
-          return diceAmount <= categoriesLength;
-        }),
+        filter(([diceAmount, categoriesLength]) => diceAmount <= categoriesLength),
+        map(([diceAmount]) => diceAmount),
       )
-      .subscribe(async ([categories, diceAmount]) => {
+      .subscribe(async (diceAmount) => {
+        const categories = await firstValueFrom(
+          this._diceCategoriesViewComponent.currentCategories$,
+        );
         this._diceAreaViewComponent.tellAStory(categories, diceAmount);
       });
   }

@@ -1,13 +1,19 @@
 import { StoryTellerModel } from 'models';
-import { errorsMock, iconsManagerMock, iconsSetMock, playersIconsMock } from '../mocks';
+import {
+  anyArrayManagerMock,
+  errorsMock,
+  iconsManagerMock,
+  iconsSetMock,
+  playersIconsMock,
+} from '../mocks';
 import { EStoryCategory } from 'types';
 
 describe('StoryTellerModel', () => {
   let model: StoryTellerModel;
 
   beforeEach(() => {
-    //TODO: test with any arraymodel!!!
-    model = new StoryTellerModel(iconsManagerMock, errorsMock, {} as any);
+    anyArrayManagerMock.shuffle = jest.fn().mockImplementation((icons) => icons);
+    model = new StoryTellerModel(iconsManagerMock, errorsMock, anyArrayManagerMock);
   });
 
   describe('getIconsPerCategories()', () => {
