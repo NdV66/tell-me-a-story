@@ -16,11 +16,17 @@ const useMainPage = () => {
   const muiTheme = useMemo(() => {
     const palette: PaletteOptions = {
       mode: theme.name,
-      primary: { main: theme.primary },
-      secondary: { main: theme.secondary },
-      success: { main: theme.success },
-      info: { main: theme.accent },
-      background: { default: theme.background },
+      primary: {
+        main: theme.primary,
+        contrastText: theme.background,
+      },
+      secondary: {
+        main: theme.secondary,
+        contrastText: theme.light,
+      },
+      background: {
+        default: theme.background,
+      },
     };
 
     return createTheme({
@@ -39,7 +45,7 @@ const useMainPage = () => {
         MuiMenuItem: {
           styleOverrides: {
             root: {
-              fontSize: theme.fontSize * 0.9,
+              fontSize: theme.fontSize * 0.94,
             },
           },
         },
@@ -49,6 +55,7 @@ const useMainPage = () => {
               padding: '10px',
               fontSize: theme.fontSize * 0.9,
               backgroundColor: theme.background,
+              color: theme.light,
             },
           },
         },

@@ -15,7 +15,6 @@ export const LangSelector = ({ onChange, value, values }: Props) => {
 
   return (
     <Select
-      id="lang-selector"
       variant="outlined"
       value={value}
       onChange={handleChange}
