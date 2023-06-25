@@ -6,17 +6,15 @@ type Props = {
   translateCategoryByKey: (key: EStoryCategory) => string;
 };
 
-export const StoryCategoryChip = ({ selected, translateCategoryByKey }: Props) => {
-  return (
-    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-      {selected.map((value) => (
-        <Chip
-          key={value}
-          label={translateCategoryByKey(value as EStoryCategory)}
-          color="primary"
-          variant="filled"
-        />
-      ))}
-    </Box>
-  );
-};
+export const StoryCategoryChip = ({ selected, translateCategoryByKey }: Props) => (
+  <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+    {selected.map((value) => (
+      <Chip
+        key={value}
+        label={translateCategoryByKey(value as EStoryCategory)}
+        color="primary"
+        variant="filled"
+      />
+    ))}
+  </Box>
+);
