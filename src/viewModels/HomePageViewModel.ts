@@ -11,10 +11,17 @@ export class HomePageViewModel implements IHomePageViewModel {
     private _diceAmountViewComponent: IDiceAmountViewComponent,
     private _diceCategoriesViewComponent: IDiceCategoriesViewComponent,
   ) {
+    this._updateMaxDiceAmountSubscribe();
+    this._tellAStroySubscribe();
+  }
+
+  private _updateMaxDiceAmountSubscribe() {
     this._diceCategoriesViewComponent.currentCategoriesLength$.subscribe((rawCategoriesLength) => {
       this._diceAmountViewComponent.changeMaxDiceAmount(rawCategoriesLength);
     });
+  }
 
+  private _tellAStroySubscribe() {
     combineLatest([
       this._diceAmountViewComponent.currentDiceAmount$,
       this._diceCategoriesViewComponent.currentCategoriesLength$,
