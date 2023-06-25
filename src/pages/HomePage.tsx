@@ -3,25 +3,25 @@ import {
   IDiceAreaViewComponent,
   IHomePageViewModel,
   IDiceAmountViewComponent,
-  IDiceCategoriesViewComponent,
+  IStoryCategoriesViewComponent,
 } from 'viewModels';
 
 import { DiceAreaComponent } from './DiceAreaComponent';
 import { IconsAmountSlider } from './IconsAmountSlider';
 
-import { StoryCategorySelector } from 'pages/StoryCategorySelector';
+import { StoryCategoriesSelector } from 'pages/StoryCategoriesSelector';
 
 type Props = {
   viewModel: IHomePageViewModel;
   diceAreaViewComponent: IDiceAreaViewComponent;
   diceAmountViewComponent: IDiceAmountViewComponent;
-  diceCategoriesViewComponent: IDiceCategoriesViewComponent;
+  storyCategoriesViewComponent: IStoryCategoriesViewComponent;
 };
 
 export const HomePage = ({
   diceAreaViewComponent,
   diceAmountViewComponent,
-  diceCategoriesViewComponent,
+  storyCategoriesViewComponent,
 }: Props) => {
   return (
     <Container
@@ -31,7 +31,7 @@ export const HomePage = ({
       <IconsAmountSlider viewComponent={diceAmountViewComponent} />
 
       <Box sx={{ marginTop: '32px' }}>
-        <StoryCategorySelector viewComponent={diceCategoriesViewComponent} />
+        <StoryCategoriesSelector viewComponent={storyCategoriesViewComponent} />
       </Box>
 
       <Box

@@ -2,7 +2,7 @@ import { IIconsManager } from 'models';
 import { BehaviorSubject, Observable, firstValueFrom } from 'rxjs';
 import { EStoryCategory, TDiceSettings } from 'types';
 
-export interface IDiceCategoriesViewComponent {
+export interface IStoryCategoriesViewComponent {
   currentCategories$: Observable<EStoryCategory[]>;
   currentCategoriesLength$: Observable<number>;
 
@@ -10,7 +10,7 @@ export interface IDiceCategoriesViewComponent {
   changeCategories: (categories: EStoryCategory[]) => void;
 }
 
-export class DiceCategoriesViewComponent implements IDiceCategoriesViewComponent {
+export class StoryCategoriesViewComponent implements IStoryCategoriesViewComponent {
   private _currentCategories$: BehaviorSubject<EStoryCategory[]>;
   private _currentCategoriesLength$: BehaviorSubject<number>;
 
@@ -21,6 +21,10 @@ export class DiceCategoriesViewComponent implements IDiceCategoriesViewComponent
     this._currentCategoriesLength$ = new BehaviorSubject(defaultCategoriesLength);
     this._currentCategories$ = new BehaviorSubject(this.diceSettings.defaultCategoriesKeys);
 
+    this._changeCurrentCategoriesLengthSubscribe();
+  }
+
+  private _changeCurrentCategoriesLengthSubscribe() {
     this.currentCategories$.subscribe((categories) => {
       const categoriesLength = this._iconsManager.getCategoriesAmount(categories);
       this._currentCategoriesLength$.next(categoriesLength);

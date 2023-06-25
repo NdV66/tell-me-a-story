@@ -5,15 +5,15 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Chip from '@mui/material/Chip';
 import { Typography } from '@mui/material';
 import { EStoryCategory } from 'types';
-import { IDiceCategoriesViewComponent } from 'viewModels';
+import { IStoryCategoriesViewComponent } from 'viewModels';
 import { useSettingsContext } from 'views';
 import { useStateObservable } from 'tools';
 
 type Props = {
-  viewComponent: IDiceCategoriesViewComponent;
+  viewComponent: IStoryCategoriesViewComponent;
 };
 
-const useStoryCategorySelector = (viewComponent: IDiceCategoriesViewComponent) => {
+const useStoryCategoriesSelector = (viewComponent: IStoryCategoriesViewComponent) => {
   const { translations } = useSettingsContext();
   const currentCategories = useStateObservable(viewComponent.currentCategories$);
 
@@ -46,7 +46,7 @@ const useStoryCategorySelector = (viewComponent: IDiceCategoriesViewComponent) =
   };
 };
 
-export const StoryCategorySelector = ({ viewComponent }: Props) => {
+export const StoryCategoriesSelector = ({ viewComponent }: Props) => {
   const theme = useTheme();
   const {
     getItemStyles,
@@ -55,7 +55,7 @@ export const StoryCategorySelector = ({ viewComponent }: Props) => {
     translations,
     diceSettings,
     handleChange,
-  } = useStoryCategorySelector(viewComponent);
+  } = useStoryCategoriesSelector(viewComponent);
 
   return (
     <>

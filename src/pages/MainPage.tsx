@@ -5,7 +5,7 @@ import { AppNavbar, useSettingsContext } from 'views';
 import {
   diceAmountViewComponent,
   diceAreaViewComponent,
-  diceCategoriesViewComponent,
+  storyCategoriesViewComponent,
   homePageViewModel,
 } from 'modelsBuilder';
 import { FooterPage } from './FooterPage';
@@ -69,7 +69,7 @@ export const MainPage = () => {
           viewModel={homePageViewModel}
           diceAreaViewComponent={diceAreaViewComponent}
           diceAmountViewComponent={diceAmountViewComponent}
-          diceCategoriesViewComponent={diceCategoriesViewComponent}
+          storyCategoriesViewComponent={storyCategoriesViewComponent}
         />
       </main>
 
