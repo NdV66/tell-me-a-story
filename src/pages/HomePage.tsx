@@ -8,8 +8,7 @@ import {
 
 import { DiceAreaComponent } from './DiceAreaComponent';
 import { IconsAmountSlider } from './IconsAmountSlider';
-
-import { StoryCategoriesSelector } from 'pages/StoryCategoriesSelector';
+import { StoryCategoriesSelector } from './StoryCategoriesSelector';
 
 type Props = {
   viewModel: IHomePageViewModel;
@@ -22,25 +21,19 @@ export const HomePage = ({
   diceAreaViewComponent,
   diceAmountViewComponent,
   storyCategoriesViewComponent,
-}: Props) => {
-  return (
-    <Container
-      maxWidth="md"
-      sx={{ height: 'calc(100vh - 24px - 24px - 24px - 64px)', paddingTop: '32px' }}
-    >
-      <IconsAmountSlider viewComponent={diceAmountViewComponent} />
+}: Props) => (
+  <Container
+    maxWidth="md"
+    sx={{ minHeight: 'calc(100vh - 24px - 24px - 24px - 105px)', paddingTop: '32px' }}
+  >
+    <IconsAmountSlider viewComponent={diceAmountViewComponent} />
 
-      <Box sx={{ marginTop: '32px' }}>
-        <StoryCategoriesSelector viewComponent={storyCategoriesViewComponent} />
-      </Box>
+    <Box sx={{ marginTop: '32px' }}>
+      <StoryCategoriesSelector viewComponent={storyCategoriesViewComponent} />
+    </Box>
 
-      <Box
-        sx={{
-          margin: '32px 0',
-        }}
-      >
-        <DiceAreaComponent viewComponent={diceAreaViewComponent} />
-      </Box>
-    </Container>
-  );
-};
+    <Box sx={{ marginBottom: '48px', marginTop: '32px' }}>
+      <DiceAreaComponent viewComponent={diceAreaViewComponent} />
+    </Box>
+  </Container>
+);

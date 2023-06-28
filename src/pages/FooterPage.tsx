@@ -1,5 +1,4 @@
-import { styled } from '@mui/material';
-import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
+import { Container, styled } from '@mui/material';
 import { OneFooterColumn, useSettingsContext } from 'views';
 
 const StyledFooterWrapper = styled('div')(({ theme }) => ({
@@ -12,12 +11,12 @@ export const FooterPage = () => {
   const { translations } = useSettingsContext();
 
   return (
-    <StyledFooterWrapper>
-      <Grid2 container>
+    <Container maxWidth="md">
+      <StyledFooterWrapper>
         <OneFooterColumn title={translations.author} link={translations.lnLink} />
         <OneFooterColumn title={translations.repo} link={translations.repoLink} />
         <OneFooterColumn title={translations.github} link={translations.githubLink} />
-      </Grid2>
-    </StyledFooterWrapper>
+      </StyledFooterWrapper>
+    </Container>
   );
 };
