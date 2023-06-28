@@ -1,4 +1,4 @@
-import { Box, Container } from '@mui/material';
+import { Box, Button, Container } from '@mui/material';
 import {
   IDiceAreaViewComponent,
   IHomePageViewModel,
@@ -9,6 +9,7 @@ import {
 import { DiceAreaComponent } from './DiceAreaComponent';
 import { IconsAmountSlider } from './IconsAmountSlider';
 import { StoryCategoriesSelector } from './StoryCategoriesSelector';
+import { useSettingsContext } from 'views';
 
 type Props = {
   viewModel: IHomePageViewModel;
@@ -18,22 +19,30 @@ type Props = {
 };
 
 export const HomePage = ({
+  viewModel,
   diceAreaViewComponent,
   diceAmountViewComponent,
   storyCategoriesViewComponent,
-}: Props) => (
-  <Container
-    maxWidth="md"
-    sx={{ minHeight: 'calc(100vh - 24px - 24px - 24px - 105px)', paddingTop: '32px' }}
-  >
-    <IconsAmountSlider viewComponent={diceAmountViewComponent} />
+}: Props) => {
+  const { translations } = useSettingsContext();
 
-    <Box sx={{ marginTop: '32px' }}>
-      <StoryCategoriesSelector viewComponent={storyCategoriesViewComponent} />
-    </Box>
+  return (
+    <Container
+      maxWidth="md"
+      sx={{ minHeight: 'calc(100vh - 24px - 24px - 24px - 105px)', paddingTop: '32px' }}
+    >
+      <IconsAmountSlider viewComponent={diceAmountViewComponent} />
 
-    <Box sx={{ marginBottom: '48px', marginTop: '32px' }}>
-      <DiceAreaComponent viewComponent={diceAreaViewComponent} />
-    </Box>
-  </Container>
-);
+      <Box sx={{ marginTop: '32px' }}>
+        <StoryCategoriesSelector viewComponent={storyCategoriesViewComponent} />
+      </Box>
+      <Box sx={{ display: 'flex', justifyContent: 'flex-end', marginTop: '16px' }}>
+        <Button onClick={viewModel.tellStoryOnceAgain}>{translations.reroll}</Button>
+      </Box>
+
+      <Box sx={{ marginBottom: '48px', marginTop: '32px' }}>
+        <DiceAreaComponent viewComponent={diceAreaViewComponent} />
+      </Box>
+    </Container>
+  );
+};

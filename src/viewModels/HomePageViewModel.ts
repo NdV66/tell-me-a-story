@@ -3,7 +3,9 @@ import { IDiceAreaViewComponent } from './DiceAreaViewComponent';
 import { IDiceAmountViewComponent } from './DiceAmountViewComponent';
 import { IStoryCategoriesViewComponent } from './StoryCategoriesViewComponent';
 
-export interface IHomePageViewModel {}
+export interface IHomePageViewModel {
+  tellStoryOnceAgain: () => void;
+}
 
 export class HomePageViewModel implements IHomePageViewModel {
   constructor(
@@ -36,5 +38,9 @@ export class HomePageViewModel implements IHomePageViewModel {
         );
         this._diceAreaViewComponent.tellAStory(categories, diceAmount);
       });
+  }
+
+  public tellStoryOnceAgain() {
+    console.log('DZIALAM');
   }
 }

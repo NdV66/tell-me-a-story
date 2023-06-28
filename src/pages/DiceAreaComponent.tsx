@@ -9,7 +9,10 @@ type Props = {
 
 const useDiceAreaComponent = (viewComponent: IDiceAreaViewComponent) => {
   const currentDice = useStateObservable(viewComponent.currentDice$);
-  return { currentDice };
+
+  return {
+    currentDice,
+  };
 };
 
 export const DiceAreaComponent = ({ viewComponent }: Props) => {

@@ -14,6 +14,7 @@ export const TRANSLATIONS_EN: TTranslations = {
   themeChange: 'theme',
   roll: 'Tell me a story!',
   noRoll: 'A long, long time ago...',
+  reroll: 'Reroll',
 
   settingsDice: 'How many dice do you want?',
   settingCategories: 'Which categories do you want to have?',
@@ -40,6 +41,7 @@ export const TRANSLATIONS_PL: TTranslations = {
   themeChange: 'tryb',
   roll: 'Opowiedz mi coś!',
   noRoll: 'Dawno, dawno temu...',
+  reroll: 'Przerzuć',
 
   settingsDice: 'Ile kostek mam wylosować?',
   settingCategories: 'O czym mam opowiedzieć?',

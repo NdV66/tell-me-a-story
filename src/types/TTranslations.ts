@@ -6,6 +6,7 @@ export type TTranslations = {
   themeChange: string;
   roll: string;
   noRoll: string;
+  reroll: string;
 
   settingsDice: string;
   settingCategories: string;
