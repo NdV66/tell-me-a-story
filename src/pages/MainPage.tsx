@@ -39,6 +39,7 @@ const useMainPage = () => {
           styleOverrides: {
             root: {
               background: theme.primary,
+              color: theme.background,
             },
           },
         },
