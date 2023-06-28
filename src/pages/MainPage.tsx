@@ -1,14 +1,15 @@
 import { useMemo } from 'react';
 import { CssBaseline, ThemeProvider, createTheme, PaletteOptions } from '@mui/material';
 import { HomePage } from 'pages/HomePage';
-import { AppNavbar, useSettingsContext } from 'views';
 import {
   diceAmountViewComponent,
   diceAreaViewComponent,
   storyCategoriesViewComponent,
   homePageViewModel,
 } from 'modelsBuilder';
-import { FooterPage } from './FooterPage';
+import { FooterComponent } from './FooterComponent';
+import { useSettingsContext } from 'context';
+import { AppNavbarComponent } from './AppNavbarComponent';
 
 const useMainPage = () => {
   const { theme } = useSettingsContext();
@@ -82,7 +83,7 @@ export const MainPage = () => {
       <CssBaseline />
 
       <header>
-        <AppNavbar />
+        <AppNavbarComponent />
       </header>
 
       <main>
@@ -95,7 +96,7 @@ export const MainPage = () => {
       </main>
 
       <footer>
-        <FooterPage />
+        <FooterComponent />
       </footer>
     </ThemeProvider>
   );

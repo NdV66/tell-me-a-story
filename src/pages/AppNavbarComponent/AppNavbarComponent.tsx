@@ -1,9 +1,10 @@
 import { AppBar, Toolbar, Typography } from '@mui/material';
-import { useSettingsContext } from '../SettingContext';
+
 import { ThemeSwitch } from './ThemeSwitch';
 import { LangSelector } from './LangSelector';
+import { useSettingsContext } from 'context';
 
-export const AppNavbar = () => {
+export const AppNavbarComponent = () => {
   const {
     theme,
     isDefaultAppTheme,

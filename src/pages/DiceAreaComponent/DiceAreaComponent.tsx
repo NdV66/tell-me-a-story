@@ -1,7 +1,7 @@
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
 import { IDiceAreaViewComponent } from 'viewModels';
-import { AppIcon } from 'views';
 import { useStateObservable } from 'tools';
+import { AppIcon } from './AppIcon';
 
 type Props = {
   viewComponent: IDiceAreaViewComponent;

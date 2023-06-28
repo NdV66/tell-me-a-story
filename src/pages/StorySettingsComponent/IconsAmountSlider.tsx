@@ -1,7 +1,7 @@
 import { Slider, Typography, styled } from '@mui/material';
+import { useSettingsContext } from 'context';
 import { useStateObservable } from 'tools';
 import { IDiceAmountViewComponent } from 'viewModels/DiceAmountViewComponent';
-import { useSettingsContext } from 'views';
 
 const prepareMarks = (min: number, max: number, step: number) => {
   const result = [];

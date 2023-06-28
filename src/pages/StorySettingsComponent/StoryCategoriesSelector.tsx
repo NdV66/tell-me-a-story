@@ -4,9 +4,9 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { Typography } from '@mui/material';
 import { EStoryCategory } from 'types';
 import { IStoryCategoriesViewComponent } from 'viewModels';
-import { useSettingsContext } from 'views';
 import { useStateObservable } from 'tools';
 import { StoryCategoryChip } from './StoryCategoryChip';
+import { useSettingsContext } from 'context';
 
 type Props = {
   viewComponent: IStoryCategoriesViewComponent;

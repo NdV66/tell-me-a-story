@@ -1,5 +1,6 @@
 import { Container, styled } from '@mui/material';
-import { OneFooterColumn, useSettingsContext } from 'views';
+import { useSettingsContext } from 'context';
+import { OneFooterColumn } from './OneFooterColumn';
 
 const StyledFooterWrapper = styled('div')(({ theme }) => ({
   padding: '24px 0',
@@ -7,7 +8,7 @@ const StyledFooterWrapper = styled('div')(({ theme }) => ({
   fontSize: theme.typography.fontSize * 0.9,
 }));
 
-export const FooterPage = () => {
+export const FooterComponent = () => {
   const { translations } = useSettingsContext();
 
   return (

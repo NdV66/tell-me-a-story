@@ -1,21 +1,8 @@
-import { createContext, PropsWithChildren, useContext, useEffect } from 'react';
+import { PropsWithChildren, useContext, useEffect } from 'react';
 import { useStateObservable } from 'tools';
-import { EAppLangs, EAppTheme, TAppTheme, TAvailableTranslation, TTranslations } from 'types';
+import { EAppTheme } from 'types';
 import { ISettingsViewModel } from 'viewModels/SettingsViewModel';
-
-export type ISettingContext = {
-  theme: TAppTheme;
-  translations: TTranslations;
-  appLang: EAppLangs;
-  appTheme: EAppTheme;
-  isDefaultAppTheme: boolean;
-  availableTranslations: TAvailableTranslation[];
-
-  changeLang: (lang: EAppLangs) => void;
-  changeAppTheme: (value: boolean) => void;
-};
-
-export const SettingContext = createContext<ISettingContext>({} as ISettingContext);
+import { SettingContext } from './SettingContext';
 
 type Props = {
   settingsViewModel: ISettingsViewModel;
