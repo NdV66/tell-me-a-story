@@ -35,6 +35,13 @@ const useMainPage = () => {
       },
       palette,
       components: {
+        MuiSlider: {
+          styleOverrides: {
+            root: {
+              fontSize: '5px',
+            },
+          },
+        },
         MuiPaper: {
           styleOverrides: {
             root: {

@@ -4,7 +4,7 @@ import { IDiceAmountViewComponent } from './DiceAmountViewComponent';
 import { IStoryCategoriesViewComponent } from './StoryCategoriesViewComponent';
 
 export interface IHomePageViewModel {
-  tellStoryOnceAgain: () => void;
+  tellAStoryOnceAgain: () => void;
 }
 
 export class HomePageViewModel implements IHomePageViewModel {
@@ -14,7 +14,7 @@ export class HomePageViewModel implements IHomePageViewModel {
     private _storyCategoriesViewComponent: IStoryCategoriesViewComponent,
   ) {
     this._updateMaxDiceAmountSubscribe();
-    this._tellAStroySubscribe();
+    this._tellAStorySubscribe();
   }
 
   private _updateMaxDiceAmountSubscribe() {
@@ -23,7 +23,7 @@ export class HomePageViewModel implements IHomePageViewModel {
     });
   }
 
-  private _tellAStroySubscribe() {
+  private _tellAStorySubscribe() {
     combineLatest([
       this._diceAmountViewComponent.currentDiceAmount$,
       this._storyCategoriesViewComponent.currentCategoriesLength$,
@@ -40,7 +40,10 @@ export class HomePageViewModel implements IHomePageViewModel {
       });
   }
 
-  public tellStoryOnceAgain() {
-    console.log('DZIALAM');
-  }
+  public tellAStoryOnceAgain = async () => {
+    const categories = await firstValueFrom(this._storyCategoriesViewComponent.currentCategories$);
+    const diceAmount = await firstValueFrom(this._diceAmountViewComponent.currentDiceAmount$);
+
+    this._diceAreaViewComponent.tellAStory(categories, diceAmount);
+  };
 }

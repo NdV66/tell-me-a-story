@@ -37,7 +37,7 @@ export const HomePage = ({
         <StoryCategoriesSelector viewComponent={storyCategoriesViewComponent} />
       </Box>
       <Box sx={{ display: 'flex', justifyContent: 'flex-end', marginTop: '16px' }}>
-        <Button onClick={viewModel.tellStoryOnceAgain}>{translations.reroll}</Button>
+        <Button onClick={viewModel.tellAStoryOnceAgain}>{translations.reroll}</Button>
       </Box>
 
       <Box sx={{ marginBottom: '48px', marginTop: '32px' }}>
