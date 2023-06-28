@@ -56,7 +56,7 @@ const useMainPage = () => {
               padding: '10px',
               fontSize: theme.fontSize * 0.9,
               backgroundColor: theme.background,
-              color: theme.light,
+              color: theme.primary,
             },
           },
         },

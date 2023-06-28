@@ -11,8 +11,6 @@ type Props = {
 
 const StyledLangSelector = styled(Select)(({ theme }) => ({
   '& .MuiSelect-select': {
-    color: theme.palette.primary.dark,
-    background: theme.palette.background,
     fontWeight: theme.typography.fontWeightBold,
   },
 }));
