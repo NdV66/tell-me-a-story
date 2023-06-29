@@ -94,6 +94,23 @@ Features:
 - can use RxJS (if needed)
 - all logic should be placed inside its own hook (often in the same file)
 
+# User Flow
+## Overview
+1. As an user I want to have dice available (with default amount and category) just after page is loaded. *DONE*
+2. As an user I want to change app lang and keep it after reload page. *DONE*
+3. As an user I want to change app theme and keep it after reload page. *DONE*
+4. As an user I want to have information about author. *DONE*
+5. As an user I want to have link to the author's Github. *DONE*
+5. As an user I want to have link to this repo. *DONE*
+## Dice amount
+1. As an user I want to have new icons just after I changed dice amount with no additional steps. *DONE*
+## Categories
+1. As an user I want to have new icons just after I changed dice categories with no additional steps. *DONE*
+2. As an user I want to have option to select more than 1 category and never less than 1. *DONE*
+# Reroll
+1. As an user I want like to have an option to reroll all dice. *DONE*
+2. As an user I want to have an option to change dice order (move it) *TO DO*
+3. As an user I want to have an option to export dice as an image and save it *TO DO*
 
 # Thanks!
 https://nagoshiashumari.github.io/Rpg-Awesome/
