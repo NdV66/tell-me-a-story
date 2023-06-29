@@ -1,0 +1,11 @@
+Version: [v1.0.0](link_here)
+- change app lang
+- change app theme
+- basic design
+- tell a story!
+- reroll dices
+- application flow
+- application architecture
+- icons
+- basic RWD
+- favicon
