@@ -7,8 +7,9 @@ Features:
 
 # Run locally
 ## Requirements
-- Node.js > 16
-- Yarn
+- Node.js (>= 16) is installed
+- yarn or npm is installed
+
 ## How to run?
 1. Download repo.
 2. Go to the main folder.
@@ -17,6 +18,17 @@ Features:
 5. App is available under `localhost:3000`.
 
 # How to deploy?
+0. Change version in the `package.json`.
+1. Merge all changes to the master.
+2. Refresh master locally. \
+`git pull origin main`
+3. Create git tag. \
+`git tag -a vX.X.X -m "What was done"` \
+`git push --tags`
+4. Run `yarn deploy`.
+5. Wait... wait...
+6. Go to the `https://ndv66.github.io/character-maker/`
+7. See your changes :)
 
 # Architecture
 ## Overview
@@ -94,7 +106,7 @@ Features:
 - can use RxJS (if needed)
 - all logic should be placed inside its own hook (often in the same file)
 
-# User Flow
+# User Stories (short)
 ## Overview
 1. As an user I want to have dice available (with default amount and category) just after page is loaded. *DONE*
 2. As an user I want to change app lang and keep it after reload page. *DONE*
@@ -109,35 +121,24 @@ Features:
 2. As an user I want to have option to select more than 1 category and never less than 1. *DONE*
 # Reroll
 1. As an user I want like to have an option to reroll all dice. *DONE*
-2. As an user I want to have an option to change dice order (move it) *TO DO*
-3. As an user I want to have an option to export dice as an image and save it *TO DO*
+2. As an user I want to have an option to change dice order (move it)
+3. As an user I want to have an option to export dice as an image and save it
+
+# Developer Stories (short)
+## Documentation
+1. As a developer, I want to have documentation. *DONE*
+2. As a developer, I want to have architecture description. *DONE*
+## Deploy
+1. As a developer, I want to have deploy description. *DONE*
+2. As a developer, I want to have tag creating description. *DONE*
+## Development
+1. As a developer, I want to have instruction how to run locally. *DONE*
+## Tests
+1. As a developer I want to have tests for Models.
+2. As a developer I want to have tests for ViewModels.
+3. As a developer I want to have tests for ViewComponents.
+4. As a developer I want to have tests for Pages.
+5. As a developer I want to have tests for PagesComponents.
 
 # Thanks!
 https://nagoshiashumari.github.io/Rpg-Awesome/
-
-# Todo
-- basic structure OK
-- basic styles OK
-- roll dices OK
-- footer OK
-- change lang OK
-- change theme OK
-- re-roll dice OK
-- add categories OK
-- add dices amount input OK
-- add more dice icons OK
-- behavior when there is less dice than expected OK
-- architecture update in readme OK
-
-- user stories & flow
-- move dices ?
-- dice area export
-- info box
-- title
-- deploy + readme
-
-
-- model tests
-- view models tests
-- view tests
-- pages tests
