@@ -16,8 +16,8 @@ export class DiceAreaViewComponent implements IDiceAreaViewComponent {
     return this._currentDice$.asObservable();
   }
 
-  public tellAStory = (category: EStoryCategory[], amount: number) => {
-    const dice = this._storyTeller.tellAStory(category, amount);
+  public tellAStory = (categories: EStoryCategory[], amount: number) => {
+    const dice = this._storyTeller.tellAStory(categories, amount);
     this._currentDice$.next(dice);
   };
 }

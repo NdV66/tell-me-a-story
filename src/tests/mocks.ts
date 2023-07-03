@@ -1,5 +1,6 @@
 import { APP_ERRORS, ICONS_SET, PREFIX_ICON } from 'data';
 import { IAnyArrayManager, IIconsManager, IStoryTellerModel } from 'models';
+import { TestScheduler } from 'rxjs/testing';
 import { EStoryCategory, TAppErrors, TDiceSettings, TIconsSet } from 'types';
 
 export const anyArrayManagerMock: IAnyArrayManager = {
@@ -37,3 +38,8 @@ export const storyTellerMock: IStoryTellerModel = {
 };
 
 export const errorsMock = APP_ERRORS;
+
+export const getTestScheduler = () =>
+  new TestScheduler((actual, expected) => {
+    expect(actual).toEqual(expected);
+  });

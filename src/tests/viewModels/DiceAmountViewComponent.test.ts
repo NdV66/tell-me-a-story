@@ -1,6 +1,6 @@
 import { TestScheduler } from 'rxjs/testing';
 
-import { diceSettingsMock, iconsManagerMock, iconsSetMock } from 'tests/mocks';
+import { diceSettingsMock, getTestScheduler } from 'tests/mocks';
 import { DiceAmountViewComponent } from 'viewModels';
 
 const expectedIconsMaxLength_onEnter = diceSettingsMock.defaultCategoriesLength;
@@ -10,17 +10,43 @@ const expectedIconsCurrentLength_onEnter =
 const prepareMaxAmountMock = jest.fn().mockReturnValue(expectedIconsMaxLength_onEnter);
 const prepareEnterCurrentAmountMock = jest.fn().mockReturnValue(expectedIconsCurrentLength_onEnter);
 
-// cold('a').subscribe(() => viewModel.changeDiceAmount(expectedAmount));
-
 describe('DiceAmountViewComponent', () => {
   let viewModel: DiceAmountViewComponent;
   let testScheduler: TestScheduler;
 
   beforeEach(() => {
-    testScheduler = new TestScheduler((actual, expected) => {
-      expect(actual).toEqual(expected);
-    });
+    testScheduler = getTestScheduler();
     viewModel = new DiceAmountViewComponent(diceSettingsMock);
+  });
+
+  test('Should update _maxDiceAmount$/maxDiceAmount$', () => {
+    testScheduler.run(({ cold, expectObservable }) => {
+      const marble = 'a-b';
+      const a = 1;
+      const b = 2;
+      const prepareFakeValues = jest.fn().mockReturnValueOnce(a).mockReturnValueOnce(b);
+
+      cold(marble).subscribe(() => {
+        viewModel['_maxDiceAmount$'].next(prepareFakeValues());
+      });
+
+      expectObservable(viewModel.maxDiceAmount$).toBe(marble, { a, b });
+    });
+  });
+
+  test('Should update _currentDiceAmount$/currentDiceAmount$', () => {
+    testScheduler.run(({ cold, expectObservable }) => {
+      const marble = 'a-b';
+      const a = 1;
+      const b = 2;
+      const prepareFakeValues = jest.fn().mockReturnValueOnce(a).mockReturnValueOnce(b);
+
+      cold(marble).subscribe(() => {
+        viewModel['_currentDiceAmount$'].next(prepareFakeValues());
+      });
+
+      expectObservable(viewModel.currentDiceAmount$).toBe(marble, { a, b });
+    });
   });
 
   test('Should setup values on enter', () => {
