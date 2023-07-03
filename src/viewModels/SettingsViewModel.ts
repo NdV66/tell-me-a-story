@@ -81,7 +81,8 @@ export class SettingsViewModel implements ISettingsViewModel {
   }
 
   private _buildLangName(key: string) {
-    return this._settingModel.getTranslationsByLang((EAppLangs as any)[key])!!.lang;
+    const translations = this._settingModel.getTranslationsByLang((EAppLangs as any)[key]);
+    return translations!!.lang;
   }
 
   get availableTranslations() {

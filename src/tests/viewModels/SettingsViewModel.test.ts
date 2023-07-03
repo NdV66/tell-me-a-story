@@ -1,4 +1,4 @@
-import { LIGHT_THEME, TRANSLATIONS_EN } from 'data';
+import { LIGHT_THEME, TRANSLATIONS_EN, TRANSLATIONS_PL } from 'data';
 import { ISettingsModel } from 'models';
 import { TestScheduler } from 'rxjs/testing';
 import { getTestScheduler } from 'tests/helpers';
@@ -100,7 +100,7 @@ describe('SettingsViewModel', () => {
     });
   });
 
-  test('Should change (app)theme', () => {
+  test('Should change appTheme', () => {
     const appTheme = EAppTheme.LIGHT;
 
     testScheduler.run(({ cold, expectObservable }) => {
@@ -113,5 +113,41 @@ describe('SettingsViewModel', () => {
         viewModel.changeAppTheme(appTheme);
       });
     });
+  });
+
+  test('Should setup from cookies', () => {
+    const syncWithModelMock = jest.fn();
+    viewModel['_syncWithModel'] = syncWithModelMock;
+
+    viewModel.setupFromCookies();
+    expect(syncWithModelMock).toHaveBeenCalledTimes(1);
+  });
+
+  test('_buildLangName()', () => {
+    const lang = 'PL';
+    const translations = TRANSLATIONS_PL;
+    const getTranslationsByLangMock = jest.fn().mockReturnValue(translations);
+    settingsModelMock.getTranslationsByLang = getTranslationsByLangMock;
+
+    const result = viewModel['_buildLangName'](lang);
+
+    expect(result).toBe(translations.lang);
+    expect(getTranslationsByLangMock).toHaveBeenCalledTimes(1);
+    expect(getTranslationsByLangMock).toHaveBeenCalledWith(EAppLangs[lang]);
+  });
+
+  test('Should get available translations', () => {
+    const expectedResult = [
+      { key: EAppLangs.PL, value: TRANSLATIONS_PL.lang },
+      { key: EAppLangs.EN, value: TRANSLATIONS_EN.lang },
+    ];
+    const buildLangNameMock = jest
+      .fn()
+      .mockReturnValueOnce(TRANSLATIONS_PL.lang)
+      .mockReturnValueOnce(TRANSLATIONS_EN.lang);
+
+    viewModel['_buildLangName'] = buildLangNameMock;
+
+    expect(viewModel.availableTranslations).toEqual(expectedResult);
   });
 });
