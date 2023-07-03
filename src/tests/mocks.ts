@@ -1,4 +1,4 @@
-import { ICONS_SET, PREFIX_ICON } from 'data';
+import { APP_ERRORS, ICONS_SET, PREFIX_ICON } from 'data';
 import { IAnyArrayManager, IIconsManager, IStoryTellerModel } from 'models';
 import { EStoryCategory, TAppErrors, TDiceSettings, TIconsSet } from 'types';
 
@@ -7,7 +7,13 @@ export const anyArrayManagerMock: IAnyArrayManager = {
 };
 
 export const prefixIconMock = 'mock-';
-export const iconsMock = ['mock-icon', 'other-mock-icon', 'other-other-mock-icon'];
+export const iconsMock = [
+  'mock-icon',
+  'other-mock-icon',
+  'other-other-mock-icon',
+  'other-other-other-mock-icon',
+  'other-other-other-other-mock-icon',
+];
 
 export const iconsSetMock: TIconsSet = ICONS_SET;
 
@@ -30,6 +36,4 @@ export const storyTellerMock: IStoryTellerModel = {
   tellAStory: jest.fn(),
 };
 
-export const errorsMock: TAppErrors = {
-  OUT_OF_RANGE: new Error('Out of range'),
-};
+export const errorsMock = APP_ERRORS;

@@ -16,7 +16,7 @@ export class DiceAmountViewComponent implements IDiceAmountViewComponent {
 
   constructor(public readonly diceSettings: TDiceSettings) {
     const max = this._prepareMaxAmount(this.diceSettings.defaultCategoriesLength);
-    const current = max - this.diceSettings.stepDice;
+    const current = this._prepareEnterCurrentAmount(max);
 
     this._currentDiceAmount$ = new BehaviorSubject(current);
     this._maxDiceAmount$ = new BehaviorSubject(max);
@@ -35,11 +35,16 @@ export class DiceAmountViewComponent implements IDiceAmountViewComponent {
   };
 
   public async changeMaxDiceAmount(rawCategoriesLength: number) {
+    //TODO tests
     const max = this._prepareMaxAmount(rawCategoriesLength);
     const current = await firstValueFrom(this._currentDiceAmount$);
 
     if (current > max) this._currentDiceAmount$.next(max);
     this._maxDiceAmount$.next(max);
+  }
+
+  private _prepareEnterCurrentAmount(max: number) {
+    return max - this.diceSettings.stepDice;
   }
 
   private _prepareMaxAmount(rawCategoriesLength: number) {

@@ -1,4 +1,11 @@
-import { DARK_THEME, ICONS_SET, LIGHT_THEME, TRANSLATIONS_EN, TRANSLATIONS_PL } from 'data';
+import {
+  APP_ERRORS,
+  DARK_THEME,
+  ICONS_SET,
+  LIGHT_THEME,
+  TRANSLATIONS_EN,
+  TRANSLATIONS_PL,
+} from 'data';
 import { EAppLangs, EAppTheme, EStoryCategory, TDiceSettings } from 'types';
 
 const diceSettings: TDiceSettings = {
@@ -9,6 +16,9 @@ const diceSettings: TDiceSettings = {
   defaultCategoriesKeys: [EStoryCategory.PLAYER],
   defaultCategoriesLength: ICONS_SET.player.length,
 };
+
+//TODO make it as a special class for env, settings etc. Maybe separate class for dice settings?
+if (diceSettings.minDice <= diceSettings.stepDice) throw APP_ERRORS.WRONG_MIN_DICE;
 
 export const ENV = {
   lang: EAppLangs.EN,
