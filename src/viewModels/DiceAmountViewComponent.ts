@@ -35,7 +35,6 @@ export class DiceAmountViewComponent implements IDiceAmountViewComponent {
   };
 
   public async changeMaxDiceAmount(rawCategoriesLength: number) {
-    //TODO tests
     const max = this._prepareMaxAmount(rawCategoriesLength);
     const current = await firstValueFrom(this._currentDiceAmount$);
 

@@ -1,6 +1,6 @@
 import { TestScheduler } from 'rxjs/testing';
 
-import { diceSettingsMock } from 'tests/mocks';
+import { diceSettingsMock, iconsManagerMock, iconsSetMock } from 'tests/mocks';
 import { DiceAmountViewComponent } from 'viewModels';
 
 const expectedIconsMaxLength_onEnter = diceSettingsMock.defaultCategoriesLength;
@@ -18,7 +18,6 @@ describe('DiceAmountViewComponent', () => {
 
   beforeEach(() => {
     testScheduler = new TestScheduler((actual, expected) => {
-      //   console.log(actual, expected);
       expect(actual).toEqual(expected);
     });
     viewModel = new DiceAmountViewComponent(diceSettingsMock);
@@ -88,6 +87,56 @@ describe('DiceAmountViewComponent', () => {
       const result = viewModel['_prepareMaxAmount'](rawCategoriesLengthMock);
 
       expect(result).toBe(expectedAmount);
+    });
+  });
+
+  describe('changeMaxDiceAmount()', () => {
+    const rawCategoriesLength = 9;
+    const maxMock = 9;
+
+    test('Should update only _maxDiceAmount, when calculated new current  is less than max', async () => {
+      const currentLengthOnEnter = 6;
+      const prepareMaxAmountMock = jest.fn().mockReturnValue(maxMock);
+      viewModel['_prepareMaxAmount'] = prepareMaxAmountMock;
+
+      testScheduler.run(async ({ expectObservable }) => {
+        viewModel['_currentDiceAmount$'].next(currentLengthOnEnter);
+
+        await viewModel.changeMaxDiceAmount(rawCategoriesLength);
+
+        expectObservable(viewModel.currentDiceAmount$).toBe('a', { a: currentLengthOnEnter });
+        expectObservable(viewModel.maxDiceAmount$).toBe('a', { a: maxMock });
+      });
+    });
+
+    test('Should update only _maxDiceAmount, when calculated new current  is equal to max', async () => {
+      const currentLengthOnEnter = 9;
+      const prepareMaxAmountMock = jest.fn().mockReturnValue(maxMock);
+      viewModel['_prepareMaxAmount'] = prepareMaxAmountMock;
+
+      testScheduler.run(async ({ expectObservable }) => {
+        viewModel['_currentDiceAmount$'].next(currentLengthOnEnter);
+
+        await viewModel.changeMaxDiceAmount(rawCategoriesLength);
+
+        expectObservable(viewModel.currentDiceAmount$).toBe('a', { a: currentLengthOnEnter });
+        expectObservable(viewModel.maxDiceAmount$).toBe('a', { a: maxMock });
+      });
+    });
+
+    test('Should update _maxDiceAmount and _currentDiceAmount, when calculated new current  is greater than max', async () => {
+      const currentLengthOnEnter = maxMock + 6;
+      const prepareMaxAmountMock = jest.fn().mockReturnValue(maxMock);
+      viewModel['_prepareMaxAmount'] = prepareMaxAmountMock;
+
+      testScheduler.run(async ({ expectObservable }) => {
+        viewModel['_currentDiceAmount$'].next(currentLengthOnEnter);
+
+        await viewModel.changeMaxDiceAmount(rawCategoriesLength);
+
+        expectObservable(viewModel.currentDiceAmount$).toBe('a', { a: maxMock });
+        expectObservable(viewModel.maxDiceAmount$).toBe('a', { a: maxMock });
+      });
     });
   });
 });
