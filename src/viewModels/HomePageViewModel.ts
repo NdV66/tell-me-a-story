@@ -7,6 +7,7 @@ export interface IHomePageViewModel {
   tellAStoryOnceAgain: () => void;
 }
 
+//TODO tests
 export class HomePageViewModel implements IHomePageViewModel {
   constructor(
     private _diceAreaViewComponent: IDiceAreaViewComponent,

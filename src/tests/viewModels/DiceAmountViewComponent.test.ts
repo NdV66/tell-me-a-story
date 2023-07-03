@@ -1,6 +1,7 @@
 import { TestScheduler } from 'rxjs/testing';
+import { getTestScheduler } from 'tests/helpers';
 
-import { diceSettingsMock, getTestScheduler } from 'tests/mocks';
+import { diceSettingsMock } from 'tests/mocks';
 import { DiceAmountViewComponent } from 'viewModels';
 
 const expectedIconsMaxLength_onEnter = diceSettingsMock.defaultCategoriesLength;
@@ -54,14 +55,10 @@ describe('DiceAmountViewComponent', () => {
     viewModel['_prepareEnterCurrentAmount'] = prepareEnterCurrentAmountMock;
 
     testScheduler.run(({ expectObservable }) => {
-      const expectedMaxMarble = 'a';
-      const expectedMax$ = { a: expectedIconsMaxLength_onEnter };
-
-      const expectedCurrentMarble = 'a';
-      const expectedCurrent$ = { a: expectedIconsCurrentLength_onEnter };
-
-      expectObservable(viewModel.maxDiceAmount$).toBe(expectedMaxMarble, expectedMax$);
-      expectObservable(viewModel.currentDiceAmount$).toBe(expectedCurrentMarble, expectedCurrent$);
+      expectObservable(viewModel.maxDiceAmount$).toBe('a', { a: expectedIconsMaxLength_onEnter });
+      expectObservable(viewModel.currentDiceAmount$).toBe('a', {
+        a: expectedIconsCurrentLength_onEnter,
+      });
     });
   });
 

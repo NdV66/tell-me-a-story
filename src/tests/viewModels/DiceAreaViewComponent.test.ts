@@ -1,5 +1,6 @@
 import { TestScheduler } from 'rxjs/testing';
-import { getTestScheduler, storyTellerMock } from 'tests/mocks';
+import { getTestScheduler } from 'tests/helpers';
+import { storyTellerMock } from 'tests/mocks';
 import { EStoryCategory } from 'types';
 import { DiceAreaViewComponent } from 'viewModels';
 

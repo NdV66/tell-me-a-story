@@ -84,7 +84,6 @@ export class SettingsViewModel implements ISettingsViewModel {
     return this._settingModel.getTranslationsByLang((EAppLangs as any)[key])!!.lang;
   }
 
-  //TODO tests
   get availableTranslations() {
     const keys = Object.keys(EAppLangs);
 

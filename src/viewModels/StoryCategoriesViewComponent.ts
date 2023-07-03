@@ -10,6 +10,7 @@ export interface IStoryCategoriesViewComponent {
   changeCategories: (categories: EStoryCategory[]) => void;
 }
 
+//TODO tests
 export class StoryCategoriesViewComponent implements IStoryCategoriesViewComponent {
   private _currentCategories$: BehaviorSubject<EStoryCategory[]>;
   private _currentCategoriesLength$: BehaviorSubject<number>;
