@@ -38,6 +38,41 @@ describe('SettingsModel', () => {
     );
   });
 
+  describe('Constructor', () => {
+    test('Should not set default values if there are values from cookies on enter', () => {
+      new SettingsModel(
+        defaultLang,
+        defaultTheme,
+        mappedTranslationsMock,
+        mappedThemesMock,
+        cookiesManagerMock,
+      );
+
+      expect(cookiesManagerMock.setAppLangCookie).not.toHaveBeenCalled();
+      expect(cookiesManagerMock.setAppThemeCookie).not.toHaveBeenCalled();
+    });
+
+    test('Should set default values if there is no values from cookies on enter', () => {
+      const cookiesManagerMock: ICookiesManager = {
+        setAppLangCookie: jest.fn(),
+        setAppThemeCookie: jest.fn(),
+      };
+      new SettingsModel(
+        defaultLang,
+        defaultTheme,
+        mappedTranslationsMock,
+        mappedThemesMock,
+        cookiesManagerMock,
+      );
+
+      expect(cookiesManagerMock.setAppLangCookie).toHaveBeenCalledTimes(1);
+      expect(cookiesManagerMock.setAppLangCookie).toHaveBeenCalledWith(defaultLang);
+
+      expect(cookiesManagerMock.setAppThemeCookie).toHaveBeenCalledTimes(1);
+      expect(cookiesManagerMock.setAppThemeCookie).toHaveBeenCalledWith(defaultTheme);
+    });
+  });
+
   test('Should get default lang, when data from cookies are empty', () => {
     const lang = model.lang;
     cookiesManagerMock.appLang = undefined;
@@ -76,5 +111,10 @@ describe('SettingsModel', () => {
   test('Should get theme based on a current theme', () => {
     cookiesManagerMock.appTheme = EAppTheme.LIGHT;
     expect(model.theme).toBe(lightMock);
+  });
+
+  test('Should get translation by given app lang', () => {
+    const result = model.getTranslationsByLang(EAppLangs.PL);
+    expect(result).toEqual(TRANSLATIONS_PL);
   });
 });

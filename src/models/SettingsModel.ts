@@ -17,8 +17,8 @@ export class SettingsModel implements ISettingsModel {
     private _themes: Map<EAppTheme, TAppTheme>,
     private _cookiesManager: ICookiesManager,
   ) {
-    !this._cookiesManager.appLang && this._cookiesManager.setAppLangCookie(this._defaultLang); //TODO tests
-    !this._cookiesManager.appTheme && this._cookiesManager.setAppThemeCookie(this._defaultAppTheme); //TODO tests
+    !this._cookiesManager.appLang && this._cookiesManager.setAppLangCookie(this._defaultLang);
+    !this._cookiesManager.appTheme && this._cookiesManager.setAppThemeCookie(this._defaultAppTheme);
   }
 
   set lang(data: EAppLangs) {
@@ -45,7 +45,6 @@ export class SettingsModel implements ISettingsModel {
     return this._themes.get(this.appTheme)!!;
   }
 
-  //TODO: tests
   public getTranslationsByLang(lang: EAppLangs) {
     return this._mappedTranslations.get(lang)!!;
   }
