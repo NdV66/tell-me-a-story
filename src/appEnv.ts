@@ -18,7 +18,7 @@ const diceSettings: TDiceSettings = {
 };
 
 //TODO make it as a special class for env, settings etc. Maybe separate class for dice settings?
-if (diceSettings.minDice <= diceSettings.stepDice) throw APP_ERRORS.WRONG_MIN_DICE;
+if (diceSettings.minDice >= diceSettings.defaultCategoriesLength) throw APP_ERRORS.WRONG_MIN_DICE;
 
 export const ENV = {
   lang: EAppLangs.EN,
