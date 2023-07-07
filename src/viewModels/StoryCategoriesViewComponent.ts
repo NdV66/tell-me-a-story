@@ -1,5 +1,5 @@
 import { IIconsManager } from 'models';
-import { BehaviorSubject, Observable, firstValueFrom } from 'rxjs';
+import { BehaviorSubject, Observable, ReplaySubject, firstValueFrom } from 'rxjs';
 import { EStoryCategory, TDiceSettings } from 'types';
 
 export interface IStoryCategoriesViewComponent {
@@ -13,13 +13,10 @@ export interface IStoryCategoriesViewComponent {
 //TODO tests
 export class StoryCategoriesViewComponent implements IStoryCategoriesViewComponent {
   private _currentCategories$: BehaviorSubject<EStoryCategory[]>;
-  private _currentCategoriesLength$: BehaviorSubject<number>;
+  private _currentCategoriesLength$: ReplaySubject<number>;
 
   constructor(private _iconsManager: IIconsManager, public readonly diceSettings: TDiceSettings) {
-    const defaultCategoriesLength = this._iconsManager.getCategoriesAmount(
-      this.diceSettings.defaultCategoriesKeys,
-    );
-    this._currentCategoriesLength$ = new BehaviorSubject(defaultCategoriesLength);
+    this._currentCategoriesLength$ = new ReplaySubject(1);
     this._currentCategories$ = new BehaviorSubject(this.diceSettings.defaultCategoriesKeys);
 
     this._changeCurrentCategoriesLengthSubscribe();
@@ -27,6 +24,7 @@ export class StoryCategoriesViewComponent implements IStoryCategoriesViewCompone
 
   private _changeCurrentCategoriesLengthSubscribe() {
     this.currentCategories$.subscribe((categories) => {
+      console.log('DUUUPAAAA', categories);
       const categoriesLength = this._iconsManager.getCategoriesAmount(categories);
       this._currentCategoriesLength$.next(categoriesLength);
     });

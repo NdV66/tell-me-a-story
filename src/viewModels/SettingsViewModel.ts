@@ -6,8 +6,8 @@ export interface ISettingsViewModel {
   translations$: Observable<TTranslations>;
   theme$: Observable<TAppTheme>;
 
-  appTheme$: Observable<EAppTheme>; //TODO tests
-  appLang$: Observable<EAppLangs>; //TODO: tests
+  appTheme$: Observable<EAppTheme>;
+  appLang$: Observable<EAppLangs>;
 
   changeLang: (lang: EAppLangs) => void;
   changeAppTheme: (theme: EAppTheme) => void;
@@ -16,7 +16,6 @@ export interface ISettingsViewModel {
   availableTranslations: TAvailableTranslation[];
 }
 
-//TODO: tests
 export class SettingsViewModel implements ISettingsViewModel {
   private _appTheme$: BehaviorSubject<EAppTheme>;
   private _theme$: BehaviorSubject<TAppTheme>;
