@@ -24,7 +24,6 @@ export class StoryCategoriesViewComponent implements IStoryCategoriesViewCompone
 
   private _changeCurrentCategoriesLengthSubscribe() {
     this.currentCategories$.subscribe((categories) => {
-      console.log('DUUUPAAAA', categories);
       const categoriesLength = this._iconsManager.getCategoriesAmount(categories);
       this._currentCategoriesLength$.next(categoriesLength);
     });
@@ -40,10 +39,11 @@ export class StoryCategoriesViewComponent implements IStoryCategoriesViewCompone
 
   public changeCategories = async (categories: EStoryCategory[]) => {
     const areTheSame = await this._areCategoriesTheSame(categories);
-    !areTheSame && categories.length && this._currentCategories$.next(categories);
+    categories.length && !areTheSame && this._currentCategories$.next(categories);
   };
 
   private async _areCategoriesTheSame(selectedValues: EStoryCategory[]) {
+    //TODO tests
     const currentCategories = await firstValueFrom(this.currentCategories$);
 
     if (currentCategories.length !== selectedValues.length) return false;

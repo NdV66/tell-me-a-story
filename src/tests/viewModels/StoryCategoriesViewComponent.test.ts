@@ -11,12 +11,13 @@ describe('StoryCategoriesViewComponent', () => {
   let testScheduler: TestScheduler;
 
   beforeEach(() => {
-    iconsManagerMock.getCategoriesAmount = jest.fn().mockReturnValue(defaultCategoriesLength);
-    viewModel = new StoryCategoriesViewComponent(iconsManagerMock, diceSettingsMock);
     testScheduler = getTestScheduler();
   });
 
   test('Should set default values on enter', () => {
+    iconsManagerMock.getCategoriesAmount = jest.fn().mockReturnValue(defaultCategoriesLength);
+    viewModel = new StoryCategoriesViewComponent(iconsManagerMock, diceSettingsMock);
+
     testScheduler.run(({ expectObservable }) => {
       expectObservable(viewModel.currentCategoriesLength$).toBe('a', {
         a: defaultCategoriesLength,
@@ -30,6 +31,7 @@ describe('StoryCategoriesViewComponent', () => {
   test('_changeCurrentCategoriesLengthSubscribe() should update categories length, when categories are changed', () => {
     const nextCategoriesLength = 21;
     const nextCategories = [EStoryCategory.CREATURES, EStoryCategory.FOOD];
+
     iconsManagerMock.getCategoriesAmount = jest
       .fn()
       .mockReturnValueOnce(defaultCategoriesLength)
@@ -49,6 +51,65 @@ describe('StoryCategoriesViewComponent', () => {
 
       cold('-b').subscribe(() => {
         viewModel['_currentCategories$'].next(nextCategories);
+      });
+    });
+  });
+
+  describe('changeCategories()', () => {
+    const nextCategories = [EStoryCategory.CREATURES, EStoryCategory.FOOD];
+
+    test('Should not update, when categories are the same', async () => {
+      const areCategoriesTheSameMock = jest.fn().mockResolvedValue(true);
+      viewModel = new StoryCategoriesViewComponent(iconsManagerMock, diceSettingsMock);
+      viewModel['_areCategoriesTheSame'] = areCategoriesTheSameMock;
+      const nextSpy = jest.spyOn(viewModel['_currentCategories$'], 'next');
+
+      await viewModel.changeCategories(nextCategories);
+
+      expect(areCategoriesTheSameMock).toHaveBeenCalledTimes(1);
+      expect(nextSpy).not.toHaveBeenCalled();
+    });
+
+    test('Should not update, when categories are empty', async () => {
+      const areCategoriesTheSameMock = jest.fn().mockResolvedValue(false);
+      viewModel = new StoryCategoriesViewComponent(iconsManagerMock, diceSettingsMock);
+      viewModel['_areCategoriesTheSame'] = areCategoriesTheSameMock;
+      const nextSpy = jest.spyOn(viewModel['_currentCategories$'], 'next');
+
+      await viewModel.changeCategories([]);
+
+      expect(areCategoriesTheSameMock).toHaveBeenCalledTimes(1);
+      expect(nextSpy).not.toHaveBeenCalled();
+    });
+
+    test('Should change categories (and update its icons length), when categories are not the same and categories list is not empty', () => {
+      const nextCategoriesLength = 21;
+      const areCategoriesTheSameMock = jest.fn().mockResolvedValue(false);
+      iconsManagerMock.getCategoriesAmount = jest
+        .fn()
+        .mockReturnValueOnce(defaultCategoriesLength)
+        .mockReturnValueOnce(nextCategoriesLength);
+      viewModel = new StoryCategoriesViewComponent(iconsManagerMock, diceSettingsMock);
+      viewModel['_areCategoriesTheSame'] = areCategoriesTheSameMock;
+      const nextSpy = jest.spyOn(viewModel['_currentCategories$'], 'next');
+
+      testScheduler.run(async ({ expectObservable }) => {
+        await viewModel.changeCategories(nextCategories);
+
+        expectObservable(viewModel.currentCategories$).toBe('ab', {
+          a: diceSettingsMock.defaultCategoriesKeys,
+          b: nextCategories,
+        });
+
+        expectObservable(viewModel.currentCategoriesLength$).toBe('ab', {
+          a: defaultCategoriesLength,
+          b: nextCategoriesLength,
+        });
+
+        expect(areCategoriesTheSameMock).toHaveBeenCalledTimes(1);
+        expect(areCategoriesTheSameMock).toHaveBeenLastCalledWith(nextCategories);
+        expect(nextSpy).toHaveBeenCalledTimes(1);
+        expect(nextSpy).toHaveBeenCalledWith(nextCategories);
       });
     });
   });
