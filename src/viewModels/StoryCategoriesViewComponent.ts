@@ -10,7 +10,6 @@ export interface IStoryCategoriesViewComponent {
   changeCategories: (categories: EStoryCategory[]) => void;
 }
 
-//TODO tests
 export class StoryCategoriesViewComponent implements IStoryCategoriesViewComponent {
   private _currentCategories$: BehaviorSubject<EStoryCategory[]>;
   private _currentCategoriesLength$: ReplaySubject<number>;
@@ -43,7 +42,6 @@ export class StoryCategoriesViewComponent implements IStoryCategoriesViewCompone
   };
 
   private async _areCategoriesTheSame(selectedValues: EStoryCategory[]) {
-    //TODO tests
     const currentCategories = await firstValueFrom(this.currentCategories$);
 
     if (currentCategories.length !== selectedValues.length) return false;

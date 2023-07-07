@@ -12,6 +12,7 @@ describe('StoryCategoriesViewComponent', () => {
 
   beforeEach(() => {
     testScheduler = getTestScheduler();
+    viewModel = new StoryCategoriesViewComponent(iconsManagerMock, diceSettingsMock);
   });
 
   test('Should set default values on enter', () => {
@@ -52,6 +53,33 @@ describe('StoryCategoriesViewComponent', () => {
       cold('-b').subscribe(() => {
         viewModel['_currentCategories$'].next(nextCategories);
       });
+    });
+  });
+
+  describe('_areCategoriesTheSame()', () => {
+    test('Should be false, when categories have different length', async () => {
+      const nextCategories = [
+        EStoryCategory.CREATURES,
+        EStoryCategory.FOOD,
+        EStoryCategory.MILITARY,
+      ];
+
+      const result = await viewModel['_areCategoriesTheSame'](nextCategories);
+      expect(result).toBe(false);
+    });
+
+    test('Should be false, when categories are 100% different, but have the same length', async () => {
+      const nextCategories = [EStoryCategory.FOOD, EStoryCategory.MILITARY];
+
+      const result = await viewModel['_areCategoriesTheSame'](nextCategories);
+      expect(result).toBe(false);
+    });
+
+    test('Should be true, when categories are 100% the same', async () => {
+      const result = await viewModel['_areCategoriesTheSame'](
+        diceSettingsMock.defaultCategoriesKeys,
+      );
+      expect(result).toBe(true);
     });
   });
 
