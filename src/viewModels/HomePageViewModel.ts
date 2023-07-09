@@ -7,7 +7,6 @@ export interface IHomePageViewModel {
   tellAStoryOnceAgain: () => void;
 }
 
-//TODO tests
 export class HomePageViewModel implements IHomePageViewModel {
   constructor(
     private _diceAreaViewComponent: IDiceAreaViewComponent,
@@ -24,6 +23,7 @@ export class HomePageViewModel implements IHomePageViewModel {
     });
   }
 
+  //TODO tests
   private _tellAStorySubscribe() {
     combineLatest([
       this._diceAmountViewComponent.currentDiceAmount$,

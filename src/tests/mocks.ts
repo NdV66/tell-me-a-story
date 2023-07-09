@@ -1,6 +1,12 @@
 import { APP_ERRORS, DARK_THEME, ICONS_SET, PREFIX_ICON, TRANSLATIONS_PL } from 'data';
 import { IAnyArrayManager, IIconsManager, ISettingsModel, IStoryTellerModel } from 'models';
+import { Observable } from 'rxjs';
 import { EAppLangs, EAppTheme, EStoryCategory, TDiceSettings, TIconsSet } from 'types';
+import {
+  IDiceAmountViewComponent,
+  IDiceAreaViewComponent,
+  IStoryCategoriesViewComponent,
+} from 'viewModels';
 
 export const anyArrayManagerMock: IAnyArrayManager = {
   shuffle: jest.fn(),
@@ -47,3 +53,23 @@ export const settingsModelMock: ISettingsModel = {
 };
 
 export const getSettingsModelMock = () => ({ ...settingsModelMock });
+
+export const diceAreaViewComponentMock: IDiceAreaViewComponent = {
+  currentDice$: new Observable(),
+  tellAStory: jest.fn(),
+};
+
+export const diceAmountViewComponentMock: IDiceAmountViewComponent = {
+  changeDiceAmount: jest.fn(),
+  changeMaxDiceAmount: jest.fn(),
+  diceSettings: diceSettingsMock,
+  currentDiceAmount$: new Observable(),
+  maxDiceAmount$: new Observable(),
+};
+
+export const storyCategoriesViewComponentMock: IStoryCategoriesViewComponent = {
+  changeCategories: jest.fn(),
+  currentCategories$: new Observable(),
+  currentCategoriesLength$: new Observable(),
+  diceSettings: diceSettingsMock,
+};
