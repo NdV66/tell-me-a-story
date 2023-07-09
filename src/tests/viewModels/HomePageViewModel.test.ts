@@ -17,6 +17,70 @@ describe('HomePageViewModel', () => {
     testScheduler = getTestScheduler();
   });
 
+  describe('_tellAStorySubscribe()', () => {
+    const currentCategoriesMock = [EStoryCategory.BOTTLES, EStoryCategory.CREATURES];
+    let currentCategoriesLengthMock$: ReplaySubject<number>;
+    let currentDiceAmount$: ReplaySubject<number>;
+    let currentCategoriesMock$: ReplaySubject<EStoryCategory[]>;
+
+    beforeEach(() => {
+      currentCategoriesLengthMock$ = new ReplaySubject<number>();
+      currentDiceAmount$ = new ReplaySubject<number>();
+      currentCategoriesMock$ = new ReplaySubject<EStoryCategory[]>();
+
+      storyCategoriesViewComponentMock.currentCategoriesLength$ = currentCategoriesLengthMock$;
+      storyCategoriesViewComponentMock.currentCategories$ = currentCategoriesMock$;
+      diceAmountViewComponentMock.currentDiceAmount$ = currentDiceAmount$;
+
+      viewModel = new HomePageViewModel(
+        diceAreaViewComponentMock,
+        diceAmountViewComponentMock,
+        storyCategoriesViewComponentMock,
+      );
+    });
+
+    test('Should tell a story (diceAmount < categoriesLength)', async () => {
+      const categoriesLengthMock = 8;
+      const currentDiceAmountMock = categoriesLengthMock - 2;
+
+      await currentCategoriesLengthMock$.next(categoriesLengthMock);
+      await currentDiceAmount$.next(currentDiceAmountMock);
+      await currentCategoriesMock$.next(currentCategoriesMock);
+
+      expect(diceAreaViewComponentMock.tellAStory).toHaveBeenCalledTimes(1);
+      expect(diceAreaViewComponentMock.tellAStory).toHaveBeenCalledWith(
+        currentCategoriesMock,
+        currentDiceAmountMock,
+      );
+    });
+
+    test('Should tell a story (diceAmount === categoriesLength)', async () => {
+      const categoriesLengthMock = 8;
+      const currentDiceAmountMock = categoriesLengthMock;
+
+      await currentCategoriesLengthMock$.next(categoriesLengthMock);
+      await currentDiceAmount$.next(currentDiceAmountMock);
+      await currentCategoriesMock$.next(currentCategoriesMock);
+
+      expect(diceAreaViewComponentMock.tellAStory).toHaveBeenCalledTimes(1);
+      expect(diceAreaViewComponentMock.tellAStory).toHaveBeenCalledWith(
+        currentCategoriesMock,
+        currentDiceAmountMock,
+      );
+    });
+
+    test('Should tell a story (diceAmount > categoriesLength)', async () => {
+      const categoriesLengthMock = 8;
+      const currentDiceAmountMock = categoriesLengthMock + 2;
+
+      await currentCategoriesLengthMock$.next(categoriesLengthMock);
+      await currentDiceAmount$.next(currentDiceAmountMock);
+      await currentCategoriesMock$.next(currentCategoriesMock);
+
+      expect(diceAreaViewComponentMock.tellAStory).not.toHaveBeenCalledTimes(1);
+    });
+  });
+
   test('Should tell a stroy once again (tellAStoryOnceAgain())', async () => {
     const currentCategoriesMock$ = new ReplaySubject<EStoryCategory[]>();
     const currentDiceAmount$ = new ReplaySubject<number>();

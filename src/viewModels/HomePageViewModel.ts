@@ -23,20 +23,23 @@ export class HomePageViewModel implements IHomePageViewModel {
     });
   }
 
-  //TODO tests
   private _tellAStorySubscribe() {
+    const waitForCategoriesLengthUpdate = ([diceAmount, categoriesLength]: [number, number]) =>
+      diceAmount <= categoriesLength;
+
     combineLatest([
       this._diceAmountViewComponent.currentDiceAmount$,
       this._storyCategoriesViewComponent.currentCategoriesLength$,
     ])
       .pipe(
-        filter(([diceAmount, categoriesLength]) => diceAmount <= categoriesLength),
+        filter(waitForCategoriesLengthUpdate),
         map(([diceAmount]) => diceAmount),
       )
       .subscribe(async (diceAmount) => {
         const categories = await firstValueFrom(
           this._storyCategoriesViewComponent.currentCategories$,
         );
+
         this._diceAreaViewComponent.tellAStory(categories, diceAmount);
       });
   }
