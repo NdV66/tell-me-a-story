@@ -1,4 +1,4 @@
-import { act, fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 
 import { DARK_THEME, TEST_IDS } from 'data';
 import { ThemeSwitch } from 'pages/AppNavbarComponent/ThemeSwitch';

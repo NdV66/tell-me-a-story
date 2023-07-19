@@ -6,4 +6,5 @@ export const TEST_IDS = {
   AppNavbarComponent: buildTestId('AppNavbarComponent'),
   FooterComponent: buildTestId('FooterComponent'),
   ThemeSwitch: buildTestId('ThemeSwitch'),
+  LangSelector: buildTestId('LangSelector'),
 };

@@ -1,6 +1,7 @@
 import { styled } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
+import { TEST_IDS } from 'data';
 import { EAppLangs } from 'types';
 
 type Props = {
@@ -27,6 +28,7 @@ export const LangSelector = ({ onChange, value, values }: Props) => {
       onChange={handleChange}
       defaultValue={value}
       sx={{ width: '88px' }}
+      data-testid={TEST_IDS.LangSelector}
     >
       {values.map(({ key, value }) => (
         <MenuItem key={key} value={key}>
