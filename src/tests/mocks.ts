@@ -1,10 +1,19 @@
-import { APP_ERRORS, DARK_THEME, ICONS_SET, PREFIX_ICON, TRANSLATIONS_PL } from 'data';
+import { ISettingContext } from 'context';
+import {
+  APP_ERRORS,
+  DARK_THEME,
+  ICONS_SET,
+  PREFIX_ICON,
+  TRANSLATIONS_EN,
+  TRANSLATIONS_PL,
+} from 'data';
 import { IAnyArrayManager, IIconsManager, ISettingsModel, IStoryTellerModel } from 'models';
 import { Observable } from 'rxjs';
 import { EAppLangs, EAppTheme, EStoryCategory, TDiceSettings, TIconsSet } from 'types';
 import {
   IDiceAmountViewComponent,
   IDiceAreaViewComponent,
+  IHomePageViewModel,
   IStoryCategoriesViewComponent,
 } from 'viewModels';
 
@@ -66,12 +75,15 @@ export const diceAmountViewComponentMock: IDiceAmountViewComponent = {
   currentDiceAmount$: new Observable(),
   maxDiceAmount$: new Observable(),
 };
-
 export const storyCategoriesViewComponentMock: IStoryCategoriesViewComponent = {
   changeCategories: jest.fn(),
   currentCategories$: new Observable(),
   currentCategoriesLength$: new Observable(),
   diceSettings: diceSettingsMock,
+};
+
+export const homePageViewModelMock: IHomePageViewModel = {
+  tellAStoryOnceAgain: jest.fn(),
 };
 
 // export const settingsViewModelMock: ISettingsViewModel = {
@@ -88,3 +100,18 @@ export const storyCategoriesViewComponentMock: IStoryCategoriesViewComponent = {
 //     changeLang: jest.fn(),
 //     setupFromCookies: jest.fn(),
 //   };
+
+export const settingsContextValueMock: ISettingContext = {
+  theme: DARK_THEME,
+  translations: TRANSLATIONS_EN,
+  appLang: EAppLangs.EN,
+  appTheme: EAppTheme.DARK,
+  isDefaultAppTheme: true,
+  availableTranslations: [
+    { key: EAppLangs.EN, value: TRANSLATIONS_EN.lang },
+    { key: EAppLangs.PL, value: TRANSLATIONS_PL.lang },
+  ],
+
+  changeLang: jest.fn(),
+  changeAppTheme: jest.fn(),
+};

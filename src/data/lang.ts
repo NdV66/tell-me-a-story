@@ -1,9 +1,9 @@
 import { EStoryCategory, TTranslations } from 'types';
 
 const COMMON = {
-  repoLink: '',
+  repoLink: 'https://github.com/NdV66/tell-me-a-story',
   githubLink: 'https://github.com/NdV66',
-  lnLink: '',
+  lnLink: 'https://www.linkedin.com/in/marta-zazlak/',
   author: 'NdV66 (Marta Zażlak), 2023',
 };
 

@@ -1,6 +1,7 @@
 import { Container, styled } from '@mui/material';
 import { useSettingsContext } from 'context';
 import { OneFooterColumn } from './OneFooterColumn';
+import { TEST_IDS } from 'data';
 
 const StyledFooterWrapper = styled('div')(({ theme }) => ({
   padding: '24px 0',
@@ -12,7 +13,7 @@ export const FooterComponent = () => {
   const { translations } = useSettingsContext();
 
   return (
-    <Container maxWidth="md">
+    <Container maxWidth="md" data-testid={TEST_IDS.FooterComponent}>
       <StyledFooterWrapper>
         <OneFooterColumn title={translations.author} link={translations.lnLink} />
         <OneFooterColumn title={translations.repo} link={translations.repoLink} />

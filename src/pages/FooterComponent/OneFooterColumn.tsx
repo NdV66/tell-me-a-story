@@ -13,6 +13,7 @@ export const OneFooterColumn = ({ title, link }: Props) => (
     rel="noopener noreferrer"
     display="block"
     align="center"
+    role="link"
   >
     {title}
   </Link>

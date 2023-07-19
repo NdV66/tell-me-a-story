@@ -1,5 +1,6 @@
 import { styled } from '@mui/material/styles';
 import Switch from '@mui/material/Switch';
+import { TEST_IDS } from 'data';
 import { TAppTheme } from 'types';
 
 const ThemeStyledSwitch = styled(Switch)(({ theme }) => ({
@@ -63,6 +64,7 @@ export const ThemeSwitch = ({ onChange, checked }: Props) => {
 
   return (
     <ThemeStyledSwitch
+      data-testid={TEST_IDS.ThemeSwitch}
       sx={{ m: 1 }}
       inputProps={{ 'aria-label': 'controlled' }}
       onChange={handleChange}
