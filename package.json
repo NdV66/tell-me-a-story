@@ -29,6 +29,11 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "jest": {
+    "transformIgnorePatterns": [
+      "/node_modules/(?!@mui)"
+    ]
+  },
   "eslintConfig": {
     "extends": [
       "react-app",

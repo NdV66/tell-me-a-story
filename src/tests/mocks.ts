@@ -73,3 +73,18 @@ export const storyCategoriesViewComponentMock: IStoryCategoriesViewComponent = {
   currentCategoriesLength$: new Observable(),
   diceSettings: diceSettingsMock,
 };
+
+// export const settingsViewModelMock: ISettingsViewModel = {
+//     appLang$: new Subject<EAppLangs>(),
+//     appTheme$: new Subject<EAppTheme>(),
+//     theme$: new Subject<TAppTheme>(),
+//     translations$: new Subject<TTranslations>(),
+//     availableTranslations: [
+//       { key: EAppLangs.EN, value: TRANSLATIONS_EN.lang },
+//       { key: EAppLangs.PL, value: TRANSLATIONS_PL.lang },
+//     ],
+
+//     changeAppTheme: jest.fn(),
+//     changeLang: jest.fn(),
+//     setupFromCookies: jest.fn(),
+//   };

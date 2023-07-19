@@ -11,7 +11,7 @@ import { FooterComponent } from './FooterComponent';
 import { useSettingsContext } from 'context';
 import { AppNavbarComponent } from './AppNavbarComponent';
 
-const useMainPage = () => {
+export const useMainPage = () => {
   const { theme } = useSettingsContext();
 
   const muiTheme = useMemo(() => {
@@ -82,11 +82,11 @@ export const MainPage = () => {
     <ThemeProvider theme={muiTheme}>
       <CssBaseline />
 
-      <header>
+      <header role="heading" aria-level={0}>
         <AppNavbarComponent />
       </header>
 
-      <main>
+      <main role="main">
         <HomePage
           viewModel={homePageViewModel}
           diceAreaViewComponent={diceAreaViewComponent}
@@ -95,7 +95,7 @@ export const MainPage = () => {
         />
       </main>
 
-      <footer>
+      <footer role="contentinfo">
         <FooterComponent />
       </footer>
     </ThemeProvider>
