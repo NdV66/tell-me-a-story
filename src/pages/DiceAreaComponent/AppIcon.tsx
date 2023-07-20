@@ -2,6 +2,7 @@ import { styled } from '@mui/material/styles';
 
 type Props = {
   icon: string;
+  role?: string;
 };
 
 const StyledAppIcon = styled('i')(({ theme }) => ({
@@ -13,8 +14,8 @@ const StyledAppIcon = styled('i')(({ theme }) => ({
   color: theme.palette.primary.main,
 }));
 
-export const AppIcon = ({ icon }: Props) => {
+export const AppIcon = ({ icon, role = 'gridcell' }: Props) => {
   const classNames = `ra ra-${icon} ra-fw`;
 
-  return <StyledAppIcon className={classNames} />;
+  return <StyledAppIcon className={classNames} role={role} />;
 };

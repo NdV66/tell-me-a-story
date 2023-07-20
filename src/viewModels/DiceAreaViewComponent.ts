@@ -3,7 +3,7 @@ import { Observable, ReplaySubject } from 'rxjs';
 import { EStoryCategory } from 'types';
 
 export interface IDiceAreaViewComponent {
-  currentDice$: Observable<string[] | undefined>;
+  currentDice$: Observable<string[]>;
   tellAStory: (categories: EStoryCategory[], amount: number) => void;
 }
 

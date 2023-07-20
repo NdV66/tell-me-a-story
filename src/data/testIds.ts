@@ -7,4 +7,5 @@ export const TEST_IDS = {
   FooterComponent: buildTestId('FooterComponent'),
   ThemeSwitch: buildTestId('ThemeSwitch'),
   LangSelector: buildTestId('LangSelector'),
+  DiceAreaComponent: buildTestId('DiceAreaComponent'),
 };
