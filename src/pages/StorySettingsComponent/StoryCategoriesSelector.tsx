@@ -12,7 +12,7 @@ type Props = {
   viewComponent: IStoryCategoriesViewComponent;
 };
 
-const useStoryCategoriesSelector = (viewComponent: IStoryCategoriesViewComponent) => {
+export const useStoryCategoriesSelector = (viewComponent: IStoryCategoriesViewComponent) => {
   const { translations } = useSettingsContext();
   const currentCategories = useStateObservable(viewComponent.currentCategories$);
 

@@ -8,11 +8,7 @@ import {
 import { prepareMarks } from 'pages/StorySettingsComponent/helper';
 import { act } from 'react-dom/test-utils';
 import { Subject } from 'rxjs';
-import { diceAmountViewComponentMock, settingsContextValueMock } from 'tests/mocks';
-
-const wrapper = ({ children }: any) => (
-  <SettingContext.Provider value={settingsContextValueMock}>{children}</SettingContext.Provider>
-);
+import { diceAmountViewComponentMock, settingsContextValueMock, wrapper } from 'tests/mocks';
 
 const { translations } = settingsContextValueMock;
 const expectedMaxDiceAmount = 6;
@@ -68,8 +64,8 @@ describe('IconsAmountSlider', () => {
     );
 
   beforeEach(() => {
-    maxDiceAmountMock$ = new Subject<number>();
-    currentDiceAmountMock$ = new Subject<number>();
+    maxDiceAmountMock$ = new Subject();
+    currentDiceAmountMock$ = new Subject();
 
     diceAmountViewComponentMock.maxDiceAmount$ = maxDiceAmountMock$;
     diceAmountViewComponentMock.currentDiceAmount$ = currentDiceAmountMock$;
