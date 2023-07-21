@@ -124,4 +124,6 @@ describe('StoryCategoriesSelector', () => {
     expect(screen.getByText(translations.settingCategories)).toBeInTheDocument();
     checkExpectedCategoriesChips();
   });
+
+  //TODO: handleClick
 });
