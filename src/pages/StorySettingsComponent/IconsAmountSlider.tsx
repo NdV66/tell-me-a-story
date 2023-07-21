@@ -20,8 +20,7 @@ export const useIconsAmountSlider = (viewComponent: IDiceAmountViewComponent) =>
   const currentDiceAmount = useStateObservable(viewComponent.currentDiceAmount$);
 
   const handleOnChange = (_: React.SyntheticEvent | Event, value: number | number[]) => {
-    console.log('>>>>>>>', value);
-    viewComponent.changeDiceAmount(value as any);
+    viewComponent.changeDiceAmount(value as number);
   };
 
   return {
@@ -45,6 +44,7 @@ export const IconsAmountSlider = ({ viewComponent }: Props) => {
 
       {maxDiceAmount && (
         <StyledSlider
+          data-testid="dupa"
           valueLabelDisplay="off"
           step={diceSettings.stepDice}
           marks={prepareMarks(diceSettings.minDice, maxDiceAmount!, diceSettings.stepDice)}

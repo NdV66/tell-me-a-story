@@ -1,4 +1,4 @@
-import { renderHook, render, screen } from '@testing-library/react';
+import { renderHook, render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { SettingContext } from 'context';
 import {
@@ -96,20 +96,19 @@ describe('IconsAmountSlider', () => {
     });
   });
 
-  test.only('Should handle click on mark', () => {
+  test('Should handle change of a dice amount', async () => {
     const expectedMark = diceAmountViewComponentMock.diceSettings.minDice;
-    renderElement();
+    const { container } = renderElement();
 
     act(() => {
       maxDiceAmountMock$.next(expectedMaxDiceAmount);
       currentDiceAmountMock$.next(expectedCurrentDiceAmount);
     });
 
-    const mark = screen.getByText(expectedMark);
+    const element = await container.querySelector('input[type="range"]'); // eslint-disable-line
+    fireEvent.change(element!, { target: { value: expectedMark } });
 
-    userEvent.click(mark);
-
-    expect(mark).toBeInTheDocument();
+    expect(element).toBeInTheDocument();
     expect(diceAmountViewComponentMock.changeDiceAmount).toHaveBeenCalled();
     expect(diceAmountViewComponentMock.changeDiceAmount).toHaveBeenCalledTimes(1);
     expect(diceAmountViewComponentMock.changeDiceAmount).toHaveBeenCalledWith(expectedMark);
