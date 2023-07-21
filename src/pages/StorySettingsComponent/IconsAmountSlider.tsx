@@ -2,19 +2,7 @@ import { Slider, Typography, styled } from '@mui/material';
 import { useSettingsContext } from 'context';
 import { useStateObservable } from 'tools';
 import { IDiceAmountViewComponent } from 'viewModels/DiceAmountViewComponent';
-
-const prepareMarks = (min: number, max: number, step: number) => {
-  const result = [];
-
-  for (let i = min; i <= max; i += step) {
-    result.push({
-      value: i,
-      label: i,
-    });
-  }
-
-  return result;
-};
+import { prepareMarks } from './helper';
 
 const StyledSlider = styled(Slider)(({ theme }) => ({
   '& .MuiSlider-markLabel': {
