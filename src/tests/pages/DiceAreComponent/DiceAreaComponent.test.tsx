@@ -1,4 +1,4 @@
-import { render, renderHook, screen, waitFor } from '@testing-library/react';
+import { render, renderHook, screen } from '@testing-library/react';
 import { Subject } from 'rxjs';
 import { act } from 'react-dom/test-utils';
 
