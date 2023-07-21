@@ -14,13 +14,14 @@ type Props = {
   viewComponent: IDiceAmountViewComponent;
 };
 
-const useIconsAmountSlider = (viewComponent: IDiceAmountViewComponent) => {
+export const useIconsAmountSlider = (viewComponent: IDiceAmountViewComponent) => {
   const { translations } = useSettingsContext();
   const maxDiceAmount = useStateObservable(viewComponent.maxDiceAmount$);
   const currentDiceAmount = useStateObservable(viewComponent.currentDiceAmount$);
 
   const handleOnChange = (_: React.SyntheticEvent | Event, value: number | number[]) => {
-    viewComponent.changeDiceAmount(value as number);
+    console.log('>>>>>>>', value);
+    viewComponent.changeDiceAmount(value as any);
   };
 
   return {
