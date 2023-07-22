@@ -1,0 +1,17 @@
+export const PLAYERS_ICONS = [
+  'aura',
+  'monster-skull',
+  'player-despair',
+  'player-pain',
+  'player-thunder-struck',
+  'aware',
+  'muscle-fat',
+  'double-team',
+  'muscle-up',
+  'player-king',
+  'player-shot',
+  'falling',
+  'player',
+  'player-lift',
+  'player-teleport',
+];
