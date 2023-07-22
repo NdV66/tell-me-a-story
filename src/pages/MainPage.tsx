@@ -51,13 +51,29 @@ export const useMainPage = () => {
             },
           },
         },
-        MuiSelect: {
+        MuiOutlinedInput: {
           styleOverrides: {
+            root: {
+              '&:hover .MuiOutlinedInput-notchedOutline': {
+                borderColor: theme.primary,
+              },
+            },
+          },
+        },
+        MuiSelect: {
+          defaultProps: {
+            variant: 'outlined',
+          },
+          styleOverrides: {
+            icon: {
+              color: theme.primary,
+            },
             outlined: {
               padding: '10px',
               fontSize: theme.fontSize * 0.9,
               backgroundColor: theme.background,
               color: theme.primary,
+              borderColor: 'red',
             },
           },
         },

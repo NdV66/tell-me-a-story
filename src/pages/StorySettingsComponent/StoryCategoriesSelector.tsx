@@ -72,7 +72,6 @@ export const StoryCategoriesSelector = ({ viewComponent }: Props) => {
           onChange={(e) => handleChange(e)}
           renderValue={renderValue}
           sx={{ width: '100%' }}
-          variant="outlined"
         >
           {diceSettings.categoriesKeys.map((key) => (
             <MenuItem key={key} value={key} style={getItemStyles(key, currentCategories, theme)}>

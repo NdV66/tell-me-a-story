@@ -23,7 +23,6 @@ export const LangSelector = ({ onChange, value, values }: Props) => {
 
   return (
     <StyledLangSelector
-      variant="outlined"
       value={value}
       onChange={handleChange}
       defaultValue={value}
