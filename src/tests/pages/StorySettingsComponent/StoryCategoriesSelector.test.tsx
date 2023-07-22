@@ -1,4 +1,12 @@
-import { act, render, renderHook, screen } from '@testing-library/react';
+import {
+  act,
+  fireEvent,
+  render,
+  renderHook,
+  screen,
+  waitForElementToBeRemoved,
+  waitFor,
+} from '@testing-library/react';
 import { Theme } from '@mui/material/styles';
 import { SelectChangeEvent } from '@mui/material';
 import { Subject } from 'rxjs';
@@ -10,6 +18,7 @@ import {
 } from 'pages/StorySettingsComponent/StoryCategoriesSelector';
 import { EStoryCategory } from 'types';
 import { SettingContext } from 'context';
+import userEvent from '@testing-library/user-event';
 
 const expectedCategories = [EStoryCategory.BOTTLES, EStoryCategory.FOOD];
 const { translations } = settingsContextValueMock;
@@ -117,7 +126,7 @@ describe('StoryCategoriesSelector', () => {
       </SettingContext.Provider>,
     );
 
-  test('Should render with all elements', () => {
+  test('Should render with all elements (with selected categories)', () => {
     renderElement();
     act(() => currentCategories$.next(expectedCategories));
 
@@ -125,5 +134,40 @@ describe('StoryCategoriesSelector', () => {
     checkExpectedCategoriesChips();
   });
 
-  //TODO: handleClick
+  test('Should render with all elements (with no selected categories)', () => {
+    renderElement();
+    act(() => currentCategories$.next([]));
+
+    expect(screen.getByText(translations.settingCategories)).toBeInTheDocument();
+    expect(screen.getByRole('button')).toBeInTheDocument();
+  });
+
+  test('Should show and then close categories list to select (show and close listbox)', async () => {
+    const elementText = translations.categoriesByKeys[expectedCategories[0]];
+    const expectedCategoriesListLength =
+      storyCategoriesViewComponentMock.diceSettings.categoriesKeys.length;
+
+    renderElement();
+    act(() => currentCategories$.next([]));
+
+    expect(screen.queryByText(elementText)).not.toBeInTheDocument();
+    expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+
+    //click selector to show list
+    expect(screen.getByRole('button')).toBeInTheDocument();
+    userEvent.click(screen.getByRole('button'));
+    expect(screen.getByRole('listbox')).toBeInTheDocument();
+    expect(screen.getAllByRole('option').length).toBe(expectedCategoriesListLength);
+
+    // close list
+    // eslint-disable-next-line
+    fireEvent.keyDown(document.activeElement!, {
+      key: 'Escape',
+      code: 'Escape',
+    });
+
+    await waitForElementToBeRemoved(screen.queryByText(elementText));
+    expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+    expect(screen.queryAllByRole('option').length).toBe(0);
+  });
 });
