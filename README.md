@@ -27,7 +27,7 @@ Features:
 `git push --tags`
 4. Run `yarn deploy`.
 5. Wait... wait...
-6. Go to the `https://ndv66.github.io/character-maker/`
+6. Go to the `https://ndv66.github.io/tell-me-a-story/`
 7. See your changes :)
 
 # Architecture

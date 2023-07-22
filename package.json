@@ -2,7 +2,7 @@
   "name": "tell-me-a-story",
   "version": "1.0.0",
   "private": true,
-  "homepage": "https://github.com/NdV66/tell-me-a-story/",
+  "homepage": "https://NdV66.github.io/tell-me-a-story/",
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
@@ -28,8 +28,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test:coverage": "yarn test --coverage --watchAll",
     "eject": "react-scripts eject",
-    "predeploy": "npm run build",
+    "predeploy": "yarn build",
     "deploy": "gh-pages -d build"
   },
   "jest": {
