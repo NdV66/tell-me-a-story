@@ -5,7 +5,6 @@ import {
   renderHook,
   screen,
   waitForElementToBeRemoved,
-  waitFor,
 } from '@testing-library/react';
 import { Theme } from '@mui/material/styles';
 import { SelectChangeEvent } from '@mui/material';
