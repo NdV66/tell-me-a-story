@@ -2,6 +2,7 @@
   "name": "tell-me-a-story",
   "version": "1.0.0",
   "private": true,
+  "homepage": "https://github.com/NdV66/tell-me-a-story/",
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
@@ -27,7 +28,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "jest": {
     "transformIgnorePatterns": [
@@ -55,6 +58,7 @@
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@types/js-cookie": "^3.0.3",
+    "gh-pages": "^5.0.0",
     "prettier": "^2.8.8"
   }
 }
