@@ -121,8 +121,6 @@ Features:
 2. As an user I want to have option to select more than 1 category and never less than 1. *DONE*
 # Reroll
 1. As an user I want like to have an option to reroll all dice. *DONE*
-2. As an user I want to have an option to change dice order (move it)
-3. As an user I want to have an option to export dice as an image and save it
 
 # Developer Stories (short)
 ## Documentation
@@ -134,11 +132,12 @@ Features:
 ## Development
 1. As a developer, I want to have instruction how to run locally. *DONE*
 ## Tests
-1. As a developer I want to have tests for Models.
-2. As a developer I want to have tests for ViewModels.
-3. As a developer I want to have tests for ViewComponents.
-4. As a developer I want to have tests for Pages.
-5. As a developer I want to have tests for PagesComponents.
+1. As a developer I want to have tests for Models. *DONE*
+2. As a developer I want to have tests for ViewModels. *DONE*
+3. As a developer I want to have tests for ViewComponents. *DONE*
+4. As a developer I want to have tests for Pages. *DONE*
+5. As a developer I want to have tests for PagesComponents. *DONE*
+5. As a developer I want to have e2e tests. *TODO v2*
 
 # Thanks!
 https://nagoshiashumari.github.io/Rpg-Awesome/

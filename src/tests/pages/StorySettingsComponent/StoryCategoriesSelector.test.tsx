@@ -159,6 +159,12 @@ describe('StoryCategoriesSelector', () => {
     expect(screen.getByRole('listbox')).toBeInTheDocument();
     expect(screen.getAllByRole('option').length).toBe(expectedCategoriesListLength);
 
+    userEvent.selectOptions(
+      screen.getByRole('listbox'),
+      screen.getByRole('option', { name: elementText }),
+    );
+    expect(storyCategoriesViewComponentMock.changeCategories).toHaveBeenCalled();
+
     // close list
     // eslint-disable-next-line
     fireEvent.keyDown(document.activeElement!, {
@@ -167,7 +173,9 @@ describe('StoryCategoriesSelector', () => {
     });
 
     await waitForElementToBeRemoved(screen.queryByText(elementText));
+
     expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
     expect(screen.queryAllByRole('option').length).toBe(0);
+    expect(screen.getByRole('button')).toBeInTheDocument();
   });
 });
