@@ -21,7 +21,7 @@ Features:
 0. Change version in the `package.json`.
 1. Merge all changes to the master.
 2. Refresh master locally. \
-`git pull origin main`
+`git pull origin master`
 3. Create git tag. \
 `git tag -a vX.X.X -m "What was done"` \
 `git push --tags`

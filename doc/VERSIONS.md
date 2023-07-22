@@ -1,4 +1,4 @@
-Version: [v1.0.0](link_here)
+Version: [v1.0.0]()
 - change app lang
 - change app theme
 - basic design
@@ -8,4 +8,8 @@ Version: [v1.0.0](link_here)
 - application architecture
 - icons
 - basic RWD
+- setup
+- architecture
 - favicon
+- libs
+- setup
