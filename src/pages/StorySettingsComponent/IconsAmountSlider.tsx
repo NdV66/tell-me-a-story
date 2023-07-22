@@ -44,7 +44,6 @@ export const IconsAmountSlider = ({ viewComponent }: Props) => {
 
       {maxDiceAmount && (
         <StyledSlider
-          data-testid="dupa"
           valueLabelDisplay="off"
           step={diceSettings.stepDice}
           marks={prepareMarks(diceSettings.minDice, maxDiceAmount!, diceSettings.stepDice)}
