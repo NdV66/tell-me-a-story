@@ -30,6 +30,11 @@ Features:
 6. Go to the `https://ndv66.github.io/tell-me-a-story/`
 7. See your changes :)
 
+## How to run e2e tests?
+1. Go to the main folder.
+2. Run `yarn start`
+3. Run `yarn cypress:open`
+
 # Architecture
 ## Overview
 ![Here should be an architecture image](./doc/architectureFlow.jpg "Title")
