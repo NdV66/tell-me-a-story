@@ -31,7 +31,8 @@
     "test:coverage": "yarn test --coverage --watchAll",
     "eject": "react-scripts eject",
     "predeploy": "yarn build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "cypress:open": "cypress open"
   },
   "jest": {
     "transformIgnorePatterns": [
@@ -59,6 +60,7 @@
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@types/js-cookie": "^3.0.3",
+    "cypress": "^12.17.2",
     "gh-pages": "^5.0.0",
     "prettier": "^2.8.8"
   }
