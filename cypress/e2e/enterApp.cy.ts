@@ -1,8 +1,8 @@
-const PATH = 'localhost:3000';
-
 import { ENV } from '../../src/appEnv';
 import { TRANSLATIONS_EN } from '../../src/data/lang';
 import { ECookieKeys } from '../../src/types';
+
+const PATH = 'localhost:3000';
 
 describe('On enter app (page) (default settings)', () => {
   beforeEach(() => {
