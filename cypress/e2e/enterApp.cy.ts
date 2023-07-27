@@ -1,16 +1,9 @@
 /// <reference types="cypress" />
-
 import { ENV } from '../../src/appEnv';
 import { TRANSLATIONS_EN } from '../../src/data/lang';
 import { ECookieKeys } from '../../src/types';
 
-const PATH = 'localhost:3000';
-
-describe('On enter app (page) (default settings)', () => {
-  beforeEach(() => {
-    cy.visit(PATH);
-  });
-
+describe('Default settings and configurations when enter page', () => {
   it('Should have all text elements on enter', () => {
     cy.get('header').contains(TRANSLATIONS_EN.appName);
     cy.get('header').contains(TRANSLATIONS_EN.lang);
@@ -34,7 +27,7 @@ describe('On enter app (page) (default settings)', () => {
 
   it('Should have default story settings on enter', () => {
     const iconsAMount = 12;
-    cy.get('i').should('have.length', iconsAMount);
+    cy.get('.ra').should('have.length', iconsAMount);
 
     //check if thumb is long enough to touch default icons amount on the selector
     cy.get('.MuiSlider-thumb').should('have.attr', { style: '75%' });
