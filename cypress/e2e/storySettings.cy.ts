@@ -15,12 +15,14 @@ const openCategoriesSelectList = () => {
   cy.get(SELECTORS.SELECT).eq(1).click();
 };
 
+const expectedMaxIcons = 18;
+
 describe('Story settings - categories', () => {
   beforeEach(() => {
     openCategoriesSelectList();
   });
 
-  it.only('Should add categories', () => {
+  it('Should add categories', () => {
     cy.get(SELECTORS.MARK).should('have.length', 5);
 
     cy.get(SELECTORS.VALUE(EStoryCategory.CREATURES)).click();
@@ -30,8 +32,8 @@ describe('Story settings - categories', () => {
 
     cy.get(SELECTORS.CHIP).should('have.length', 3);
     cy.get(SELECTORS.MARK).should('have.length', 6);
-    //TODO check amount change
-    //TODO check icons change
+    cy.get(SELECTORS.MARK).last().contains(expectedMaxIcons);
+    cy.get(SELECTORS.ICON).should('have.length', 12);
   });
 
   it('Should change categories', () => {
@@ -43,8 +45,8 @@ describe('Story settings - categories', () => {
 
     cy.get(SELECTORS.CHIP).should('have.length', 1);
     cy.get(SELECTORS.CHIP).contains(TRANSLATIONS_EN.categoriesByKeys[expectedCategory]);
-    //TODO check amount change
-    //TODO check icons change
+    cy.get(SELECTORS.MARK).last().contains(expectedMaxIcons);
+    cy.get(SELECTORS.ICON).should('have.length', 12);
   });
 
   it("Should not remove category, if it's the last one", () => {
@@ -59,5 +61,17 @@ describe('Story settings - categories', () => {
 
     closeCategoriesSelectList();
     cy.get(SELECTORS.CHIP).should('have.length', 1);
+  });
+});
+
+describe('Story settings - dice amount', () => {
+  it('Should change dice amount when dice amount mark is changed', () => {
+    const marksAmount = 5;
+
+    for (let i = 0; i < marksAmount; i++) {
+      const iconsAmount = (i + 1) * ENV.diceSettings.stepDice;
+      cy.get(`.MuiSlider-markLabel[data-index="${i}"]`).click();
+      cy.get(SELECTORS.ICON).should('have.length', iconsAmount);
+    }
   });
 });

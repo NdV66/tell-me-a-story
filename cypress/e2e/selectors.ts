@@ -11,6 +11,7 @@ export const SELECTORS = {
   SELECT: '.MuiSelect-select',
   BACKDROP: '.MuiBackdrop-root',
   APP_BAR: '.MuiAppBar-root',
+  SLIDER_THUMB: '.MuiSlider-thumb',
 
   VALUE: (value: string | number) => `[data-value="${value}"]`,
 };
