@@ -2,19 +2,20 @@
 import { ENV } from '../../src/appEnv';
 import { TRANSLATIONS_EN } from '../../src/data/lang';
 import { ECookieKeys } from '../../src/types';
+import { SELECTORS } from './selectors';
 
 describe('Default settings and configurations when enter page', () => {
   it('Should have all text elements on enter', () => {
-    cy.get('header').contains(TRANSLATIONS_EN.appName);
-    cy.get('header').contains(TRANSLATIONS_EN.lang);
+    cy.get(SELECTORS.HEADER).contains(TRANSLATIONS_EN.appName);
+    cy.get(SELECTORS.HEADER).contains(TRANSLATIONS_EN.lang);
 
-    cy.get('main').contains(TRANSLATIONS_EN.settingsDice);
-    cy.get('main').contains(TRANSLATIONS_EN.settingCategories);
-    cy.get('main').contains(TRANSLATIONS_EN.reroll);
+    cy.get(SELECTORS.MAIN).contains(TRANSLATIONS_EN.settingsDice);
+    cy.get(SELECTORS.MAIN).contains(TRANSLATIONS_EN.settingCategories);
+    cy.get(SELECTORS.MAIN).contains(TRANSLATIONS_EN.reroll);
 
-    cy.get('footer').get('a').contains(TRANSLATIONS_EN.repo);
-    cy.get('footer').get('a').contains(TRANSLATIONS_EN.github);
-    cy.get('footer').get('a').contains(TRANSLATIONS_EN.author);
+    cy.get(SELECTORS.FOOTER).get('a').contains(TRANSLATIONS_EN.repo);
+    cy.get(SELECTORS.FOOTER).get('a').contains(TRANSLATIONS_EN.github);
+    cy.get(SELECTORS.FOOTER).get('a').contains(TRANSLATIONS_EN.author);
   });
 
   it('Should have default cookies on enter', () => {
@@ -27,13 +28,13 @@ describe('Default settings and configurations when enter page', () => {
 
   it('Should have default story settings on enter', () => {
     const iconsAMount = 12;
-    cy.get('.ra').should('have.length', iconsAMount);
+    cy.get(SELECTORS.ICON).should('have.length', iconsAMount);
 
     //check if thumb is long enough to touch default icons amount on the selector
     cy.get('.MuiSlider-thumb').should('have.attr', { style: '75%' });
 
     for (let key of ENV.diceSettings.defaultCategoriesKeys) {
-      cy.get('.MuiChip-label').contains(TRANSLATIONS_EN.categoriesByKeys[key]);
+      cy.get(SELECTORS.CHIP).contains(TRANSLATIONS_EN.categoriesByKeys[key]);
     }
   });
 });
