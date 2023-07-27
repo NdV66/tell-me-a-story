@@ -1,3 +1,5 @@
+/// <reference types="cypress" />
+
 import { ENV } from '../../src/appEnv';
 import { TRANSLATIONS_EN } from '../../src/data/lang';
 import { ECookieKeys } from '../../src/types';
@@ -30,7 +32,15 @@ describe('On enter app (page) (default settings)', () => {
     cy.getCookie(ECookieKeys.THEME).should('have.property', 'value', ENV.theme);
   });
 
-  // it('Should have default story settings on enter', () => {
+  it('Should have default story settings on enter', () => {
+    const iconsAMount = 12;
+    cy.get('i').should('have.length', iconsAMount);
 
-  // })
+    //check if thumb is long enough to touch default icons amount on the selector
+    cy.get('.MuiSlider-thumb').should('have.attr', { style: '75%' });
+
+    for (let key of ENV.diceSettings.defaultCategoriesKeys) {
+      cy.get('.MuiChip-label').contains(TRANSLATIONS_EN.categoriesByKeys[key]);
+    }
+  });
 });

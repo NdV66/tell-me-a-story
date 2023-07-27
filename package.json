@@ -1,72 +1,83 @@
 {
-  "name": "tell-me-a-story",
-  "version": "1.0.0",
-  "private": true,
-  "homepage": "https://NdV66.github.io/tell-me-a-story/",
-  "dependencies": {
-    "@emotion/react": "^11.11.1",
-    "@emotion/styled": "^11.11.0",
-    "@fontsource/roboto": "^5.0.3",
-    "@mui/material": "^5.13.4",
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "@types/jest": "^27.5.2",
-    "@types/node": "^16.18.35",
-    "@types/react": "^18.2.11",
-    "@types/react-dom": "^18.2.4",
-    "js-cookie": "^3.0.5",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1",
-    "rpg-awesome": "^0.2.0",
-    "rxjs": "^7.8.1",
-    "typescript": "^4.9.5",
-    "web-vitals": "^2.1.4"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "test:coverage": "yarn test --coverage --watchAll",
-    "eject": "react-scripts eject",
-    "predeploy": "yarn build",
-    "deploy": "gh-pages -d build",
-    "cypress:open": "cypress open"
-  },
-  "jest": {
-    "transformIgnorePatterns": [
-      "/node_modules/(?!@mui)"
-    ]
-  },
-  "plugin": [
-    "cypress"
-    ],
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest",
-      "plugin:cypress/recommended"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "@types/js-cookie": "^3.0.3",
-    "cypress": "^12.17.2",
-    "eslint-plugin-cypress": "^2.13.3",
-    "gh-pages": "^5.0.0",
-    "prettier": "^2.8.8"
-  }
+    "name": "tell-me-a-story",
+    "version": "1.0.0",
+    "private": true,
+    "homepage": "https://NdV66.github.io/tell-me-a-story/",
+    "dependencies": {
+        "@emotion/react": "^11.11.1",
+        "@emotion/styled": "^11.11.0",
+        "@fontsource/roboto": "^5.0.3",
+        "@mui/material": "^5.13.4",
+        "@testing-library/jest-dom": "^5.16.5",
+        "@testing-library/react": "^13.4.0",
+        "@testing-library/user-event": "^13.5.0",
+        "@types/jest": "^27.5.2",
+        "@types/node": "^16.18.35",
+        "@types/react": "^18.2.11",
+        "@types/react-dom": "^18.2.4",
+        "js-cookie": "^3.0.5",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "react-scripts": "5.0.1",
+        "rpg-awesome": "^0.2.0",
+        "rxjs": "^7.8.1",
+        "typescript": "^4.9.5",
+        "web-vitals": "^2.1.4"
+    },
+    "scripts": {
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "test": "react-scripts test",
+        "test:coverage": "yarn test --coverage --watchAll",
+        "eject": "react-scripts eject",
+        "predeploy": "yarn build",
+        "deploy": "gh-pages -d build",
+        "cypress:open": "cypress open"
+    },
+    "jest": {
+        "transformIgnorePatterns": [
+            "/node_modules/(?!@mui)"
+        ]
+    },
+    "eslintConfig": {
+        "plugins": [
+            "cypress"
+        ],
+        "extends": [
+            "react-app",
+            "react-app/jest",
+            "plugin:cypress/recommended"
+        ],
+        "env": {
+            "cypress/globals": true
+        },
+        "rules": {
+            "cypress/no-assigning-return-values": "error",
+            "cypress/no-unnecessary-waiting": "error",
+            "cypress/assertion-before-screenshot": "warn",
+            "cypress/no-force": "warn",
+            "cypress/no-async-tests": "error",
+            "cypress/no-pause": "error"
+        }
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    },
+    "devDependencies": {
+        "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+        "@types/js-cookie": "^3.0.3",
+        "cypress": "^12.17.2",
+        "eslint-plugin-cypress": "^2.13.3",
+        "gh-pages": "^5.0.0",
+        "prettier": "^2.8.8"
+    }
 }

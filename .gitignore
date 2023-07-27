@@ -21,3 +21,13 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# End to End Tests
+dist/
+node_modules/
+obj/
+logs/
+*.log
+*.txt
+testresults/
+screenshots/
