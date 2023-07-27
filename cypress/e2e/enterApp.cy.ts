@@ -13,9 +13,18 @@ describe('Default settings and configurations when enter page', () => {
     cy.get(SELECTORS.MAIN).contains(TRANSLATIONS_EN.settingCategories);
     cy.get(SELECTORS.MAIN).contains(TRANSLATIONS_EN.reroll);
 
-    cy.get(SELECTORS.FOOTER).get('a').contains(TRANSLATIONS_EN.repo);
-    cy.get(SELECTORS.FOOTER).get('a').contains(TRANSLATIONS_EN.github);
-    cy.get(SELECTORS.FOOTER).get('a').contains(TRANSLATIONS_EN.author);
+    cy.get(SELECTORS.FOOTER)
+      .get('a')
+      .contains(TRANSLATIONS_EN.repo)
+      .should('have.attr', 'href', TRANSLATIONS_EN.repoLink);
+    cy.get(SELECTORS.FOOTER)
+      .get('a')
+      .contains(TRANSLATIONS_EN.github)
+      .should('have.attr', 'href', TRANSLATIONS_EN.githubLink);
+    cy.get(SELECTORS.FOOTER)
+      .get('a')
+      .contains(TRANSLATIONS_EN.author)
+      .should('have.attr', 'href', TRANSLATIONS_EN.lnLink);
   });
 
   it('Should have default cookies on enter', () => {
